@@ -1,6 +1,5 @@
-import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import LandingPage from './pages/LandingPage';
 import OnBoarding from './pages/OnBoarding';
 
