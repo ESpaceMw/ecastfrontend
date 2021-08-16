@@ -1,13 +1,39 @@
+import { useState } from 'react'
+
 import { Link } from 'react-router-dom'
 
 import PrimaryButton from '../../components/SubmitButton'
 
+import LoginService from '../../services/auth/LoginService'
+
 const Login  = () => {
 
-    return (
+  const [email, setEmail] = useState('')
+
+  const [password, setPassword] = useState('')
+
+  const handleLogin = async (email: string, password: string) => {
+
+    const postData = {
+
+      email: email,
+
+      password: password
+
+    }
+
+    const response = await LoginService.processLogin(postData)
+
+    console.log(response)
+
+  }
+
+  return (
+    
     <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-black">
         <div className="max-w-md w-full mb-10">
           <div>
+
             <h2 className="text-center text-3xl font-extrabold dark:text-gray-300 text-gray-900">Welcome back</h2>
             
             <button type="button" className="w-full mt-4 block bg-white dark:bg-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:text-gray-300 text-gray-900 font-semibold rounded-none p-3 border border-gray-300 dark:border-0 dark:border-transparent">
@@ -34,10 +60,14 @@ const Login  = () => {
                   id="email-address"
                   name="email"
                   type="email"
+                  value={email}
                   autoComplete="email"
                   required
                   className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                  onChange={(event) => {
+                    setEmail(event.target.value)
+                  }}
                 />
               </div>
               <div>
@@ -46,10 +76,14 @@ const Login  = () => {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
                   autoComplete="current-password"
                   required
                   className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
+                  onChange={(event) => {
+                    setPassword(event.target.value)
+                  }}
                 />
               </div>
             </div>
@@ -60,6 +94,7 @@ const Login  = () => {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
+                  onChange={() => {}}
                   className="h-4 w-4 dark:bg-transparent bg-white text-blue-600 focus:ring-blue-500 dark:border-gray-900 border-gray-300 rounded-none"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
@@ -75,7 +110,11 @@ const Login  = () => {
             </div>
 
             <div>
-              <PrimaryButton text="Continue to sign in"/>
+              <PrimaryButton 
+              text="Continue to sign in"
+              onClick={() => {
+                handleLogin(email, password)
+              }}/>
             </div>
 
             <div>

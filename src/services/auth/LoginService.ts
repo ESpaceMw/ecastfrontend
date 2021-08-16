@@ -25,4 +25,4 @@ class LoginService{
     }
 }
 
-export default LoginService
+export default new LoginService()
