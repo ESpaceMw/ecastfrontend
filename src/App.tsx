@@ -1,8 +1,8 @@
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import DashboardMain from './components/layouts/DashboardMain';
 import LandingPageFooter from './components/layouts/LandingPageFooter';
 import LandingPageHeader from './components/layouts/LandingPageHeader';
+import { ThemeProvider } from './context/themeContext';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -13,6 +13,7 @@ import OnBoarding from './pages/OnBoarding';
 function App() {
   return (
     <div>
+      <ThemeProvider initialTheme="light">
       <Switch>
 
           <Route path="/" exact> 
@@ -50,6 +51,7 @@ function App() {
           </Route>
 
         </Switch>
+        </ThemeProvider>
     </div>
   );
 }

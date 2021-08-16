@@ -3,10 +3,21 @@ import OnBoardMan from '../media/onboard-man.jpg'
 import OnBoardingWoman from '../media/onboard-girl.jpg'
 
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { ThemeContext } from '../context/themeContext'
+import { LightBulb, Moon } from 'heroicons-react'
 
 const OnBoarding = () => {
+
+    const { theme, setTheme } = useContext(ThemeContext)
+
+    function isDark() {
+      console.log('WTF')
+        return theme === 'dark'
+    }
+    
     return(
-      <div className="relative bg-white overflow-hidden">
+      <div className="relative bg-white dark:bg-black overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="relative bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">        
             <main className="mt-20 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
@@ -54,11 +65,12 @@ const OnBoarding = () => {
             <Link to="" href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">All rights reserved.</Link>
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-            <Link to="#" className="mr-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-              </svg>
-            </Link>
+            <button className="mr-3"
+                onClick={() => { isDark() ? setTheme('light') : setTheme('dark')}}
+            >
+                { isDark() ?  <LightBulb className="text-yellow-500 mr-2 dark:bg-black  transition delay-150 duration-300 p-1 h-8 w-8 rounded"/> 
+                :  <Moon className="text-gray-500 mr-2  transition delay-150 duration-300 p-1 h-8 w-8 rounded"/> }
+            </button>
             <Link to="" className="text-gray-500 border-r pr-3">
               Jobs
             </Link>
