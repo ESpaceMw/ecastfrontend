@@ -15,6 +15,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { Moon } from 'heroicons-react'
+import { Link } from 'react-router-dom'
 
 const solutions = [
   {
@@ -102,15 +103,15 @@ export default function LandingPageHeader() {
             <button>
                 <Moon className="text-gray-500 mr-2 bg-white hover:bg-gray-100 transition delay-150 duration-300 p-1 h-8 w-8 rounded"/>
             </button>
-            <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link to="sign-in" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
               Sign in
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="sign-up"
               className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-sm shadow-sm text-base font-medium text-white bg-blue-400 hover:bg-blue-500"
             >
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
       </div>
