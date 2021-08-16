@@ -41,10 +41,10 @@ const OnBoarding = () => {
         <div className="sm:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <div className="sm:flex">
             <div className="sm:px-20 px-5 sm:py-72 py-10">
-              <img className="w-36 h-36 object-cover object-center flex-shrink-0 rounded-full border-2 border-blue-400" src={OnBoardingWoman} alt="onboarding-hero" />
+              <img className="w-36 h-36 object-cover object-center transform hover:scale-105 transition delay-150 duration-300 flex-shrink-0 rounded-full border-2 border-blue-400" src={OnBoardingWoman} alt="onboarding-hero" />
             </div>
             <div className="sm:py-52 px-10 mb-5">
-              <img className="h-72 w-72 object-cover object-center flex-shrink-0 rounded-full border-2 border-blue-400" src={OnBoardMan} alt="onboarding-hero" />
+              <img className="h-72 w-72 object-cover object-center transform hover:scale-105 transition delay-150 duration-300 flex-shrink-0 rounded-full border-2 border-blue-400" src={OnBoardMan} alt="onboarding-hero" />
             </div>
           </div>
         </div>

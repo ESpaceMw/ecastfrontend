@@ -14,6 +14,7 @@ import {
   ViewGridIcon,
   XIcon,
 } from '@heroicons/react/outline'
+import { Moon } from 'heroicons-react'
 
 const solutions = [
   {
@@ -98,6 +99,9 @@ export default function LandingPageHeader() {
 
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <button>
+                <Moon className="text-gray-500 mr-2 bg-white hover:bg-gray-100 transition delay-150 duration-300 p-1 h-8 w-8 rounded"/>
+            </button>
             <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
               Sign in
             </a>
