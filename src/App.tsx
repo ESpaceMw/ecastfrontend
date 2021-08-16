@@ -46,7 +46,6 @@ function App() {
           {/* Dashboard routes */}
 
           <Route path="/dashboard/overview"> 
-            <DashboardMain/>
             <Overview/>
           </Route>
 

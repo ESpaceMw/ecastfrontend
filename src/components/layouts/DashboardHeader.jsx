@@ -12,10 +12,8 @@ function Header({
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 -mb-px">
 
-          {/* Header: Left side */}
           <div className="flex">
 
-            {/* Hamburger button */}
             <button
               className="text-gray-500 hover:text-gray-600 lg:hidden"
               aria-controls="sidebar"
@@ -32,14 +30,16 @@ function Header({
 
           </div>
 
-          {/* Header: Right side */}
           <div className="flex items-center">
 
             <SearchModal />
+
             <Notifications />
+
             <Help />
-            {/*  Divider */}
+
             <hr className="w-px h-6 bg-gray-200 mx-3" />
+            
             <UserMenu />
 
           </div>

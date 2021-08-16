@@ -1,8 +1,12 @@
+import DashboardMain from "../../../components/layouts/DashboardMain"
+
 const Overview = () => {
 
     return(
         <div>
-            content
+            <DashboardMain>
+                ddndndj
+            </DashboardMain>
         </div>
     )
 }
