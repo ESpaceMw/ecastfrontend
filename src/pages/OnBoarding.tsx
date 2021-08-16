@@ -49,26 +49,26 @@ const OnBoarding = () => {
           </div>
         </div>
         <div className="bg-gray-100 mb-0">
-      <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-        <p className="text-gray-500 text-sm text-center sm:text-left">© 2021 eCast —
-          <Link to="" href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">All rights reserved.</Link>
-        </p>
-        <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-          <Link to="#" className="mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-            </svg>
-          </Link>
-          <Link to="" className="text-gray-500 border-r pr-3">
-            Jobs
-          </Link>
-          <Link to="" className="text-gray-500 border-r pr-3 pl-3">
-            Blog
-          </Link><Link to="" className="text-gray-500 pl-3">
-            Download
-          </Link>
-        </span>
-      </div>
+        <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+          <p className="text-gray-500 text-sm text-center sm:text-left">© 2021 eCast —
+            <Link to="" href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">All rights reserved.</Link>
+          </p>
+          <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+            <Link to="#" className="mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+              </svg>
+            </Link>
+            <Link to="" className="text-gray-500 border-r pr-3">
+              Jobs
+            </Link>
+            <Link to="" className="text-gray-500 border-r pr-3 pl-3">
+              Blog
+            </Link><Link to="" className="text-gray-500 pl-3">
+              Download
+            </Link>
+          </span>
+        </div>
      </div>
     </div>
     )
