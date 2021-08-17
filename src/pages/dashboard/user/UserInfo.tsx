@@ -1,13 +1,13 @@
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
-const Profile = () => {
+const UserInfo = () => {
     return(
         <div>
             <DashboardMain>
-            profile
+            UserInfo
             </DashboardMain>
         </div>
     )
 }
 
-export default Profile
+export default UserInfo
