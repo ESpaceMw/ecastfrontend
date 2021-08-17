@@ -33,9 +33,9 @@ function Header({
 
           <div className="flex items-center">
 
-            <div className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition duration-150 rounded-full ">
+            <button className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition duration-150 rounded-full ">
               <Moon className="text-gray-500"/>
-            </div>
+            </button>
             
             <SearchModal />
 

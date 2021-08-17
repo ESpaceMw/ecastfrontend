@@ -1,4 +1,5 @@
-import { DotsHorizontal} from "heroicons-react"
+import { DotsHorizontal, Plus} from "heroicons-react"
+import Alert from "../../../components/Alert"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
 const episodes_ = [
@@ -45,7 +46,7 @@ const Episodes = () => {
             <DashboardMain>
                 <div className="w-full h-full overflow-hidden">
                     
-                    <div className="flex h-full">
+                    <div className="flex">
                         <div className="w-3/5 mr-3 bg-white shadow-sm rounded-sm hover:shadow-md">
                             <div className="p-3 flex justify-between">
                                 <h3 className="text-md font-medium">All Episodes</h3>
@@ -57,7 +58,7 @@ const Episodes = () => {
                             <div className="p-3">
                                 {
                                     episodes_.map((value) => (
-                                        <div className="flex justify-between hover:bg-gray-50 transition duration-150 border-b border-gray-200 p-3">
+                                        <div className="flex justify-between hover:bg-gray-100 transition duration-150 border-b border-gray-200 p-3">
                                             <div className="flex">
                                                 <p className="bg-gray-100 p-1 h-8 text-center">
                                                     {value.name}
@@ -74,11 +75,12 @@ const Episodes = () => {
                                     ))
                                 }
                             </div>
-                            <button className="bg-gray-500 p-3 bottom-0 fixed right-0 mb-10 mr-20">
-                                GHHH
+                            <button className="bg-gray-400 rounded-full p-3 bottom-0 fixed right-0 mb-10 mr-20">
+                                <Plus className="text-white"/>
                             </button>
                         </div>
                         <div className="w-2/5 mr-3 bg-white shadow-sm hover:shadow-md">
+                            <div className="bg-white">
                             <div className="p-3 flex justify-between">
                                 <h3 className="text-md font-medium">Series</h3>
                                 <button className="bg-gray-100 p-1 rounded-sm">
@@ -88,7 +90,7 @@ const Episodes = () => {
 
                             <div className="p-3">
                                 {series.map((value) => (
-                                <div className="flex justify-between p-3 border-b border-gray-200">
+                                <div className="flex justify-between p-3 border-b border-gray-200 hover:bg-gray-100 transition duration-150">
                                     <div>
                                         <h3 className="text-md">{value.title}</h3>
                                         <p className="text-sm mt-2 text-gray-500">{value.time}</p>
@@ -99,9 +101,29 @@ const Episodes = () => {
                                 </div>
                                 ))}
                             </div>
+                            </div>
+
+                            <div className="bg-blue-400 rounded-sm mt-5 p-3">
+                                <div className="flex justify-between">
+                                    <h3 className="text-md font-semibold text-white">Upcoming events</h3>
+                                    <button className="bg-gray-100 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4"/>
+                                    </button>
+                                </div>
+                                <h3 className="mt-3 text-white text-lg">
+                                    Share upcoming episodes and series to keep people expectant and notified
+                                </h3>
+                                <p className="text-sm text-center mt-3 text-white">
+                                    Be able to share upcoming episodes and series, even events on your profile's feed so that people are kept expectant of the coming event. Be able to also make your updates reach thousands in no time! This right here is the filling of the gap podcasting has been missing... so sign up now.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <Alert
+                 icon={"⚠"}
+                 message={"Podcast created successfully!"}
+                 />
             </DashboardMain>
         </div>
     )

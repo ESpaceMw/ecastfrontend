@@ -83,6 +83,9 @@ function Sidebar({
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="font-medium ml-4 text-md">{value.MenuTitle}</span>
+                  {value.MenuTitle === 'Alerts' ? <div className="flex flex-shrink-0 ml-2">
+                    <span className="inline-flex items-center justify-center h-5 text-xs font-medium text-white bg-blue-500 px-2 rounded-sm">4</span>
+                  </div> : <div></div>}
                 </div>
               </NavLink>
             </li>
