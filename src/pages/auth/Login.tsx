@@ -12,8 +12,9 @@ const Login  = () => {
 
   const [password, setPassword] = useState('')
 
-  const handleLogin = async (email: string, password: string) => {
+  async function handleLogin (email: string, password: string){
 
+    
     const postData = {
 
       email: email,
@@ -29,7 +30,7 @@ const Login  = () => {
   }
 
   return (
-    
+
     <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-black">
         <div className="max-w-md w-full mb-10">
           <div>
@@ -49,7 +50,10 @@ const Login  = () => {
 
           </div>
 
-          <form className="mt-2 space-y-6" action="#" method="POST">
+          <form className="mt-2 space-y-6" onSubmit={(event) => {
+            event.preventDefault()
+            handleLogin(email, password)
+          }} method="POST">
 
             <input type="hidden" name="remember" defaultValue="true" />
 
@@ -113,7 +117,7 @@ const Login  = () => {
               <PrimaryButton 
               text="Continue to sign in"
               onClick={() => {
-                handleLogin(email, password)
+                
               }}/>
             </div>
 

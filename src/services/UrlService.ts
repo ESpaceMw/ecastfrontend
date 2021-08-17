@@ -6,7 +6,7 @@ if(process.env.NODE_ENV === 'production'){
 
 }else{
 
-    apiDomain = 'http://127.0.0.1:8000'
+    apiDomain = 'http://127.0.0.1:8000/'
 
 }
 
