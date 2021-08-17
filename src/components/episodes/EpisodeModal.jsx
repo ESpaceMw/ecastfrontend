@@ -3,7 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from '../../media/logo.png'
 import { DotsHorizontal} from "heroicons-react"
+import ReactAudioPlayer from 'react-audio-player';
 import MusicalNote from '../../icons/musical-note.png'
+import SaveYourTears from '../../media/01 Save Your Tears - (SongsLover.com).mp3'
 
 const EpidoseModal  = ({name, title, published, time}) => {
 
@@ -117,7 +119,12 @@ const EpidoseModal  = ({name, title, published, time}) => {
               
             </div>
             <div className="text-center text-blue-500">
-              <Link to="#">Some media player here</Link>
+              <ReactAudioPlayer
+                src={SaveYourTears}
+                autoPlay={false}
+                controls
+                style={{ width: '100%' }}
+              />
             </div>
           </div>
         </div>
