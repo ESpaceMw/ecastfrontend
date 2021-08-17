@@ -44,10 +44,10 @@ const Episodes = () => {
     return(
         <div>
             <DashboardMain>
-                <div className="w-full h-full overflow-hidden">
+                <div className="w-full h-full">
                     
-                    <div className="flex">
-                        <div className="w-3/5 mr-3 bg-white shadow-sm rounded-sm hover:shadow-md">
+                    <div className="sm:flex">
+                        <div className="sm:w-3/5 mr-3 bg-white shadow-sm rounded-sm hover:shadow-md">
                             <div className="p-3 flex justify-between">
                                 <h3 className="text-md font-medium">All Episodes</h3>
                                 <button className="bg-gray-100 p-1 rounded-sm">
@@ -75,11 +75,11 @@ const Episodes = () => {
                                     ))
                                 }
                             </div>
-                            <button className="bg-gray-400 rounded-full p-3 bottom-0 fixed right-0 mb-10 mr-20">
+                            <button className="bg-gray-400 rounded-full p-3 bottom-0 fixed right-0 mb-10 mr-10 sm:mr-20">
                                 <Plus className="text-white"/>
                             </button>
                         </div>
-                        <div className="w-2/5 mr-3 bg-white shadow-sm hover:shadow-md">
+                        <div className="sm:w-2/5 mr-3 bg-white shadow-sm hover:shadow-md">
                             <div className="bg-white">
                             <div className="p-3 flex justify-between">
                                 <h3 className="text-md font-medium">Series</h3>
