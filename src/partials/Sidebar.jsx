@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import UserPreferences from '../data/Menu';
+import Analytics from '../data/Analytics';
+import UserPreferences from '../data/UserPreferences';
+import Podcasts from '../data/Podcasts';
 
 function Sidebar({
   sidebarOpen,
@@ -76,11 +78,45 @@ function Sidebar({
           <ul className="mt-3">
             {
               UserPreferences.map((value) => (
-              <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-gray-800 transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <li className={`px-3 py-2 hover:bg-blue-400 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
+              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
-                  {value.Icon}
-                  <span className="text-sm font-medium">{value.MenuTitle}</span>
+                  <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
+                  <span className="text-sm font-medium ml-4">{value.MenuTitle}</span>
+                </div>
+              </NavLink>
+            </li>
+              ))
+            }
+            
+          </ul>
+
+          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3 mt-5">Podcasts</h3>
+          <ul className="mt-3">
+            {
+              Podcasts.map((value) => (
+              <li className={`px-3 py-2 hover:bg-blue-400 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
+              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+                <div className="flex flex-grow">
+                  <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
+                  <span className="text-sm font-medium ml-4">{value.MenuTitle}</span>
+                </div>
+              </NavLink>
+            </li>
+              ))
+            }
+            
+          </ul>
+
+          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3 mt-5">Analytics</h3>
+          <ul className="mt-3">
+            {
+              Analytics.map((value) => (
+              <li className={`px-3 py-2 hover:bg-blue-400 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
+              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+                <div className="flex flex-grow">
+                  <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
+                  <span className="text-sm font-medium ml-4">{value.MenuTitle}</span>
                 </div>
               </NavLink>
             </li>
