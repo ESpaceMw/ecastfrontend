@@ -6,6 +6,7 @@ import { ThemeProvider } from './context/themeContext';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Channels from './pages/dashboard/analytics/Channels';
 import Integrations from './pages/dashboard/analytics/Integrations';
 import Alerts from './pages/dashboard/overview/Alerts';
 import Overview from './pages/dashboard/overview/Overview.jsx';
@@ -88,6 +89,10 @@ function App() {
 
           <Route path="/dashboard/integrations"> 
             <Integrations/>
+          </Route>
+
+          <Route path="/dashboard/channels"> 
+            <Channels/>
           </Route>
 
         </Switch>
