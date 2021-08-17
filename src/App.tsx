@@ -6,6 +6,7 @@ import { ThemeProvider } from './context/themeContext';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Alerts from './pages/dashboard/overview/Alerts';
 import Overview from './pages/dashboard/overview/Overview.jsx';
 import Contacts from './pages/dashboard/podcast/Contacts';
 import Episodes from './pages/dashboard/podcast/Episodes';
@@ -57,6 +58,10 @@ function App() {
 
           <Route path="/dashboard/profile"> 
             <UserInfo/>
+          </Route>
+
+          <Route path="/dashboard/alerts"> 
+            <Alerts/>
           </Route>
 
           <Route path="/dashboard/episodes"> 
