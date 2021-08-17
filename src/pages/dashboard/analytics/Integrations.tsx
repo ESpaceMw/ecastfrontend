@@ -32,7 +32,7 @@ const Integrations = () => {
     return(
         <div>
             <DashboardMain>
-                <div className="border mb-10 m-3">
+                <div className="border mb-10 m-3 bg-white">
                     <div className="bg-blue-500 w-full py-10 mb-10">
                         <p className="text-3xl w-72 text-white text-bold p-3">
                             Distribute your podcast to 

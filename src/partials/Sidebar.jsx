@@ -66,7 +66,7 @@ function Sidebar({
             </svg>
           </button>
           {/* Logo */}
-          <NavLink exact to="/" className="block">
+          <NavLink exact to="/dashboard/profile" className="block">
             <div className="flex justify-between">
               <div className="flex">
                 <img src={Girl} className="mr-2 border-2 border-yellow-500 rounded-full w-10 h-10 object-cover object-center" alt="user-icon"/>
