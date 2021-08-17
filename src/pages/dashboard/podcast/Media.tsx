@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
 const Media = () => {
