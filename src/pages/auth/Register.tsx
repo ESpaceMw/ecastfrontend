@@ -86,7 +86,9 @@ export default class Register extends Component {
             </div>
 
             <div>
-              <SubmitButton text="Continue to sign up"/>
+              <SubmitButton text="Continue to sign up" onClick={() => {
+                
+              }}/>
             </div>
 
             <div>
