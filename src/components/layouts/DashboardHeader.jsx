@@ -2,6 +2,7 @@ import SearchModal from '../../partials/header/SearchModal';
 import Notifications from '../../partials/header/Notifications';
 import Help from '../../partials/header/Help';
 import UserMenu from '../../partials/header/UserMenu';
+import { Moon } from 'heroicons-react';
 
 function Header({
   sidebarOpen,
@@ -32,6 +33,10 @@ function Header({
 
           <div className="flex items-center">
 
+            <div className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition duration-150 rounded-full ">
+              <Moon className="text-gray-500"/>
+            </div>
+            
             <SearchModal />
 
             <Notifications />

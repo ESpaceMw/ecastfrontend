@@ -7,6 +7,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Overview from './pages/dashboard/overview/Overview.jsx';
+import Episodes from './pages/dashboard/podcast/Episodes';
 import UserInfo from './pages/dashboard/user/UserInfo';
 import LandingPage from './pages/LandingPage';
 import OnBoarding from './pages/OnBoarding';
@@ -53,6 +54,10 @@ function App() {
 
           <Route path="/dashboard/profile"> 
             <UserInfo/>
+          </Route>
+
+          <Route path="/dashboard/episodes"> 
+            <Episodes/>
           </Route>
 
         </Switch>

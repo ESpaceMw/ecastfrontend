@@ -17,9 +17,9 @@ const DashboardMain = (props: { children: boolean | ReactChild | ReactFragment |
                 {/*  Site header */}
                 <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-                <main>
+                <main className="h-full">
 
-                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full h-full max-w-9xl mx-auto bg-gray-50">
                     {props.children}
                 </div>
 

@@ -74,7 +74,7 @@ function Sidebar({
 
         {/* Links */}
         <div>
-          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3">user preferences</h3>
+          <h3 className="text-md uppercase text-gray-500 font-semibold pl-3">preferences</h3>
           <ul className="mt-3">
             {
               UserPreferences.map((value) => (
@@ -82,7 +82,7 @@ function Sidebar({
               <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
-                  <span className="text-sm font-medium ml-4">{value.MenuTitle}</span>
+                  <span className="font-medium ml-4 text-md">{value.MenuTitle}</span>
                 </div>
               </NavLink>
             </li>
@@ -91,7 +91,7 @@ function Sidebar({
             
           </ul>
 
-          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3 mt-5">Podcasts</h3>
+          <h3 className="text-md uppercase text-gray-500 font-semibold pl-3 mt-5">Podcasts</h3>
           <ul className="mt-3">
             {
               Podcasts.map((value) => (
@@ -99,7 +99,7 @@ function Sidebar({
               <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
-                  <span className="text-sm font-medium ml-4">{value.MenuTitle}</span>
+                  <span className="text-md font-medium ml-4">{value.MenuTitle}</span>
                 </div>
               </NavLink>
             </li>
@@ -108,7 +108,7 @@ function Sidebar({
             
           </ul>
 
-          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3 mt-5">Analytics</h3>
+          <h3 className="text-md uppercase text-gray-500 font-semibold pl-3 mt-5">Analytics</h3>
           <ul className="mt-3">
             {
               Analytics.map((value) => (
@@ -116,7 +116,7 @@ function Sidebar({
               <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
-                  <span className="text-sm font-medium ml-4">{value.MenuTitle}</span>
+                  <span className="text-md font-medium ml-4">{value.MenuTitle}</span>
                 </div>
               </NavLink>
             </li>
