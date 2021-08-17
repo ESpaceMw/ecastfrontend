@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react"
-import { DotsHorizontal, Pencil, PencilAlt, Plus, ViewList} from "heroicons-react"
+import { DotsHorizontal, PencilAlt, Plus, ViewList} from "heroicons-react"
 import { useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import Alert from "../../../components/Alert"

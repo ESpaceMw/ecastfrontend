@@ -7,6 +7,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Overview from './pages/dashboard/overview/Overview.jsx';
+import Contacts from './pages/dashboard/podcast/Contacts';
 import Episodes from './pages/dashboard/podcast/Episodes';
 import Events from './pages/dashboard/podcast/episodes/Events';
 import UserInfo from './pages/dashboard/user/UserInfo';
@@ -59,6 +60,10 @@ function App() {
 
           <Route path="/dashboard/episodes"> 
             <Episodes/>
+          </Route>
+
+          <Route path="/dashboard/contacts"> 
+            <Contacts/>
           </Route>
 
           <Route path="/dashboard/events"> 
