@@ -76,7 +76,7 @@ function SearchModal() {
           <form className="border-b border-gray-200">
             <div className="relative">
               <label htmlFor="modal-search" className="sr-only">Search</label>
-              <input id="modal-search" className="w-full border-0 focus:ring-transparent placeholder-gray-400 appearance-none py-3 pl-10 pr-4" type="search" placeholder="Search Anything…" ref={searchInput} />
+              <input id="modal-search" className="w-full border-0 focus:border-transparent placeholder-gray-400 appearance-none py-3 pl-10 pr-4" type="search" placeholder="Search Anything…" ref={searchInput} />
               <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
                 <svg className="w-4 h-4 flex-shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-4 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
@@ -92,7 +92,7 @@ function SearchModal() {
               <ul className="text-sm">
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -104,7 +104,7 @@ function SearchModal() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -116,7 +116,7 @@ function SearchModal() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -128,7 +128,7 @@ function SearchModal() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -140,7 +140,7 @@ function SearchModal() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -152,7 +152,7 @@ function SearchModal() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -166,11 +166,11 @@ function SearchModal() {
             </div>
             {/* Recent pages */}
             <div className="mb-3 last:mb-0">
-              <div className="text-xs font-semibold text-gray-400 uppercase px-2 mb-2">Recent pages</div>
+              <div className="text-xs font-semibold text-gray-400 uppercase px-2 mb-2">Recent places</div>
               <ul className="text-sm">
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
@@ -182,7 +182,7 @@ function SearchModal() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-indigo-500 rounded group"
+                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 rounded group"
                     to="#0"
                     onClick={() => setSearchOpen(!searchOpen)}
                   >

@@ -41,7 +41,7 @@ function Header({
 
             <Notifications />
 
-            <Help />
+            {/* <Help /> */}
 
             <hr className="w-px h-6 bg-gray-200 mx-3" />
             

@@ -59,11 +59,11 @@ function Help() {
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Need help?</div>
+          <div className="text-xs font-semibold w-72 text-gray-400 uppercase pt-1.5 pb-2 px-4">Need help?</div>
           <ul>
             <li>
               <Link
-                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+                className="font-medium text-sm text-blue-400 hover:text-blue-500 flex items-center py-1 px-3"
                 to="#0"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
@@ -71,12 +71,12 @@ function Help() {
                   <rect y="3" width="12" height="9" rx="1" />
                   <path d="M2 0h8v2H2z" />
                 </svg>
-                <span>Documentation</span>
+                <span>Frequently asked questions</span>
               </Link>
             </li>
             <li>
               <Link
-                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+                className="font-medium text-sm text-blue-400 hover:text-blue-500 flex items-center py-1 px-3"
                 to="#0"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
@@ -88,7 +88,7 @@ function Help() {
             </li>
             <li>
               <Link
-                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+                className="font-medium text-sm text-blue-400 hover:text-blue-500 flex items-center py-1 px-3"
                 to="#0"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
