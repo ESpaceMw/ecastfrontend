@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import Analytics from '../data/Analytics';
 import UserPreferences from '../data/UserPreferences';
 import Podcasts from '../data/Podcasts';
+import Girl from '../media/onboard-girl.jpg'
 
 function Sidebar({
   sidebarOpen,
@@ -66,8 +67,14 @@ function Sidebar({
           </button>
           {/* Logo */}
           <NavLink exact to="/" className="block">
-            <div className="text-center text-white text-3xl items-center bg-blue-400 rounded-full w-10 h-10">
-              e
+            <div className="flex justify-between">
+              <div className="flex">
+                <img src={Girl} className="mr-2 border-2 border-yellow-500 rounded-full w-10 h-10 object-cover object-center" alt="user-icon"/>
+                <div>
+                  <h3 className="text-md text-gray-900">Nhlanhla Dhaka</h3>
+                  <p className="text-gray-500 text-sm">The Dee Podcast</p>
+                </div>
+              </div>
             </div>
           </NavLink>
         </div>

@@ -1,6 +1,5 @@
 import SearchModal from '../../partials/header/SearchModal';
 import Notifications from '../../partials/header/Notifications';
-import Help from '../../partials/header/Help';
 import UserMenu from '../../partials/header/UserMenu';
 import { Moon } from 'heroicons-react';
 

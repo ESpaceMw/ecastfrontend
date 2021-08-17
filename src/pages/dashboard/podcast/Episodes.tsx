@@ -1,6 +1,9 @@
 import { DotsHorizontal, Plus} from "heroicons-react"
+import { Link } from "react-router-dom"
 import Alert from "../../../components/Alert"
+import SerieModal from "../../../components/episodes/SerieModal"
 import DashboardMain from "../../../components/layouts/DashboardMain"
+import EpisodeModal from '.././../../components/episodes/EpisodeModal.jsx'
 
 const episodes_ = [
     {
@@ -58,20 +61,11 @@ const Episodes = () => {
                             <div className="p-3">
                                 {
                                     episodes_.map((value) => (
-                                        <div className="flex justify-between hover:bg-gray-100 transition duration-150 border-b border-gray-200 p-3">
-                                            <div className="flex">
-                                                <p className="bg-gray-100 p-1 h-8 text-center">
-                                                    {value.name}
-                                                </p>
-                                                <div className="ml-3">
-                                                    <h3 className="text-gray-900 text-md">{value.title}</h3>
-                                                    <p className="text-sm text-gray-500">{value.published}</p>
-                                                </div>
-                                            </div>
-                                            <p className="text-sm">
-                                                {value.time}
-                                            </p>
-                                        </div>
+                                        <EpisodeModal 
+                                        name={value.name} 
+                                        title={value.title} 
+                                        published={value.published} 
+                                        time={value.time}/>
                                     ))
                                 }
                             </div>
@@ -86,19 +80,12 @@ const Episodes = () => {
                                 <button className="bg-gray-100 p-1 rounded-sm">
                                     <DotsHorizontal className="h-4 w-4"/>
                                 </button>
+                            
                             </div>
 
                             <div className="p-3">
                                 {series.map((value) => (
-                                <div className="flex justify-between p-3 border-b border-gray-200 hover:bg-gray-100 transition duration-150">
-                                    <div>
-                                        <h3 className="text-md">{value.title}</h3>
-                                        <p className="text-sm mt-2 text-gray-500">{value.time}</p>
-                                    </div>
-                                    <button className="p-1 rounded-sm h-6 w-6">
-                                        <DotsHorizontal className="h-4 w-4"/>
-                                    </button>
-                                </div>
+                                <SerieModal title={value.title} published={value.time}/>
                                 ))}
                             </div>
                             </div>
@@ -106,9 +93,9 @@ const Episodes = () => {
                             <div className="bg-blue-400 rounded-sm mt-5 p-3">
                                 <div className="flex justify-between">
                                     <h3 className="text-md font-semibold text-white">Upcoming events</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
+                                    <Link to="/dashboard/events" className="bg-gray-100 p-1 rounded-sm">
                                         <DotsHorizontal className="h-4 w-4"/>
-                                    </button>
+                                    </Link>
                                 </div>
                                 <h3 className="mt-3 text-white text-lg">
                                     Share upcoming episodes and series to keep people expectant and notified
@@ -121,7 +108,7 @@ const Episodes = () => {
                     </div>
                 </div>
                 <Alert
-                 icon={"⚠"}
+                 icon={"🚀"}
                  message={"Podcast created successfully!"}
                  />
             </DashboardMain>
