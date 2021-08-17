@@ -1,4 +1,6 @@
-import { DotsHorizontal, Plus} from "heroicons-react"
+import { Transition } from "@headlessui/react"
+import { DotsHorizontal, Pencil, PencilAlt, Plus, ViewList} from "heroicons-react"
+import { useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import Alert from "../../../components/Alert"
 import SerieModal from "../../../components/episodes/SerieModal"
@@ -44,6 +46,12 @@ const series = [
 ]
 
 const Episodes = () => {
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const trigger = useRef(null);
+    const dropdown = useRef(null);
+
     return(
         <div>
             <DashboardMain>
@@ -93,9 +101,43 @@ const Episodes = () => {
                             <div className="bg-blue-400 rounded-sm mt-5 p-3">
                                 <div className="flex justify-between">
                                     <h3 className="text-md font-semibold text-white">Upcoming events</h3>
-                                    <Link to="/dashboard/events" className="bg-gray-100 p-1 rounded-sm">
+                                    <Link to="#" onClick={() => setDropdownOpen(!dropdownOpen)}
+                                        aria-expanded={dropdownOpen} ref={trigger} className="bg-gray-100 p-1 rounded-sm">
                                         <DotsHorizontal className="h-4 w-4"/>
+                                        <Transition
+                                        className="z-10 absolute right-14 min-w-44 bg-white py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
+                                        show={dropdownOpen}
+                                    >
+                                        <div
+                                        ref={dropdown}
+                                        onFocus={() => setDropdownOpen(true)}
+                                        onBlur={() => setDropdownOpen(false)}
+                                        >
+                                        <ul>
+                                            <li>
+                                            <Link
+                                                className="font-medium text-sm hover:bg-gray-50 flex items-center py-1 px-3"
+                                                to="#"
+                                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                                            >
+                                                <PencilAlt className="text-gray-600 w-5 h-5"/> Create event
+                                            </Link>
+                                            </li>
+                                            <li>
+                                            <Link
+                                                className="font-medium text-sm hover:bg-gray-50 flex items-center py-1 px-3"
+                                                to="/dashboard/events"
+                                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                                            >
+                                                <ViewList className="text-gray-600 w-5 h-5"/> View events
+                                            </Link>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </Transition>
                                     </Link>
+
+                                    
                                 </div>
                                 <h3 className="mt-3 text-white text-lg">
                                     Share upcoming episodes and series to keep people expectant and notified
