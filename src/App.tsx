@@ -12,6 +12,7 @@ import Overview from './pages/dashboard/overview/Overview.jsx';
 import Contacts from './pages/dashboard/podcast/Contacts';
 import Episodes from './pages/dashboard/podcast/Episodes';
 import Events from './pages/dashboard/podcast/episodes/Events';
+import NewEpisode from './pages/dashboard/podcast/episodes/NewEpisode';
 import Media from './pages/dashboard/podcast/Media';
 import UserInfo from './pages/dashboard/user/UserInfo';
 import LandingPage from './pages/LandingPage';
@@ -67,6 +68,10 @@ function App() {
 
           <Route path="/dashboard/episodes"> 
             <Episodes/>
+          </Route>
+
+          <Route path="/dashboard/new-episode"> 
+            <NewEpisode/>
           </Route>
 
           <Route path="/dashboard/media"> 
