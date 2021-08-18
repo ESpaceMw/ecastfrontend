@@ -23,8 +23,8 @@ export default class Register extends Component {
           <form className="mt-2 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded shadow-sm -space-y-px">
-              <div>
-                <label className="block text-gray-700 dark:text-gray-300">Full name<span className="text-red-500">*</span></label>
+              <div className="mb-2">
+                <label className="block text-gray-700 dark:text-gray-300">First name<span className="text-red-500">*</span></label>
                 <input
                   id="username"
                   name="name"
@@ -32,10 +32,82 @@ export default class Register extends Component {
                   autoComplete="name"
                   required
                   className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Your first and last name"
+                  placeholder="Your first name"
                 />
               </div>
-              <div>
+              <div className="mb-2">
+                <label className="block text-gray-700 dark:text-gray-300">Last name<span className="text-red-500">*</span></label>
+                <input
+                  id="username"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Your last name"
+                />
+              </div>
+              <div className="mt-4">
+                  <label className="block text-gray-700 dark:text-gray-300">Gender<span className="text-red-500">*</span></label>
+                  <div className="inline-block relative w-full">
+                      <select className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                      <option>M</option>
+                      <option>F</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      </div>
+                  </div>
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 dark:text-gray-300">Date of birth<span className="text-red-500">*</span></label>
+                <input
+                  id="username"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Date of birth"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 dark:text-gray-300">Country<span className="text-red-500">*</span></label>
+                <input
+                  id="username"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Your Country"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 dark:text-gray-300">City<span className="text-red-500">*</span></label>
+                <input
+                  id="username"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Your City"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 dark:text-gray-300">Phone number<span className="text-red-500">*</span></label>
+                <input
+                  id="username"
+                  name="name"
+                  type="phone"
+                  autoComplete="name"
+                  required
+                  className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                  placeholder="Your Phone number"
+                />
+              </div>
+              <div className="mb-2">
                 <label className="block text-gray-700 dark:text-gray-300">Email<span className="text-red-500">*</span></label>
                 <input
                   id="email-address"
@@ -48,7 +120,7 @@ export default class Register extends Component {
                 />
               </div>
 
-              <div>
+              <div className="mb-2">
                 <label className="block text-gray-700 dark:text-gray-300">Password<span className="text-red-500">*</span></label>
                 <input
                   id="password"
@@ -61,7 +133,7 @@ export default class Register extends Component {
                 />
               </div>
 
-              <div>
+              <div className="mb-2">
                 <label className="block text-gray-700 dark:text-gray-300">Confirm password<span className="text-red-500">*</span></label>
                 <input
                   id="confirm-password"
