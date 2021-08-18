@@ -3,6 +3,7 @@ import DashboardMain from "../../../components/layouts/DashboardMain"
 import Spotify from '../../../icons/spotify.png'
 import ApplePodcast from '../../../icons/podcast.png'
 import GooglePodcast from '../../../icons/5f675b163b3c2a0004655704.png'
+import Rakh from '../../../media/dude.jpg'
 
 const integrations = [
     {
@@ -33,7 +34,7 @@ const Integrations = () => {
         <div>
             <DashboardMain>
                 <div className="border mb-10 m-3 bg-white">
-                    <div className="bg-blue-500 w-full py-10 mb-10">
+                    <div className="w-full py-10 mb-10 bg-cover bg-gradient-to-r from-gray-600 via-gray-300 to-white bg-opacity-10" style={{ backgroundImage: `url(${Rakh})` }}>
                         <p className="text-3xl w-72 text-white text-bold p-3">
                             Distribute your podcast to 
                             the most popular streaming 

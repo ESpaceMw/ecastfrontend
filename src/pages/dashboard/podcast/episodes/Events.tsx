@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import DashboardMain from "../../../../components/layouts/DashboardMain"
+import GirlWithBeats from '../../../../media/soundtrap-d0sXdsCnhF8-unsplash.jpg'
+import Growth from '../../../../media/business-success-growing-growth-increase-up-concept-wooded-cube-block-with-word-growth_20693-206.jpg'
 
 const Events = () => {
 
@@ -10,7 +12,7 @@ const Events = () => {
       <div>
           <DashboardMain>
               <div>
-               <div className="p-3 bg-blue-500 w-full mb-5">
+               <div className="p-3 w-full mb-5 bg-cover bg-gradient-to-r from-gray-600 via-gray-300 to-white bg-opacity-10" style={{ backgroundImage: `url(${GirlWithBeats})` }}>
                    <h3 className="font-semibold text-3xl w-72 text-gray-100">
                        Share upcoming series and 
                         episodes, and get to promote 
@@ -52,7 +54,7 @@ const Events = () => {
                </div>
                <div className="pb-10">
                    <div className="border rounded-sm">
-                       <div className="p-3 h-64 bg-yellow-500">
+                       <div className="p-3 h-72 bg-cover bg-gradient-to-r from-gray-600 via-gray-300 to-white bg-opacity-10" style={{ backgroundImage: `url(${Growth})` }}>
                            <p className="text-white">Published 3 days ago</p>
                        </div>
                        <p className="p-3">
