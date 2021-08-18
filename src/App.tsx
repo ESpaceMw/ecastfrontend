@@ -10,7 +10,7 @@ import Channels from './pages/dashboard/analytics/Channels';
 import Integrations from './pages/dashboard/analytics/Integrations';
 import Alerts from './pages/dashboard/overview/Alerts';
 import Inbox from './pages/dashboard/overview/Inbox';
-import Overview from './pages/dashboard/overview/Overview.jsx';
+import Overview from './pages/dashboard/overview/Overview';
 import Contacts from './pages/dashboard/podcast/Contacts';
 import Episodes from './pages/dashboard/podcast/Episodes';
 import Events from './pages/dashboard/podcast/episodes/Events';
