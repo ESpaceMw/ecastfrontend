@@ -3,6 +3,7 @@ import './App.css';
 import LandingPageFooter from './components/layouts/LandingPageFooter';
 import LandingPageHeader from './components/layouts/LandingPageHeader';
 import { ThemeProvider } from './context/themeContext';
+import Category from './pages/auth/Category';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -46,6 +47,12 @@ function App() {
           <Route path="/sign-up"> 
             <LandingPageHeader/>
             <Register/>
+            <LandingPageFooter/>
+          </Route>
+
+          <Route path="/choose-category"> 
+            <LandingPageHeader/>
+            <Category/>
             <LandingPageFooter/>
           </Route>
 
