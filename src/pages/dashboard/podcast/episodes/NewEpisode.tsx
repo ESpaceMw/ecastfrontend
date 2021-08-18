@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import { Document, Folder, PencilAlt, Upload, User } from "heroicons-react"
+import { Folder, PencilAlt, Upload, User } from "heroicons-react"
 import React from "react";
 import DashboardMain from "../../../../components/layouts/DashboardMain"
 import SubmitButton from "../../../../components/SubmitButton";
