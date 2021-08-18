@@ -79,13 +79,73 @@ const Inbox = () => {
                     style={{ backgroundImage: 'url(`https://static.intercomassets.com/ember/assets/images/messenger-backgrounds/background-1-99a36524645be823aabcd0e673cb47f8.png)`' }}
                 >
                     <div className="flex flex-row space-x-2">
-                        <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                    <div className="flex flex-col">
-                        <div className="bg-gray-200 rounded p-5">
-                        Some message text
-                        </div>
-                        <div className=" text-gray-600">4hr ago</div>
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
                     </div>
+
+                    <div className="flex flex-row space-x-2">
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
+                    </div>
+
+                    <div className="flex flex-row space-x-2">
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
+                    </div>
+
+                    <div className="flex flex-row space-x-2">
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
+                    </div>
+
+                    <div className="flex flex-row space-x-2">
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
+                    </div>
+
+                    <div className="flex flex-row space-x-2">
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
+                    </div>
+
+                    <div className="flex flex-row space-x-2">
+                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                            <div className="flex flex-col">
+                                <div className="bg-gray-200 rounded p-5">
+                                    Some message text
+                                </div>
+                                <div className=" text-gray-600">4hr ago</div>
+                            </div>
                     </div>
 
                     <div className="flex flex-row justify-center  text-sm text-gray-600">
@@ -101,6 +161,9 @@ const Inbox = () => {
                         </div>
                         <div className=" text-gray-600">5hr ago</div>
                     </div>
+
+                    
+                    
                     </div>
                 </div>
 
