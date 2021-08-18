@@ -53,7 +53,7 @@ const Overview = () => {
                                 <p className="text-gray-500">New Subscribers</p>
                                 <h3 className="text-2xl font-semibold">12,123</h3>
                                 <div className="flex">
-                                    <div className="rounded-full bg-blue-100 w-5 h-5 items-center text-center">
+                                    <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
                                             <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
                                         </p> 
@@ -65,7 +65,7 @@ const Overview = () => {
                                 <p className="text-gray-500">Total streams</p>
                                 <h3 className="text-2xl font-semibold">129,199</h3>
                                 <div className="flex">
-                                    <div className="rounded-full bg-red-100 w-5 h-5 items-center text-center">
+                                    <div className="rounded-full bg-red-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
                                             <ArrowDown className="text-red-400 m-1 w-3 h-3 justify-center"/>
                                         </p> 
@@ -77,7 +77,7 @@ const Overview = () => {
                                 <p className="text-gray-500">Engagement Rate</p>
                                 <h3 className="text-2xl font-semibold">21.45</h3>
                                 <div className="flex">
-                                    <div className="rounded-full bg-blue-100 w-5 h-5 items-center text-center">
+                                    <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
                                             <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
                                         </p> 
@@ -89,7 +89,7 @@ const Overview = () => {
                                 <p className="text-gray-500">Avg. listen time </p>
                                 <h3 className="text-2xl font-semibold">15,2 min</h3>
                                 <div className="flex">
-                                    <div className="rounded-full bg-blue-100 w-5 h-5 items-center text-center">
+                                    <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
                                             <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
                                         </p> 
@@ -105,7 +105,7 @@ const Overview = () => {
                                 <p className="text-gray-500">Audience</p>
                                 <h3 className="text-2xl font-semibold">78,000</h3>
                                 <div className="flex">
-                                    <div className="rounded-full bg-blue-100 w-5 h-5 items-center text-center">
+                                    <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
                                             <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
                                         </p> 
@@ -156,7 +156,7 @@ const Overview = () => {
                                     </button>
                                 </div>
                                 <div className="py-10 flex flex-wrap justify-center">
-                                    <img className="w-20 h-20" src={CashCards} alt="cards-with-dollar-sign" />
+                                    <img className="w-20 h-20 transform hover:scale-110 transition duration-150" src={CashCards} alt="cards-with-dollar-sign" />
                                 </div>
                                 <p>
                                     Podcasting is not an expense, it is a powerful 
