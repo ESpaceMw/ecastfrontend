@@ -3,6 +3,7 @@ import { LockClosed, ShoppingCart, User } from "heroicons-react";
 import React from "react";
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import ClipArt from '../../../media/dusan-jovic-2V4Qhq55maY-unsplash.jpg'
+import BG from '../../../media/bg.png'
 
 const UserInfo = () => {
 
@@ -248,7 +249,7 @@ const UserInfo = () => {
                                 <div className="relative">
                                     
                                     <div className="border mt-5">
-                                        <div className="bg-blue-500 flex flex-wrap justify-center py-14">
+                                        <div style={{ backgroundImage: `url(${BG})` }} className="flex flex-wrap bg-cover justify-center py-14">
 
                                             <img src={ClipArt} alt="user-clip-art" className="hover:opacity-90 transition duration-150 w-36 h-36 rounded-full object-cover self-center"/>
 

@@ -8,6 +8,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Channels from './pages/dashboard/analytics/Channels';
 import Integrations from './pages/dashboard/analytics/Integrations';
+import Statistics from './pages/dashboard/analytics/Statistics';
 import Alerts from './pages/dashboard/overview/Alerts';
 import Inbox from './pages/dashboard/overview/Inbox';
 import Overview from './pages/dashboard/overview/Overview';
@@ -94,6 +95,10 @@ function App() {
 
           <Route path="/dashboard/integrations"> 
             <Integrations/>
+          </Route>
+
+          <Route path="/dashboard/statistics"> 
+            <Statistics/>
           </Route>
 
           <Route path="/dashboard/channels"> 
