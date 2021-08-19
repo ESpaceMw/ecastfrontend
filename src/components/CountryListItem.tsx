@@ -1,0 +1,48 @@
+import { useState } from "react";
+
+interface Props {
+    continent: string
+}
+
+const CountryListItem: React.FC<Props> = ({ continent, children }) => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border dark:border-gray-600 shadow-sm mb-3 rounded-sm">
+      <button
+        type="button"
+        aria-label="Open item"
+        title="Open item"
+        className="flex items-center justify-between w-full p-4 focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <p className="text-lg font-medium dark:text-gray-300">{continent}</p>
+        <div className="flex items-center justify-center w-8 h-8 dark:border-gray-600 border rounded-full">
+          <svg
+            viewBox="0 0 24 24"
+            className={`w-3 text-gray-600 transition transform duration-200 ${
+              isOpen ? 'transform rotate-180' : ''
+            }`}
+          >
+            <polyline
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              points="2,7 12,17 22,7"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </button>
+      {isOpen && (
+        <div className="p-4 pt-0">
+          <p className="text-gray-700 dark:text-gray-500">{children}</p>
+        </div>
+      )}
+    </div>
+)}
+
+export default CountryListItem
