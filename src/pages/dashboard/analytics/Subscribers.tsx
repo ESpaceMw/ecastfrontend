@@ -33,10 +33,10 @@ const Subscribers = () => {
                                     id="modal-search" 
                                     className="w-full rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
                                     type="search" 
-                                    placeholder="Search contact" />
+                                    placeholder="Search for a subscriber" />
                             </div>
                             <div className="mt-3">
-                                <h3 className="text-md uppercase">All subscribers</h3>
+                                <h3 className="text-md uppercase">{subscribers.length} subscribers</h3>
 
                                 {
                                     subscribers.map((item) => (
