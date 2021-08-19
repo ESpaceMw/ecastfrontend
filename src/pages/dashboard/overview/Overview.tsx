@@ -2,41 +2,45 @@ import { ArrowDown, ArrowUp, DotsHorizontal } from "heroicons-react"
 import React from "react"
 import { Link } from "react-router-dom"
 import DashboardMain from "../../../components/layouts/DashboardMain"
+import AudienceChart from "../../../components/overview/AudienceChart"
 import CashCards from '../../../icons/cards-with-dollar-sign.png'
 import Money from '../../../media/pexels-burst-545065.jpg'
 
 const popularEpisodes = [
     {
         id: 1,
-        title: 'Engaging Gamechangers',
+        title: 'Engaging Gamec hangers',
         sub: 'Season 2, Episode 15',
         time: '15:08 AM'
     },
     {
         id: 2,
-        title: 'Engaging Gamechangers',
+        title: 'Engaging Game changers',
         sub: 'Season 2, Episode 15',
         time: '15:08 AM'
     },
     {
         id: 3,
-        title: 'Engaging Gamechangers',
+        title: 'Engaging Game changers',
         sub: 'Season 2, Episode 15',
         time: '15:08 AM'
     },
     {
         id: 4,
-        title: 'Engaging Gamechangers',
+        title: 'Engaging Game changers',
         sub: 'Season 2, Episode 15',
         time: '15:08 AM'
     },
     {
         id: 5,
-        title: 'Engaging Gamechangers',
+        title: 'Engaging Game changers',
         sub: 'Season 2, Episode 15',
         time: '15:08 AM'
     },
 ]
+
+
+
 const Overview = () => {
 
     const [openTab, setOpenTab] = React.useState(1);
@@ -85,7 +89,7 @@ const Overview = () => {
                                     <p className="text-blue-400 ml-2 text-sm">+ 6.45%</p>
                                 </div>
                             </div>
-                            <div className="w-1/4 border-r p-2 ml-2 hover:bg-gray-100 transition duration-150">
+                            <div className="w-1/4 p-2 ml-2 hover:bg-gray-100 transition duration-150">
                                 <p className="text-gray-500">Avg. listen time </p>
                                 <h3 className="text-2xl font-semibold">15,2 min</h3>
                                 <div className="flex">
@@ -112,9 +116,7 @@ const Overview = () => {
                                     </div>
                                     <p className="text-blue-400 ml-2 text-sm">+ 33.45% <span className="text-gray-600">for the last 7 days</span></p>
                                 </div>
-                                <p className="text-3xl">
-                                    Bar Chart here
-                                </p>
+                                <AudienceChart/>
                             </div>
                             <div className="bg-white rounded-sm shadow hover:shadow-md mt-5 p-3">
                                 <div className="flex justify-between">
@@ -185,7 +187,7 @@ const Overview = () => {
                                 <p className="text-white mt-1 hover:text-gray-100 transition duration-150 font-semibold text-sm">Read more...</p>
                             </div>
 
-                            <div className="bg-white rounded-sm shadow hover:shadow-md p-3 mt-5">
+                            <div className="bg-white rounded-sm shadow h-72 hover:shadow-md p-3 mt-5">
                                 <div>
                                     <p>Listeners reviews</p>
                                 </div>
@@ -193,7 +195,7 @@ const Overview = () => {
                         </div>
                     </div>
 
-                    <div className="border mt-5 rounded-sm shadow-sm hover:shadow-md">
+                    <div className="border mt-24 rounded-sm shadow-sm hover:shadow-md">
                         <div className="h-72 bg-cover" style={{ backgroundImage: `url(${Money})` }}>
                             <h3 className="text-3xl font-semibold p-5 text-white w-1/2">
                                 Podcasting alone should give you 
