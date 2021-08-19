@@ -10,6 +10,7 @@ import Register from './pages/auth/Register';
 import Channels from './pages/dashboard/analytics/Channels';
 import Integrations from './pages/dashboard/analytics/Integrations';
 import Statistics from './pages/dashboard/analytics/Statistics';
+import Subscribers from './pages/dashboard/analytics/Subscribers';
 import Alerts from './pages/dashboard/overview/Alerts';
 import Inbox from './pages/dashboard/overview/Inbox';
 import Overview from './pages/dashboard/overview/Overview';
@@ -110,6 +111,10 @@ function App() {
 
           <Route path="/dashboard/channels"> 
             <Channels/>
+          </Route>
+
+          <Route path="/dashboard/subscribers"> 
+            <Subscribers/>
           </Route>
 
         </Switch>
