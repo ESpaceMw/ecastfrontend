@@ -3,6 +3,8 @@ import { CloudUploadOutline, FolderOpenOutline, MusicNoteOutline, NewspaperOutli
 import React from "react";
 import DashboardMain from "../../../../components/layouts/DashboardMain"
 import SubmitButton from "../../../../components/SubmitButton";
+import { useDropzone } from "react-dropzone";
+import ReactAudioPlayer from "react-audio-player";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const NewEpisode = () => {
@@ -10,6 +12,16 @@ const NewEpisode = () => {
     const [openTab, setOpenTab] = React.useState(1);
 
     const color: string = 'blue'
+
+    const {acceptedFiles, getRootProps, getInputProps} = useDropzone(
+        {accept: 'audio/*', noClick: true, noKeyboard: true},
+    )
+
+    const files = acceptedFiles.map((file) => (
+        <li key={file.name}>
+            {file.name}
+        </li>
+    ))
     
     return(
         <div>
@@ -113,7 +125,7 @@ const NewEpisode = () => {
                                             
                                             <div>
                                                 <label className="block font-medium text-gray-700">Audio file</label>
-                                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-sm">
+                                                <div {...getRootProps({className: "mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed hover:border-green-400 transition duration-150 rounded-sm dropzone"})}>
                                                 <div className="space-y-1 text-center">
                                                     <MusicNoteOutline className="text-gray-400 w-12 h-12 mx-auto"/>
                                                     <div className="flex text-gray-600">
@@ -122,7 +134,7 @@ const NewEpisode = () => {
                                                         className="relative cursor-pointer bg-white rounded-sm font-medium text-blue-400 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                                     >
                                                         <span>Upload an audio file</span>
-                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                        <input {...getInputProps()} />
                                                     </label>
                                                     <p className="pl-1">or drag and drop</p>
                                                     </div>
@@ -136,10 +148,17 @@ const NewEpisode = () => {
                                             </h1>
 
                                             <ul id="gallery" className="flex flex-1 flex-wrap -m-1">
-                                            <li id="empty" className="h-full w-full text-center flex flex-col items-center justify-center">
+                                            {/* <li id="empty" className="h-full w-full text-center flex flex-col items-center justify-center">
                                                 <img className="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
                                                 <span className="text-small text-gray-500">No file selected</span>
-                                            </li>
+                                            </li> */}
+                                            {files}
+                                            <ReactAudioPlayer
+                                                    src=""
+                                                    autoPlay={false}
+                                                    controls
+                                                    style={{ width: '100%' }}
+                                                />
                                             </ul>
                                         </div>
                                    </article>
