@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import { CloudUploadOutline, FolderOpenOutline, MusicNoteOutline, NewspaperOutline } from "heroicons-react"
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import DashboardMain from "../../../../components/layouts/DashboardMain"
 import SubmitButton from "../../../../components/SubmitButton";
 import { useDropzone } from "react-dropzone";
@@ -11,17 +11,22 @@ const NewEpisode = () => {
 
     const [openTab, setOpenTab] = React.useState(1);
 
-    const color: string = 'blue'
+    const color = 'blue'
 
-    const {acceptedFiles, getRootProps, getInputProps} = useDropzone(
-        {accept: 'audio/*', noClick: true, noKeyboard: true},
-    )
+    const [files, setFiles] = React.useState([]);
 
-    const files = acceptedFiles.map((file) => (
-        <li key={file.name}>
-            {file.name}
-        </li>
-    ))
+
+    const {getRootProps, getInputProps} = useDropzone(
+        {accept: 'audio/*', noClick: true, noKeyboard: true, onDrop: acceptedFiles => {
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        })));
+        }},
+        )
+
+        useEffect(() => () => {
+            files.forEach((file) => URL.revokeObjectURL(file.preview));
+        }, [files]);
     
     return(
         <div>
@@ -152,13 +157,17 @@ const NewEpisode = () => {
                                                 <img className="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
                                                 <span className="text-small text-gray-500">No file selected</span>
                                             </li> */}
-                                            {files}
-                                            <ReactAudioPlayer
-                                                    src=""
+                                            {files.map((file) => (
+                                                <ReactAudioPlayer
+                                                {...console.log(file.preview)}
+                                                    src={file.preview}
                                                     autoPlay={false}
                                                     controls
                                                     style={{ width: '100%' }}
                                                 />
+                                            ))
+                                            }
+                                            
                                             </ul>
                                         </div>
                                    </article>

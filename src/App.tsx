@@ -17,7 +17,7 @@ import Overview from './pages/dashboard/overview/Overview';
 import Contacts from './pages/dashboard/podcast/Contacts';
 import Episodes from './pages/dashboard/podcast/Episodes';
 import Events from './pages/dashboard/podcast/episodes/Events';
-import NewEpisode from './pages/dashboard/podcast/episodes/NewEpisode';
+import NewEpisode from './pages/dashboard/podcast/episodes/NewEpisode.jsx';
 import Media from './pages/dashboard/podcast/Media';
 import UserInfo from './pages/dashboard/user/UserInfo';
 import AboutUs from './pages/landing/AboutUs';
