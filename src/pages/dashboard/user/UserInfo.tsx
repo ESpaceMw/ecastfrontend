@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { LockClosed, ShoppingCart, User } from "heroicons-react";
+import { ExclamationCircle, LockClosed, ShoppingCart, User } from "heroicons-react";
 import React from "react";
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import ClipArt from '../../../media/dusan-jovic-2V4Qhq55maY-unsplash.jpg'
 import BG from '../../../media/bg.png'
+import { XIcon } from "@heroicons/react/outline";
 
 const UserInfo = () => {
 
@@ -179,8 +180,30 @@ const UserInfo = () => {
                             </div>
                             <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                             <div className="relative">
-                                    
+                                    <div className="mt-3">
+                                        <div className="flex items-center bg-red-600 p-2 justify-between flex-wrap">
+                                        <div className="w-0 flex-1 flex items-center">
+                                            <span className="flex p-2 rounded-sm bg-red-400">
+                                            <ExclamationCircle className="h-6 w-6 text-white" aria-hidden="true" />
+                                            </span>
+                                            <p className="ml-3 font-medium text-white truncate">
+                                            <span className="hidden md:inline">You are currently not subscribed to any plan</span>
+                                            </p>
+                                        </div>
+                                        
+                                        <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
+                                            <button
+                                            type="button"
+                                            className="-mr-1 flex p-2 rounded-md focus:outline-none  sm:-mr-2"
+                                            >
+                                            <span className="sr-only">Dismiss</span>
+                                            <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                                            </button>
+                                        </div>
+                                        </div>
+                                    </div>
                                     <div className="grid grid-cols-2 gap-4 mt-5">
+
                                         <div>
                                         <div className="bg-gray-200 md:p-10 align-items-center">
                                             <h3 className="text-gray-700 font-bold text-3xl">

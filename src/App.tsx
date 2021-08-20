@@ -22,6 +22,7 @@ import Media from './pages/dashboard/podcast/Media';
 import UserInfo from './pages/dashboard/user/UserInfo';
 import LandingPage from './pages/LandingPage';
 import OnBoarding from './pages/OnBoarding';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -115,6 +116,10 @@ function App() {
 
           <Route path="/dashboard/subscribers"> 
             <Subscribers/>
+          </Route>
+
+          <Route>
+            <PageNotFound/>
           </Route>
 
         </Switch>
