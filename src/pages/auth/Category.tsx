@@ -38,7 +38,7 @@ const Category = () => {
           </div>
           <div className="rounded-sm border shadow hover:shadow-md">
               <div className="bg-gray-100 p-3 text-lg font-semibold">
-                  One last step
+                  One last step - Choose your category of interest
               </div>
               <div className="flex flex-wrap p-3">
                     {

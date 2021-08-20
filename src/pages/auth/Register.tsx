@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import SubmitButton from '../../components/SubmitButton'
 import RegisterService from '../../services/auth/RegisterService'
 
@@ -56,6 +56,9 @@ const Register = () => {
     setRegisterStatus(response)
 
   }
+
+  let history = useHistory();
+  
     return (
           <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-black">
             <div className="max-w-md w-full mb-10">
@@ -250,8 +253,9 @@ const Register = () => {
                   <SubmitButton text="Continue to sign up" onClick={() => {
                     
                   }}/>
-                  <p className="text-green-400 p-2 text-center">
+                  <p className="text-green-400 p-2 text-center font-semibold">
                     {registerStatus}
+                    {registerStatus === 'You have registered successfully!' ? history.push('/choose-category') : ''}
                   </p>
                 </div>
 
