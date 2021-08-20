@@ -1,6 +1,7 @@
 import { DotsHorizontal, ArrowUp } from "heroicons-react"
 import { Link } from "react-router-dom"
 import DashboardMain from "../../../components/layouts/DashboardMain"
+import SubscribersChart from "../../../components/subscribers/SubscribersChart"
 import Alexander from '../../../media/16075282192866.jpg'
 import Gowa from '../../../media/DrBrianMcGowanHeadshot-crop-1024x1024.jpg'
 
@@ -108,7 +109,7 @@ const Subscribers = () => {
 
                                     <div>
                                         <h3 className="text-md text-medium mb-2 mt-2">Annual listens</h3>
-                                        <p className="text-lg">Graph here</p>
+                                        <SubscribersChart/>
                                         <p className="text-2xl mt-2">1,050,657 Total Listens</p>
                                         <div className="flex">
                                             <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">

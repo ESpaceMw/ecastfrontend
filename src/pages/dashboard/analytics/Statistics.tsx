@@ -1,6 +1,7 @@
 import { ArrowUp, DotsHorizontal } from "heroicons-react"
 import CountryListItem from "../../../components/CountryListItem"
 import DashboardMain from "../../../components/layouts/DashboardMain"
+import AudienceChart from "../../../components/overview/AudienceChart"
 import Map from '../../../media/map.png'
 
 const continents = [
@@ -118,7 +119,7 @@ const Statistics = () => {
 
                                     <div>
                                         <h3 className="text-md text-medium mb-2 mt-2">Annual listens</h3>
-                                        <p className="text-lg">Graph here</p>
+                                        <AudienceChart/>
                                         <p className="text-2xl mt-2">1,050,657 Total Listens</p>
                                         <div className="flex">
                                             <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
