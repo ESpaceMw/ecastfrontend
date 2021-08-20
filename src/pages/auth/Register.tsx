@@ -1,11 +1,62 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SubmitButton from '../../components/SubmitButton'
+import RegisterService from '../../services/auth/RegisterService'
 
-export default class Register extends Component {
-    render() {
-        return (
+
+const Register = () => {
+
+  const [firstName, setFirstName] = useState('')
+
+  const [lastName, setLastName] = useState('')
+
+  const [email, setEmail] = useState('')
+
+  const [phoneNumber, setPhoneNumber] = useState('')
+
+  const [gender, setGender] = useState('M')
+
+  const [dateOfBirth, setDateOfBirth] = useState('')
+
+  const [country, setCountry] = useState('')
+
+  const [city, setCity] = useState('')
+
+  const [password, setPassword] = useState('')
+
+  const [registerStatus, setRegisterStatus] = useState('')
+
+  async function handleRegister (email: string, phoneNumber: string, gender: string, firstName: string, lastName: string, dateOfBirth: string, country: string, city: string, password: string){
+    
+    const postData = {
+
+      first_name: firstName,
+
+      last_name: lastName,
+
+      gender: gender,
+
+      date_of_birth: dateOfBirth,
+
+      country: country,
+
+      city: city,
+
+      email: email,
+
+      phone_number: phoneNumber,
+
+      password: password
+
+    }
+
+    const response = await RegisterService.processRegister(postData)
+
+    setRegisterStatus(response)
+
+  }
+    return (
           <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-black">
             <div className="max-w-md w-full mb-10">
               <div>
@@ -20,7 +71,10 @@ export default class Register extends Component {
                   Or, sign up with your email
                 </p>
               </div>
-              <form className="mt-2 space-y-6" action="#" method="POST">
+              <form className="mt-2 space-y-6" onSubmit={(event) => {
+                event.preventDefault()
+                handleRegister(email, phoneNumber, gender, firstName, lastName, dateOfBirth, country, city, password)
+              }} method="POST">
                 <input type="hidden" name="remember" defaultValue="true" />
                 <div className="rounded shadow-sm -space-y-px">
                   <div className="mb-2">
@@ -29,6 +83,10 @@ export default class Register extends Component {
                       id="first_name"
                       name="first_name"
                       type="text"
+                      value={firstName}
+                      onChange={(event) => {
+                        setFirstName(event.target.value)
+                      }}
                       autoComplete="name"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -41,6 +99,10 @@ export default class Register extends Component {
                       id="last_name"
                       name="last_name"
                       type="text"
+                      value={lastName}
+                      onChange={(event) => {
+                        setLastName(event.target.value)
+                      }}
                       autoComplete="name"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -50,9 +112,12 @@ export default class Register extends Component {
                   <div className="mt-4">
                       <label className="block text-gray-700 dark:text-gray-300">Gender<span className="text-red-500">*</span></label>
                       <div className="inline-block relative w-full">
-                          <select id="gender" name="gender" className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
-                          <option>M</option>
-                          <option>F</option>
+                          <select value={gender}
+                            onChange={(event) => {
+                              setGender(event.target.value)
+                            }} id="gender" name="gender" className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                            <option>M</option>
+                            <option>F</option>
                           </select>
                           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                           <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -65,6 +130,10 @@ export default class Register extends Component {
                       id="date_of_birth"
                       name="date_of_birth"
                       type="text"
+                      value={dateOfBirth}
+                      onChange={(event) => {
+                        setDateOfBirth(event.target.value)
+                      }}
                       autoComplete="name"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -77,6 +146,10 @@ export default class Register extends Component {
                       id="country"
                       name="country"
                       type="text"
+                      value={country}
+                      onChange={(event) => {
+                        setCountry(event.target.value)
+                      }}
                       autoComplete="name"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -89,6 +162,10 @@ export default class Register extends Component {
                       id="city"
                       name="city"
                       type="text"
+                      value={city}
+                      onChange={(event) => {
+                        setCity(event.target.value)
+                      }}
                       autoComplete="name"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -101,6 +178,10 @@ export default class Register extends Component {
                       id="phone_number"
                       name="phone_number"
                       type="phone"
+                      value={phoneNumber}
+                      onChange={(event) => {
+                        setPhoneNumber(event.target.value)
+                      }}
                       autoComplete="name"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -113,6 +194,10 @@ export default class Register extends Component {
                       id="email-address"
                       name="email"
                       type="email"
+                      value={email}
+                      onChange={(event) => {
+                        setEmail(event.target.value)
+                      }}
                       autoComplete="email"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -139,6 +224,10 @@ export default class Register extends Component {
                       id="confirm-password"
                       name="c-password"
                       type="password"
+                      value={password}
+                      onChange={(event) => {
+                        setPassword(event.target.value)
+                      }}
                       autoComplete="current-password"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -151,7 +240,7 @@ export default class Register extends Component {
                   
                   <div>
                       <p className="text-center text-sm justify-center  dark:text-gray-300">
-                        By continuing to sign up, you agree to Alembi user <Link to="#" className="text-blue-500 underline font-medium">Privacy Policy</Link>
+                        By continuing to sign up, you agree to eCast user <Link to="#" className="text-blue-500 underline font-medium">Privacy Policy</Link>
                       </p>
                   </div>
 
@@ -159,8 +248,11 @@ export default class Register extends Component {
 
                 <div>
                   <SubmitButton text="Continue to sign up" onClick={() => {
-                    <Link to="/choose-category"/>
+                    
                   }}/>
+                  <p className="text-green-400 p-2 text-center">
+                    {registerStatus}
+                  </p>
                 </div>
 
                 <div>
@@ -175,5 +267,7 @@ export default class Register extends Component {
             </div>
         </div>
         )
-    }
+    
 }
+
+export default Register

@@ -17,6 +17,12 @@ class UrlService {
         return apiDomain + 'api/v1/auth/login'
 
     }
+
+    static registerUrl(){
+
+        return apiDomain + 'api/v1/auth/register'
+        
+    }
 }
 
 export default UrlService
