@@ -205,7 +205,7 @@ const UserInfo = () => {
                                     <div className="grid grid-cols-2 gap-4 mt-5">
 
                                         <div>
-                                        <div className="bg-gray-200 md:p-10 align-items-center">
+                                        <div className="bg-gray-200 md:p-10 align-items-center hover:bg-gray-400 transition duration-150">
                                             <h3 className="text-gray-700 font-bold text-3xl">
                                                 BASIC
                                             </h3>
@@ -227,41 +227,87 @@ const UserInfo = () => {
                                                 </p>
                                             </div>
                                         </div>
+                                        <div className="mt-3">
+                                            <div>
+                                                <h3 className="text-md font-semibold uppercase mt-1 mb-1">
+                                                    Basic Plan
+                                                </h3>
+                                                <div className="flex items-center mb-2">
+                                                    <input type="checkbox" name="basic-monthly" id="basic-monthly" />
+                                                    <label htmlFor="basic-monthly" className="ml-2 text-center block text-sm text-gray-900 dark:text-gray-300">
+                                                      MK2,500 Per Month
+                                                    </label>
+                                                </div>
+                                                <div className="flex items-center mb-2">
+                                                    <input type="checkbox" name="basic-yearly" id="basic-yearly" />
+                                                    <label htmlFor="basic-yearly" className="ml-2 text-center block text-sm text-gray-900 dark:text-gray-300">
+                                                      MK5,500 Per Annum
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button className="bg-green-400 hover:bg-green-500 text-md text-white py-2 px-8">
+                                                Subscribe
+                                            </button>
+                                        </div>
                                         </div>
 
                                         <div>
-                                            <div className="bg-blue-300 md:p-10 align-items-center">
+                                            <div className="bg-blue-400 hover:bg-blue-500 transition duration-150 md:p-10 align-items-center">
                                                 <h3 className="text-white font-bold text-3xl">
                                                     PRO
                                                 </h3>
                                             </div>
                                             <div className="grid grid-cols-2 gap-4 mt-2">
-                                                <div className="p-6 bg-blue-300">
+                                                <div className="p-6 bg-blue-400">
                                                     <p className="text-white text-md">
                                                         Unlimited Storage
                                                     </p>
                                                 </div>
-                                                <div className="p-6 bg-blue-300">
+                                                <div className="p-6 bg-blue-400">
                                                     <p className="text-white text-md">
                                                         Statistics
                                                     </p>
                                                 </div>
-                                                <div className="p-6 bg-blue-300">
+                                                <div className="p-6 bg-blue-400">
                                                     <p className="text-white text-md">
                                                         Multiple Distribution (Spotify, Apple podcasts, etc)
                                                     </p>
                                                 </div>
-                                                <div className="p-6 bg-blue-300">
+                                                <div className="p-6 bg-blue-400">
                                                     <p className="text-white text-md">
                                                         Hi - Def Downloads
                                                     </p>
                                                 </div>
-                                                <div className="p-6 bg-blue-300">
+                                                <div className="p-6 bg-blue-400">
                                                     <p className="text-white text-md">
                                                         1 TB Bandwidth/month
                                                     </p>
                                                 </div>
+                                                </div>
+                                                <div>
+                                                
+                                                
                                             </div>
+                                            <h3 className="text-md font-semibold uppercase mt-1 mb-1">
+                                                Pro Plan
+                                            </h3>
+                                                <div className="flex items-center mb-2">
+                                                    <input type="checkbox" name="basic-monthly" id="pro-monthly" />
+                                                    <label htmlFor="pro-monthly" className="ml-2 text-center block text-sm text-gray-900 dark:text-gray-300">
+                                                      MK5,000 Per Month
+                                                    </label>
+                                                </div>
+                                                <div className="flex items-center mb-2">
+                                                    <input type="checkbox" name="basic-yearly" id="pro-yearly" />
+                                                    <label htmlFor="pro-yearly" className="ml-2 text-center block text-sm text-gray-900 dark:text-gray-300">
+                                                      MK10,000 Per Annum
+                                                    </label>
+                                                </div>
+                                                
+                                                <button className="bg-yellow-400 hover:bg-yellow-500 text-md text-white py-2 px-8">
+                                                    Subscribe
+                                                </button>
+                                                
                                         </div>
                                     </div>
 
