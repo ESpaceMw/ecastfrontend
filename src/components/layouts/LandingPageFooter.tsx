@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const LandingPageFooter = () => {
     return(
@@ -71,7 +73,7 @@ const LandingPageFooter = () => {
                         <a className="text-gray-600 hover:text-gray-800">Seller Information Center</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">FAQ's</a>
+                        <Link to="/faq" className="text-gray-600 hover:text-gray-800">FAQ's</Link>
                     </li>
                     <li>
                         <a className="text-gray-600 hover:text-gray-800">Support & Feedback</a>

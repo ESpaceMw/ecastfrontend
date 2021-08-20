@@ -23,6 +23,7 @@ import UserInfo from './pages/dashboard/user/UserInfo';
 import AboutUs from './pages/landing/AboutUs';
 import Blog from './pages/landing/Blog';
 import Download from './pages/landing/Download';
+import HelpCenter from './pages/landing/Footer/Support/HelpCenter';
 import Jobs from './pages/landing/Jobs';
 import LandingPage from './pages/LandingPage';
 import OnBoarding from './pages/OnBoarding';
@@ -92,7 +93,15 @@ function App() {
 
           <Route path="/forgot-password"> 
             <LandingPageHeader/>
-            <ForgotPassword/>
+              <ForgotPassword/>
+            <LandingPageFooter/>
+          </Route>
+
+          {/* Landing page footer routes */}
+
+          <Route path="/faq"> 
+            <LandingPageHeader/>
+              <HelpCenter/>
             <LandingPageFooter/>
           </Route>
 
