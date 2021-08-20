@@ -20,6 +20,10 @@ import Events from './pages/dashboard/podcast/episodes/Events';
 import NewEpisode from './pages/dashboard/podcast/episodes/NewEpisode';
 import Media from './pages/dashboard/podcast/Media';
 import UserInfo from './pages/dashboard/user/UserInfo';
+import AboutUs from './pages/landing/AboutUs';
+import Blog from './pages/landing/Blog';
+import Download from './pages/landing/Download';
+import Jobs from './pages/landing/Jobs';
 import LandingPage from './pages/LandingPage';
 import OnBoarding from './pages/OnBoarding';
 import PageNotFound from './pages/PageNotFound';
@@ -32,7 +36,7 @@ function App() {
 
           <Route path="/" exact> 
             <LandingPageHeader/>
-            <LandingPage/>
+              <LandingPage/>
             <LandingPageFooter/>
           </Route>
 
@@ -40,21 +44,49 @@ function App() {
             <OnBoarding/>
           </Route>
 
+          {/* Landing page routes */}
+
+          <Route path="/download">
+            <LandingPageHeader/>
+              <Download/>
+            <LandingPageFooter/>
+          </Route>
+
+          <Route path="/jobs"> 
+            <LandingPageHeader/>
+              <Jobs/>
+            <LandingPageFooter/>
+          </Route>
+
+          <Route path="/blog">
+            <LandingPageHeader/>
+              <Blog/>
+            <LandingPageFooter/>
+          </Route>
+
+          <Route path="/about-us">
+            <LandingPageHeader/>
+              <AboutUs/>
+            <LandingPageFooter/>
+          </Route>
+
+          {/* Authentication routes */}
+
           <Route path="/sign-in"> 
             <LandingPageHeader/>
-            <Login/>
+              <Login/>
             <LandingPageFooter/>
           </Route>
 
           <Route path="/sign-up"> 
             <LandingPageHeader/>
-            <Register/>
+              <Register/>
             <LandingPageFooter/>
           </Route>
 
           <Route path="/choose-category"> 
             <LandingPageHeader/>
-            <Category/>
+              <Category/>
             <LandingPageFooter/>
           </Route>
 
@@ -117,6 +149,8 @@ function App() {
           <Route path="/dashboard/subscribers"> 
             <Subscribers/>
           </Route>
+
+          {/* 404 Error route */}
 
           <Route>
             <PageNotFound/>
