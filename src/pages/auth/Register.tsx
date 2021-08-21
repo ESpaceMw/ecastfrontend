@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import { ExclamationCircleOutline } from 'heroicons-react'
+import { useState } from 'react'
+import { CountryDropdown } from 'react-country-region-selector'
 import { Link, useHistory } from 'react-router-dom'
+import DatePicker from '../../components/DatePicker'
 import SubmitButton from '../../components/SubmitButton'
 import RegisterService from '../../services/auth/RegisterService'
 
@@ -19,11 +22,13 @@ const Register = () => {
 
   const [dateOfBirth, setDateOfBirth] = useState('')
 
-  const [country, setCountry] = useState('')
+  const [country, setCountry] = useState('Malawi')
 
   const [city, setCity] = useState('')
 
   const [password, setPassword] = useState('')
+
+  const [c_password, setCPassword] = useState('')
 
   const [registerStatus, setRegisterStatus] = useState('')
 
@@ -79,7 +84,7 @@ const Register = () => {
                 handleRegister(email, phoneNumber, gender, firstName, lastName, dateOfBirth, country, city, password)
               }} method="POST">
                 <input type="hidden" name="remember" defaultValue="true" />
-                <div className="rounded shadow-sm -space-y-px">
+                <div className="space-y-2 p-2 rounded-sm bg-white">
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">First name<span className="text-red-500">*</span></label>
                     <input
@@ -129,35 +134,14 @@ const Register = () => {
                   </div>
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">Date of birth<span className="text-red-500">*</span></label>
-                    <input
-                      id="date_of_birth"
-                      name="date_of_birth"
-                      type="text"
-                      value={dateOfBirth}
-                      onChange={(event) => {
-                        setDateOfBirth(event.target.value)
-                      }}
-                      autoComplete="name"
-                      required
-                      className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                      placeholder="Date of birth"
-                    />
+                    <DatePicker/>
                   </div>
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">Country<span className="text-red-500">*</span></label>
-                    <input
-                      id="country"
-                      name="country"
-                      type="text"
+                    <CountryDropdown
+                    classes="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                       value={country}
-                      onChange={(event) => {
-                        setCountry(event.target.value)
-                      }}
-                      autoComplete="name"
-                      required
-                      className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                      placeholder="Your Country"
-                    />
+                      onChange={(val) => setCountry(val)} />
                   </div>
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">City<span className="text-red-500">*</span></label>
@@ -214,6 +198,10 @@ const Register = () => {
                       id="password"
                       name="password"
                       type="password"
+                      value={password}
+                      onChange={(event) => {
+                        setPassword(event.target.value)
+                      }}
                       autoComplete="current-password"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -227,16 +215,19 @@ const Register = () => {
                       id="confirm-password"
                       name="c-password"
                       type="password"
-                      value={password}
+                      value={c_password}
                       onChange={(event) => {
-                        setPassword(event.target.value)
+                        setCPassword(event.target.value)
                       }}
                       autoComplete="current-password"
                       required
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                       placeholder="Confirm password"
                     />
+                    {password === c_password ? <></> : <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2 animate-pulse">
+                    <ExclamationCircleOutline className="w-5 h-5 mr-3"/> Passwords do not match</p>}
                   </div>
+
                 </div>
 
                 <div className="flex items-center justify-between">
