@@ -463,7 +463,7 @@ const DatePicker = () => {
                           toggleDisplayDateFocus();
                         }}
                         onMouseDown={event => event.preventDefault()}
-                        className={`cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 
+                        className={`cursor-pointer text-center text-sm leading-none rounded-full transition ease-in-out duration-100 
                         ${
                           isToday(dayNumber)
                             ? "bg-blue-500 text-white"

@@ -5,12 +5,17 @@ import DashboardMain from "../../../components/layouts/DashboardMain"
 import ClipArt from '../../../media/dusan-jovic-2V4Qhq55maY-unsplash.jpg'
 import BG from '../../../media/bg.png'
 import { XIcon } from "@heroicons/react/outline";
+import SubscribeModal from "../../../components/subscription/SubscribeModal";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 const UserInfo = () => {
 
     const [openTab, setOpenTab] = React.useState(1);
 
     const color: string = 'blue'
+
+    const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
     
     return(
         <div>
@@ -245,9 +250,10 @@ const UserInfo = () => {
                                                     </label>
                                                 </div>
                                             </div>
-                                            <button className="bg-green-400 hover:bg-green-500 text-md text-white py-2 px-8">
-                                                Subscribe
-                                            </button>
+                                            
+                                            <Elements stripe={stripePromise}>
+                                                <SubscribeModal />
+                                            </Elements>
                                         </div>
                                         </div>
 

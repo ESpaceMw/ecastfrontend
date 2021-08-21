@@ -1,11 +1,11 @@
 import { Transition } from "@headlessui/react";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Logo from '../../media/logo.png'
-import { DotsHorizontal} from "heroicons-react"
-import MusicalNote from '../../icons/musical-note.png'
-import Love from '../../icons/like.png'
-import Chat from '../../icons/chat.png'
+
+import {
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js';
+import { CreditCard } from "heroicons-react";
 
 const SubscribeModal  = () => {
 
@@ -32,15 +32,30 @@ const SubscribeModal  = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (elements == null) {
+      return;
+    }
+
+    // const {error, paymentMethod} = await stripe.createPaymentMethod({
+    //   type: 'card',
+    //   card: elements.getElement(CardElement),
+    // });
+  };
+
   return (
     <div>
-      <Link
+      <button 
         ref={trigger}
-        to="#" 
         onClick={() => { setSearchOpen(!searchOpen) }}
-        className="flex justify-between p-3 border-b border-gray-200 hover:bg-gray-100 transition duration-150">
-            some thing here
-        </Link>
+        className="bg-green-400 hover:bg-green-500 text-md text-white py-2 px-8">
+            Subscribe
+        </button>
       {/* Modal backdrop */}
       <Transition
         className="fixed inset-0 bg-gray-900 bg-opacity-30 z-50 transition-opacity"
@@ -67,61 +82,59 @@ const SubscribeModal  = () => {
         leaveStart="opacity-100 translate-y-0"
         leaveEnd="opacity-0 translate-y-4"
       >
-        <div className="bg-white overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
-          <div className="p-3">
-            <div className="flex justify-between">
-              <div className="flex">
-                <img src={Logo} className="w-32 h-32 border rounded-sm border-gray-200" alt="serie-cover-art"/>
-                <div className="ml-3">
-                  <h3 className="font-semibold text-lg">
-                    Impact Goals 
-                  </h3>
-                  <h2 className="font-medium text-gray-500 text-md">
-                    Season 1
-                  </h2>
-                  <p>
-                    Premium Content
-                  </p>
-                  <p>
-                    Premiered [5/4/2021]
-                  </p>
-                  <div className="w-full flex justify-around">
-                    <div className="flex mt-2 mr-2">
-                      <img src={MusicalNote} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="">22043 Listens</p>
+        <div className="bg-white overflow-auto w-1/2 shadow-lg" ref={searchContent}>
+          
+          <form  onSubmit={handleSubmit}>
+            <div/>
+            <div className="bg-gray-100 p-3">
+                <h3 className="font-semibold text-md">Checkout</h3>
+            </div>
+            <div className="p-3">
+                <label className="block text-gray-700 dark:text-gray-300">Name on card</label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      required
+                      className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm"
+                      placeholder="Enter the name on the card"
+                    />
+            </div>
+            <div className="ml-3 mr-3 mb-3">
+                <label className="block text-gray-700 dark:text-gray-300"> Credit card details</label>
+                <div class="w-full border hover:border-blue-400">
+                    <div class="flex">
+                        <div className="w-4/6 flex items-center space-x-2 pl-2">
+                            <CreditCard className="text-gray-400"/>
+                            <input type="text" id="payment" class="flex-1 text-sm bg-grey-light text-grey-darkest rounded-l p-3 focus:outline-none" placeholder="Card Number"/>
+                        </div>
+                        <input type="text" id="payment" class="w-1/6 inline-block text-sm bg-grey-light text-grey-darkest p-3 focus:outline-none" placeholder="MM / YY"/>
+                        <input type="text" id="payment" class="w-1/6 inline-block text-sm bg-grey-light text-grey-darkest rounded-r p-3 focus:outline-none" placeholder="CVC"/>
                     </div>
-                    <div className="flex mt-2 mr-2">
-                      <img src={Love} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="">22043 Listens</p>
-                    </div>
-                    <div className="flex mt-2 mr-2">
-                      <img src={Chat} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="">22043 Listens</p>
-                    </div>
-                  </div>
                 </div>
+            </div>
+
+            <div className="flex items-center pl-3">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  onChange={() => {}}
+                  className="h-4 w-4 dark:bg-transparent bg-white text-blue-400 focus:ring-blue-400 dark:border-gray-900 border-gray-300 rounded-none"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                  I agree to eCast <span className="text-blue-400 underline">privacy policies</span> on visa net transactions.
+                </label>
               </div>
-              <div>
-                <button className="bg-gray-100 p-1 rounded-sm">
-                  <DotsHorizontal className="h-4 w-4"/>
-                </button>
-              </div>
+
+            <div className="w-full p-3">
+                <button className="bg-blue-400 hover:text-gray-100 hover:bg-blue-500 transition duration-150 w-full py-2 justify-center text-white rounded-sm  m-20text-white" type="submit" disabled={!stripe || !elements}>
+                Pay
+            </button>
             </div>
-            <div className="justify-center">
-              <p className="text-sm mb-2 mt-2">
-                Impact Goals is an amazing series premiered on 12 - 04 - 21 by the renowned
-                Entrepreneur, Speaker, Gospel Minister and Philaphropist, Nhlanhla Dhaka who 
-                is also the author of this Podcast. The goal of this series to equip all visionaries 
-                and architects with spectacular knowledge on coming up with not only big 
-                goals, but great goals full of impact. So, buy yourself this great content, and 
-                have you and yourself on the path of leaving behind a great legacy.
-              </p>
-              
-            </div>
-            <div className="text-center text-blue-500">
-              <Link to="#">Check Out All Episodes in this Series</Link>
-            </div>
-          </div>
+
+            </form>
         </div>
       </Transition>
     </div>
