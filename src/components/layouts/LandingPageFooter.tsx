@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const LandingPageFooter = () => {
     return(
-        <footer className="text-gray-600 body-font bg-gray-50 border-t">
+        <footer className="text-gray-600 dark:text-gray-200 body-font bg-gray-50 dark:bg-gray-800 dark:border-gray-700 border-t">
             <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
                 <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-                <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 dark:text-gray-100">
                     <div className="text-center text-white text-3xl items-center bg-blue-400 rounded-full w-10 h-10">
                         e
                     </div>
@@ -16,75 +16,75 @@ const LandingPageFooter = () => {
                 </div>
                 <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                 <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">USEFUL LINKS</h2>
+                    <h2 className="title-font font-medium text-gray-900 dark:text-gray-100 tracking-widest text-sm mb-3">USEFUL LINKS</h2>
                     <nav className="list-none mb-10">
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">eSpace</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">eSpace</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Register store</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Register store</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Service countries</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Service countries</a>
                     </li>
                     </nav>
                 </div>
                 <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">ABOUT</h2>
+                    <h2 className="title-font font-medium text-gray-900 dark:text-gray-100 tracking-widest text-sm mb-3">ABOUT</h2>
                     <nav className="list-none mb-10">
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Company</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Company</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Investors</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Investors</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Partners</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Partners</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Policies</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Policies</a>
                     </li>
                     </nav>
                 </div>
                 <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">PRIVACY POLICY</h2>
+                    <h2 className="title-font font-medium text-gray-900 dark:text-gray-100 tracking-widest text-sm mb-3">PRIVACY POLICY</h2>
                     <nav className="list-none mb-10">
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">User agreement</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">User agreement</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Privacy</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Privacy</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Cookies</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Cookies</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Accessibility</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Accessibility</a>
                     </li>
                     </nav>
                 </div>
                 <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">HELP & SUPPORT</h2>
+                    <h2 className="title-font font-medium text-gray-900 dark:text-gray-100 tracking-widest text-sm mb-3">HELP & SUPPORT</h2>
                     <nav className="list-none mb-10">
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Resolution Center</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Resolution Center</a>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Seller Information Center</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Seller Information Center</a>
                     </li>
                     <li>
-                        <Link to="/faq" className="text-gray-600 hover:text-gray-800">FAQ's</Link>
+                        <Link to="/faq" className="text-gray-600 dark:text-gray-200 hover:text-gray-800">FAQ's</Link>
                     </li>
                     <li>
-                        <a className="text-gray-600 hover:text-gray-800">Support & Feedback</a>
+                        <a className="text-gray-600 dark:text-gray-200 hover:text-gray-800">Support & Feedback</a>
                     </li>
                     </nav>
                 </div>
                 </div>
             </div>
-            <div className="bg-gray-100">
+            <div className="bg-gray-100 dark:bg-gray-900">
                 <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-                <p className="text-gray-400 text-sm text-center sm:text-left">© {new Date().getFullYear()} E-Cast — All rights reserved
+                <p className="text-gray-400 dark:text-gray-200 text-sm text-center sm:text-left">© {new Date().getFullYear()} E-Cast — All rights reserved
                 </p>
                 <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                     <a className="text-blue-400 hover:text-white hover:bg-blue-400 transition delay-150 duration-300 bg-gray-200 dark:bg-gray-900 p-2 rounded-full">

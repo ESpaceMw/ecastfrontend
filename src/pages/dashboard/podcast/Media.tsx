@@ -13,9 +13,9 @@ const Media = () => {
     const color: string = 'blue'
     
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
-                <div className="bg-white h-full mb-10 shadow-sm hover:shadow-md p-5">
+                <div className="dark:bg-gray-900 bg-white h-full mb-10 shadow-sm hover:shadow-md p-5">
                     <ul
                         className="flex mb-0 flex-wrap pt-3 pb-4"
                         role="tablist"
@@ -26,7 +26,7 @@ const Media = () => {
                             "text-lg  dark:hover:text-gray-300  font-semibold" +
                             (openTab === 1
                                 ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  ")
+                                : "bg-white  dark:text-gray-200")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -45,7 +45,7 @@ const Media = () => {
                             "text-lg  dark:hover:text-gray-300  font-semibold" +
                             (openTab === 2
                                 ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  ")
+                                : "bg-white dark:text-gray-200 ")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -64,7 +64,7 @@ const Media = () => {
                             "text-lg  dark:hover:text-gray-300  font-semibold" +
                             (openTab === 3
                                 ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  ")
+                                : "bg-white  dark:text-gray-200")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -110,7 +110,7 @@ const Media = () => {
                                 </div>
                             </div>
                             <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                            <div className="relative">
+                            <div className="relative dark:text-gray-300">
                                     
                                 No videos uploaded yet!
 
@@ -122,8 +122,8 @@ const Media = () => {
                                     
                                     <div className="flex flex-wrap -m-4 mb-10">
                                         <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border">
-                                                <div className="flex flex-wrap justify-center bg-gray-200">
+                                            <div className="border dark:border-gray-700  ">
+                                                <div className="flex flex-wrap justify-center dark:bg-gray-700 bg-gray-200">
                                                     <div className="py-10 px-10">
                                                         <MusicNote className="w-20 h-20 text-gray-500"/>
                                                     </div>
@@ -139,8 +139,8 @@ const Media = () => {
                                             </div>
                                         </div>
                                             <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border">
-                                                <div className="flex flex-wrap justify-center bg-gray-200">
+                                            <div className="border dark:border-gray-700  ">
+                                                <div className="flex flex-wrap justify-center dark:bg-gray-700 bg-gray-200">
                                                     <div className="py-10 px-10">
                                                         <MusicNote className="w-20 h-20 text-gray-500"/>
                                                     </div>
@@ -156,8 +156,8 @@ const Media = () => {
                                             </div>
                                         </div>
                                             <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border">
-                                                <div className="flex flex-wrap justify-center bg-gray-200">
+                                            <div className="border dark:border-gray-700  ">
+                                                <div className="flex flex-wrap justify-center bg-gray-200 dark:bg-gray-700">
                                                     <div className="py-10 px-10">
                                                         <MusicNote className="w-20 h-20 text-gray-500"/>
                                                     </div>
@@ -173,8 +173,8 @@ const Media = () => {
                                             </div>
                                         </div>
                                             <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border">
-                                                <div className="flex flex-wrap justify-center bg-gray-200">
+                                            <div className="border dark:border-gray-700  ">
+                                                <div className="flex flex-wrap justify-center bg-gray-200 dark:bg-gray-700">
                                                     <div className="py-10 px-10">
                                                         <MusicNote className="w-20 h-20 text-gray-500"/>
                                                     </div>

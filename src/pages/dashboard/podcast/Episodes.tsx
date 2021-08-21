@@ -2,7 +2,6 @@ import { Transition } from "@headlessui/react"
 import { DotsHorizontal, PencilAlt, Plus, ViewList} from "heroicons-react"
 import { useState, useRef } from "react"
 import { Link } from "react-router-dom"
-import Alert from "../../../components/Alert"
 import SerieModal from "../../../components/episodes/SerieModal"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import EpisodeModal from '.././../../components/episodes/EpisodeModal.jsx'
@@ -53,16 +52,16 @@ const Episodes = () => {
     const dropdown = useRef(null);
 
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
                 <div className="w-full h-full">
                     
                     <div className="sm:flex">
-                        <div className="sm:w-3/5 mr-3 bg-white shadow-sm rounded-sm hover:shadow-md">
+                        <div className="sm:w-3/5 mr-3 dark:bg-gray-900 bg-white shadow-sm rounded-sm hover:shadow-md">
                             <div className="p-3 flex justify-between">
-                                <h3 className="text-md font-medium">All Episodes</h3>
-                                <button className="bg-gray-100 p-1 rounded-sm">
-                                    <DotsHorizontal className="h-4 w-4"/>
+                                <h3 className="text-md font-medium dark:text-gray-200">All Episodes</h3>
+                                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                    <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
                                 </button>
                             </div>
 
@@ -77,16 +76,16 @@ const Episodes = () => {
                                     ))
                                 }
                             </div>
-                            <Link to="/dashboard/new-episode" className="bg-gray-400 hover:bg-gray-600 transition duration-150 rounded-full p-3 bottom-0 fixed right-0 mb-10 mr-10 sm:mr-20">
+                            <Link to="/dashboard/new-episode" className="bg-gray-400 dark:bg-gray-700 hover:bg-gray-600 transition duration-150 rounded-full p-3 bottom-0 fixed right-0 mb-10 mr-10 sm:mr-20">
                                 <Plus className="text-white"/>
                             </Link>
                         </div>
-                        <div className="sm:w-2/5 mr-3 bg-white shadow-sm hover:shadow-md">
-                            <div className="bg-white">
+                        <div className="sm:w-2/5 sm:mt-0 mt-5 mr-3 dark:bg-gray-900 bg-white shadow-sm hover:shadow-md">
+                            <div className="bg-white dark:bg-gray-900">
                             <div className="p-3 flex justify-between">
-                                <h3 className="text-md font-medium">Series</h3>
-                                <button className="bg-gray-100 p-1 rounded-sm">
-                                    <DotsHorizontal className="h-4 w-4"/>
+                                <h3 className="text-md font-medium dark:text-gray-200">Series</h3>
+                                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                    <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
                                 </button>
                             
                             </div>
@@ -98,12 +97,12 @@ const Episodes = () => {
                             </div>
                             </div>
 
-                            <div className="bg-blue-400 rounded-sm mt-5 p-3">
+                            <div className="bg-blue-400 rounded-sm sm:mt-0 sm:mb-0 mb-5 mt-5 p-3">
                                 <div className="flex justify-between">
                                     <h3 className="text-md font-semibold text-white">Upcoming events</h3>
                                     <Link to="#" onClick={() => setDropdownOpen(!dropdownOpen)}
-                                        aria-expanded={dropdownOpen} ref={trigger} className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                        aria-expanded={dropdownOpen} ref={trigger} className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-200"/>
                                         <Transition
                                         className="z-10 absolute right-14 min-w-44 bg-white py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
                                         show={dropdownOpen}
@@ -149,10 +148,10 @@ const Episodes = () => {
                         </div>
                     </div>
                 </div>
-                <Alert
+                {/* <Alert
                  icon={"🚀"}
                  message={"Podcast created successfully!"}
-                 />
+                 /> */}
             </DashboardMain>
         </div>
     )

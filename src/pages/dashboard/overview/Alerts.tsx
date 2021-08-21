@@ -27,14 +27,14 @@ const Alerts = () => {
                 <div>
                     {
                         alerts.map((value) => (
-                            <div className="bg-white p-3 rounded-sm shadow-sm hover:shadow-md">
+                            <div className="bg-white dark:bg-gray-900 p-3 rounded-sm shadow-sm hover:shadow-md">
                             <div>
-                                <Link onDoubleClick={() => {<Alert icon={''} message='Item deleted successfully'/>}} to="#" className="p-3 transition duration-150 hover:bg-gray-100 flex justify-justify border-b border-gray-200 pb-2">
+                                <Link onDoubleClick={() => {<Alert icon={''} message='Item deleted successfully'/>}} to="#" className="p-3 transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 flex justify-justify border-b dark:border-gray-700 border-gray-200 pb-2">
                                     <div>
-                                        <h3 className="font-semibold text-md">{value.title}</h3>
-                                        <p>{value.content}</p>
+                                        <h3 className="font-semibold text-md dark:text-gray-200">{value.title}</h3>
+                                        <p className="dark:text-gray-300">{value.content}</p>
                                     </div>
-                                    <p className="text-sm w-20">{value.time}</p>
+                                    <p className="text-sm w-20 dark:text-gray-300">{value.time}</p>
                                 </Link>
                             </div>
                         </div>

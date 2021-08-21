@@ -18,9 +18,9 @@ const UserInfo = () => {
     const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
     
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
-                <div className="bg-white shadow-sm hover:shadow-md p-5 mb-10">
+                <div className="bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-5 mb-10">
                     <ul
                         className="flex mb-0 flex-wrap pt-3"
                         role="tablist"
@@ -28,10 +28,10 @@ const UserInfo = () => {
                         <li className="mr-2 text-center">
                         <a
                             className={
-                            "text-lg dark:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-500 font-semibold" +
+                            "text-lg dark:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-200 font-semibold" +
                             (openTab === 1
                                 ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  dark:bg-gray-600")
+                                : "bg-white  dark:text-gray-200")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -47,10 +47,10 @@ const UserInfo = () => {
                         <li className="mr-2 text-center">
                         <a
                             className={
-                            "text-lg dark:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-500 font-semibold" +
+                            "text-lg dark:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-200 font-semibold" +
                             (openTab === 2
                                 ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  dark:bg-gray-400")
+                                : "bg-white  dark:bg-gray-200")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -66,10 +66,10 @@ const UserInfo = () => {
                         <li className="mr-2 text-center">
                         <a
                             className={
-                            "text-lg dark:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-500 font-semibold" +
+                            "text-lg dark:bg-gray-900 dark:hover:text-gray-300 dark:text-gray-200 font-semibold" +
                             (openTab === 3
                                 ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  dark:bg-gray-600")
+                                : "bg-white  dark:text-gray-200")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -90,32 +90,32 @@ const UserInfo = () => {
                             <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                 <div className="relative">
                                         
-                                    <p className="mt-2">
-                                    Edit your Title, cover art, category and more.
+                                    <p className="mt-2 dark:text-gray-200">
+                                        Edit your Title, cover art, category and more.
                                     </p>
 
                                 <div className="flex items-stretch mt-2">
                                     <div className="flex-0">
-                                        <p className="text-gray-700 mr-2 text-md">Podcast url:</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200 dark:text-gray-200">Podcast url:</p>
                                     </div>
                                     <div className="flex-0">
-                                        <a href="#" className="text-blue-400 text-md">https://www.ecast.espacemw.com/podcasts/dhakanhlanhla</a>
+                                        <a href="#" className="text-blue-400 text-md truncate">https://www.ecast.espacemw.com/podcasts/dhakanhlanhla</a>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md">Title:</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Title:</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="The Dee Podcast" type="text"/>
+                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="The Dee Podcast" type="text"/>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md">Tag line:</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Tag line:</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="Become the best version of yourself" type="text"/>
+                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="Become the best version of yourself" type="text"/>
                                     </div>
                                 </div>
                                 <div className="md:flex md:items-center mt-2">
@@ -123,7 +123,7 @@ const UserInfo = () => {
                                     <div className="w-full items-center">
                                         <label className="block text-gray-500 font-bold">
                                             <input className="mr-2 leading-tight" type="checkbox"/>
-                                            <span className="text-md">
+                                            <span className="text-md dark:text-gray-200">
                                                 Display Title and Tagline in the page masgthead
                                             </span>
                                         </label>
@@ -131,31 +131,31 @@ const UserInfo = () => {
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md">Cover art</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Cover art</p>
                                     </div>
                                     <div className="w-full flex w-ull">
                                         <img className="rounded-sm hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" src={ClipArt} alt="user-clip-art"/>
                                         <div>
-                                            <p className="ml-3 text-gray-700 text-md">Choose your photo from Media Library:</p>
-                                            <input className="appearance-none ml-3 mt-2 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-1 px-1 leading-tight focus:outline-none focus:ring-1" type="file"/>
+                                            <p className="ml-3 text-gray-700 text-md dark:text-gray-200">Choose your photo from Media Library:</p>
+                                            <input className="appearance-none ml-3 mt-2 block w-full dark:text-gray-300 text-gray-700 text-md border dark:border-gray-700 border-gray-300 rounded-sm py-1 px-1 leading-tight focus:outline-none focus:ring-1" type="file"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md">Description:</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Description:</p>
                                     </div>
                                     <div className="w-full">
-                                        <textarea className="appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">Hello Everyone, welcome to the Dee Podcast. Here you will be inspired to become the best version of yourself - the man/woman that God created you to be. So, subscribe and let's vibe together.
+                                        <textarea className="dark:text-gray-300 dark:bg-transparent dark:border-gray-700 appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">Hello Everyone, welcome to the Dee Podcast. Here you will be inspired to become the best version of yourself - the man/woman that God created you to be. So, subscribe and let's vibe together.
                                         </textarea>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md">Category</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Category</p>
                                     </div>
                                     <div className="inline-block relative w-full">
-                                        <select className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                                        <select className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         <option>Education: Self Improvement</option>
                                         </select>
                                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -165,13 +165,13 @@ const UserInfo = () => {
                                 </div>
                                 <div className="flex items-center mt-2">
                                     <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md">Language</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Language</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="English" type="text"/>
+                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="English" type="text"/>
                                     </div>
                                 </div>
-                                <div className="border-b-1 border w-full border-gray-200 mt-3 mb-3"></div>
+                                <div className="border-b-1 border w-full dark:border-gray-700 border-gray-200 mt-3 mb-3"></div>
                                 <div className="flex items-center py-2">
                                     <button className="flex-shrink-0 bg-blue-400 hover:bg-blue-500 text-md border-none text-white py-2 px-8 rounded-sm" type="button">
                                     Save
@@ -186,7 +186,7 @@ const UserInfo = () => {
                             <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                             <div className="relative">
                                     <div className="mt-3">
-                                        <div className="flex items-center bg-red-600 p-2 justify-between flex-wrap">
+                                        <div className="flex items-center animate-pulse bg-red-600 p-2 justify-between flex-wrap">
                                         <div className="w-0 flex-1 flex items-center">
                                             <span className="flex p-2 rounded-sm bg-red-400">
                                             <ExclamationCircle className="h-6 w-6 text-white" aria-hidden="true" />
@@ -234,7 +234,7 @@ const UserInfo = () => {
                                         </div>
                                         <div className="mt-3">
                                             <div>
-                                                <h3 className="text-md font-semibold uppercase mt-1 mb-1">
+                                                <h3 className="text-md font-semibold uppercase mt-1 mb-1 dark:text-gray-200">
                                                     Basic Plan
                                                 </h3>
                                                 <div className="flex items-center mb-2">
@@ -294,7 +294,7 @@ const UserInfo = () => {
                                                 
                                                 
                                             </div>
-                                            <h3 className="text-md font-semibold uppercase mt-1 mb-1">
+                                            <h3 className="text-md font-semibold uppercase mt-1 mb-1 dark:text-gray-200">
                                                 Pro Plan
                                             </h3>
                                                 <div className="flex items-center mb-2">
@@ -323,13 +323,13 @@ const UserInfo = () => {
 
                                 <div className="relative">
                                     
-                                    <div className="border mt-5">
+                                    <div className="border dark:border-gray-700 mt-5">
                                         <div style={{ backgroundImage: `url(${BG})` }} className="flex flex-wrap bg-cover justify-center py-14">
 
                                             <img src={ClipArt} alt="user-clip-art" className="hover:opacity-90 transition duration-150 w-36 h-36 rounded-full object-cover self-center"/>
 
                                         </div>
-                                        <div className="p-4">
+                                        <div className="p-4 dark:text-gray-300">
                                             <ul>
                                                 <li className="flex">Overview</li>
                                                 <li className="flex mt-1 hover:text-blue-400 transition duration-150"><User className="w-5 h-5 text-gray-600 mr-1"/> Name, phone, email</li>

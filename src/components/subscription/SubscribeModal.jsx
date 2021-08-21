@@ -82,11 +82,11 @@ const SubscribeModal  = () => {
         leaveStart="opacity-100 translate-y-0"
         leaveEnd="opacity-0 translate-y-4"
       >
-        <div className="bg-white overflow-auto w-1/2 shadow-lg" ref={searchContent}>
+        <div className="bg-white dark:bg-gray-900 dark:text-gray-200 overflow-auto w-1/2 shadow-lg" ref={searchContent}>
           
           <form  onSubmit={handleSubmit}>
             <div/>
-            <div className="bg-gray-100 p-3">
+            <div className="bg-gray-100 dark:bg-gray-800 p-3">
                 <h3 className="font-semibold text-md">Checkout</h3>
             </div>
             <div className="p-3">
@@ -103,14 +103,14 @@ const SubscribeModal  = () => {
             </div>
             <div className="ml-3 mr-3 mb-3">
                 <label className="block text-gray-700 dark:text-gray-300"> Credit card details</label>
-                <div class="w-full border hover:border-blue-400">
+                <div class="w-full dark:border-gray-700 border hover:border-blue-400">
                     <div class="flex">
                         <div className="w-4/6 flex items-center space-x-2 pl-2">
                             <CreditCard className="text-gray-400"/>
-                            <input type="text" id="payment" class="flex-1 text-sm bg-grey-light text-grey-darkest rounded-l p-3 focus:outline-none" placeholder="Card Number"/>
+                            <input type="text" id="payment" class="dark:bg-transparent flex-1 text-sm bg-grey-light text-grey-darkest rounded-l p-3 focus:outline-none" placeholder="Card Number"/>
                         </div>
-                        <input type="text" id="payment" class="w-1/6 inline-block text-sm bg-grey-light text-grey-darkest p-3 focus:outline-none" placeholder="MM / YY"/>
-                        <input type="text" id="payment" class="w-1/6 inline-block text-sm bg-grey-light text-grey-darkest rounded-r p-3 focus:outline-none" placeholder="CVC"/>
+                        <input type="text" id="payment" class="dark:bg-transparent w-1/6 inline-block text-sm bg-grey-light text-grey-darkest p-3 focus:outline-none" placeholder="MM / YY"/>
+                        <input type="text" id="payment" class="dark:bg-transparent w-1/6 inline-block text-sm bg-grey-light text-grey-darkest rounded-r p-3 focus:outline-none" placeholder="CVC"/>
                     </div>
                 </div>
             </div>

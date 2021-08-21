@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 
 import { 
   Popover, 
@@ -15,12 +15,14 @@ import {
   CloudDownloadOutline, 
   Moon, 
   NewspaperOutline, 
+  Sun, 
   UserGroupOutline 
 } from 'heroicons-react'
 
 import { Link } from 'react-router-dom'
 
 import Icon from '../../logo.svg'
+import { ThemeContext } from '../../context/themeContext'
 
 const landingPages = [
   {
@@ -46,10 +48,17 @@ const landingPages = [
 
 
 export default function LandingPageHeader() {
+
+  const { theme, setTheme } = useContext(ThemeContext)
+
+  function isDark() {
+      return theme === 'dark'
+  }
+
   return (
-    <Popover className="relative bg-white">
+    <Popover className="relative bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div className="flex justify-between items-center dark:border-gray-700 border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link
              to="/" 
@@ -58,34 +67,37 @@ export default function LandingPageHeader() {
             </Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
-            <Popover.Button className="bg-white rounded-sm p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+            <Popover.Button className="dark:bg-gray-900 bg-white rounded-sm p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
               <span className="sr-only">Open menu</span>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
-          <Popover.Group as="nav" className="hidden md:flex space-x-10">
+          <Popover.Group as="nav" className="hidden md:flex space-x-10 dark:text-gray-200">
 
-            <Link to="/jobs" href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link to="/jobs" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               Jobs
             </Link>
-            <Link to="/download" href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link to="/download" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               Download
             </Link>
-            <Link to="/blog" href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link to="/blog" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               Blog
             </Link>
-            <Link to="/about-us" href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link to="/about-us" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               About us
             </Link>
 
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <button>
-                <Moon className="text-gray-500 mr-2 bg-white hover:bg-gray-100 transition delay-150 duration-300 p-1 h-8 w-8 rounded"/>
+            <button
+            onClick={() => { isDark() ? setTheme('light') : setTheme('dark')}} 
+            className="mr-2">
+              { isDark() ?  <Sun className="text-yellow-500"/> 
+                :  <Moon className="text-gray-500"/> }
             </button>
             <Link 
             to="sign-in" 
-            className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+            className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
               Sign in
             </Link>
             <Link

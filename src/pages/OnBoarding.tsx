@@ -16,6 +16,7 @@ const OnBoarding = () => {
         return theme === 'dark'
     }
     
+    
     return(
       <div className="relative bg-white dark:bg-black overflow-hidden">
         <div className="max-w-7xl mx-auto">

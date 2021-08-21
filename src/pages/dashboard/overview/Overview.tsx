@@ -1,9 +1,15 @@
 import { ArrowDown, ArrowUp, DotsHorizontal } from "heroicons-react"
+
 import React from "react"
+
 import { Link } from "react-router-dom"
+
 import DashboardMain from "../../../components/layouts/DashboardMain"
+
 import AudienceChart from "../../../components/overview/AudienceChart"
+
 import CashCards from '../../../icons/cards-with-dollar-sign.png'
+
 import Money from '../../../media/pexels-burst-545065.jpg'
 
 const popularEpisodes = [
@@ -48,14 +54,14 @@ const Overview = () => {
     const color: string = 'blue'
 
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
                 <div className="pb-10">
-                    <div className="rounded-sm bg-white shadow-sm hover:shadow-md p-3 w-full">
-                        <div className="flex w-full">
-                            <div className="w-1/4 border-r p-2 hover:bg-gray-100 transition duration-150">
-                                <p className="text-gray-500">New Subscribers</p>
-                                <h3 className="text-2xl font-semibold">12,123</h3>
+                    <div className="rounded-sm bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-3 w-full">
+                        <div className="sm:flex w-full">
+                            <div className="sm:w-1/4 dark:border-gray-700 sm:border-r p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150">
+                                <p className="text-gray-500 dark:text-gray-200">New Subscribers</p>
+                                <h3 className="text-2xl font-semibold dark:text-gray-300">12,123</h3>
                                 <div className="flex">
                                     <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
@@ -65,9 +71,9 @@ const Overview = () => {
                                     <p className="text-blue-400 ml-2 text-sm">+ 33.45%</p>
                                 </div>
                             </div>
-                            <div className="w-1/4 border-r p-2 ml-2 hover:bg-gray-100 transition duration-150">
-                                <p className="text-gray-500">Total streams</p>
-                                <h3 className="text-2xl font-semibold">129,199</h3>
+                            <div className="sm:w-1/4 dark:border-gray-700 sm:border-r p-2 ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150">
+                                <p className="text-gray-500 dark:text-gray-200">Total streams</p>
+                                <h3 className="text-2xl font-semibold dark:text-gray-300">129,199</h3>
                                 <div className="flex">
                                     <div className="rounded-full bg-red-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
@@ -77,9 +83,9 @@ const Overview = () => {
                                     <p className="text-red-400 ml-2 text-sm">- 113.45%</p>
                                 </div>
                             </div>
-                            <div className="w-1/4 border-r p-2 ml-2 hover:bg-gray-100 transition duration-150">
-                                <p className="text-gray-500">Engagement Rate</p>
-                                <h3 className="text-2xl font-semibold">21.45</h3>
+                            <div className="sm:w-1/4 dark:border-gray-700 sm:border-r p-2 ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150">
+                                <p className="text-gray-500 dark:text-gray-200">Engagement Rate</p>
+                                <h3 className="text-2xl font-semibold dark:text-gray-300">21.45</h3>
                                 <div className="flex">
                                     <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
@@ -89,9 +95,9 @@ const Overview = () => {
                                     <p className="text-blue-400 ml-2 text-sm">+ 6.45%</p>
                                 </div>
                             </div>
-                            <div className="w-1/4 p-2 ml-2 hover:bg-gray-100 transition duration-150">
-                                <p className="text-gray-500">Avg. listen time </p>
-                                <h3 className="text-2xl font-semibold">15,2 min</h3>
+                            <div className="sm:w-1/4 dark:border-gray-700 p-2 ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150">
+                                <p className="text-gray-500 dark:text-gray-200">Avg. listen time </p>
+                                <h3 className="text-2xl font-semibold dark:text-gray-300">15,2 min</h3>
                                 <div className="flex">
                                     <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
@@ -103,11 +109,11 @@ const Overview = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full flex mt-5">
-                        <div className="w-3/5 h-72 mr-5">
-                            <div className="bg-white rounded-sm shadow hover:shadow-md p-3">
-                                <p className="text-gray-500">Audience</p>
-                                <h3 className="text-2xl font-semibold">78,000</h3>
+                    <div className="w-full sm:flex mt-5">
+                        <div className="sm:w-3/5 sm:h-72 sm:mr-5">
+                            <div className="bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
+                                <p className="text-gray-500 dark:text-gray-200">Audience</p>
+                                <h3 className="text-2xl font-semibold dark:text-gray-300">78,000</h3>
                                 <div className="flex">
                                     <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                         <p className="text-center">
@@ -118,9 +124,9 @@ const Overview = () => {
                                 </div>
                                 <AudienceChart/>
                             </div>
-                            <div className="bg-white rounded-sm shadow hover:shadow-md mt-5 p-3">
+                            <div className="bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md mt-5 p-3">
                                 <div className="flex justify-between">
-                                    <p className="text-md font-semibold">Popular episodes</p>
+                                    <p className="text-md font-semibold text-gray-200">Popular episodes</p>
                                     <Link to="#" className="text-blue-400 hover:text-blue-500">
                                         See all
                                     </Link>
@@ -128,39 +134,39 @@ const Overview = () => {
                                 <div>
                                     {
                                         popularEpisodes.map((value) => (
-                                            <div className="flex justify-between mt-3 hover:bg-gray-100 transition duration-150 p-3">
+                                            <div className="flex justify-between mt-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 p-3">
                                                 <div className="flex">
-                                                    <div className="bg-gray-200 text-center p-1 rounded-sm w-6 h-6 text-sm">
+                                                    <div className="bg-gray-200 dark:bg-gray-700 text-center p-1 rounded-sm w-6 h-6 text-sm">
                                                         {value.id}
                                                     </div>
                                                     <div className="ml-2">
-                                                        <h3 className="font-medium text-md">
+                                                        <h3 className="font-medium text-md dark:text-gray-200">
                                                             {value.title}
                                                         </h3>
-                                                        <p className="mt-1 text-sm">
+                                                        <p className="mt-1 text-sm dark:text-gray-300">
                                                             {value.sub}
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <p className="text-sm">{value.time}</p>
+                                                <p className="text-sm dark:text-gray-300">{value.time}</p>
                                             </div>
                                         ))
                                     }
                                 </div>
                             </div>
                         </div>
-                        <div className="w-2/5">
-                            <div className="p-3 bg-white rounded-sm shadow-sm hover:shadow-md">
+                        <div className="sm:w-2/5 sm:mt-0 mt-5">
+                            <div className="p-3 bg-white dark:bg-gray-900 rounded-sm shadow-sm hover:shadow-md">
                                 <div className="justify-between flex">
-                                    <h3 className="font-semibold">eCast Bankie</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                    <h3 className="font-semibold dark:text-gray-200">eCast Bankie</h3>
+                                    <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-200"/>
                                     </button>
                                 </div>
                                 <div className="py-10 flex flex-wrap justify-center">
                                     <img className="w-20 h-20 transform hover:scale-110 transition duration-150" src={CashCards} alt="cards-with-dollar-sign" />
                                 </div>
-                                <p>
+                                <p className="dark:text-gray-300">
                                     Podcasting is not an expense, it is a powerful 
                                     way to make money. Here at eCast, we 
                                     surely will have you make a lot of it!
@@ -171,8 +177,8 @@ const Overview = () => {
                             <div className="p-3 mt-5 bg-blue-400 rounded-sm shadow-sm hover:shadow-md">
                                 <div className="justify-between flex">
                                     <h3 className="font-semibold text-white">eCast Bankie</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                    <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-300"/>
                                     </button>
                                 </div>
                                 <h2 className="text-2xl font-medium text-white mt-1">Learn how to save more 
@@ -187,17 +193,17 @@ const Overview = () => {
                                 <p className="text-white mt-1 hover:text-gray-100 transition duration-150 font-semibold text-sm">Read more...</p>
                             </div>
 
-                            <div className="bg-white rounded-sm shadow h-72 hover:shadow-md p-3 mt-5">
+                            <div className="mt-5 bg-white dark:bg-gray-900 rounded-sm shadow h-72 hover:shadow-md p-3">
                                 <div>
-                                    <p>Listeners reviews</p>
+                                    <p className="dark:text-gray-200">Listeners reviews</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="border mt-24 rounded-sm shadow-sm hover:shadow-md">
+                    <div className="border dark:border-gray-700 mt-5 sm:mt-24 dark:bg-gray-900 bg-white rounded-sm shadow-sm hover:shadow-md">
                         <div className="h-72 bg-cover" style={{ backgroundImage: `url(${Money})` }}>
-                            <h3 className="text-3xl font-semibold p-5 text-white w-1/2">
+                            <h3 className="text-3xl font-semibold p-5 text-white sm:w-1/2">
                                 Podcasting alone should give you 
                                 a decent income. Let's show you 
                                 how you can  just earn that!
@@ -214,7 +220,7 @@ const Overview = () => {
                                     "text-lg  dark:hover:text-gray-300  font-semibold" +
                                     (openTab === 1
                                         ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                        : "bg-white  ")
+                                        : "bg-white dark:text-gray-300")
                                     }
                                     onClick={e => {
                                     e.preventDefault();
@@ -233,7 +239,7 @@ const Overview = () => {
                                     "text-lg  dark:hover:text-gray-300  font-semibold" +
                                     (openTab === 2
                                         ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                        : "bg-white  ")
+                                        : "bg-white dark:text-gray-300")
                                     }
                                     onClick={e => {
                                     e.preventDefault();
@@ -252,7 +258,7 @@ const Overview = () => {
                                     "text-lg  dark:hover:text-gray-300  font-semibold" +
                                     (openTab === 3
                                         ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                        : "bg-white  ")
+                                        : "bg-white dark:text-gray-300")
                                     }
                                     onClick={e => {
                                     e.preventDefault();
@@ -271,7 +277,7 @@ const Overview = () => {
                                     "text-lg  dark:hover:text-gray-300  font-semibold" +
                                     (openTab === 4
                                         ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                        : "bg-white  ")
+                                        : "bg-white dark:text-gray-300")
                                     }
                                     onClick={e => {
                                     e.preventDefault();
@@ -292,10 +298,10 @@ const Overview = () => {
                                     <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                     <div className="relative">
                                             
-                                            <h3 className="font-medium text-lg">
+                                            <h3 className="font-medium text-lg dark:text-gray-200">
                                                 What's eCast Bankie?
                                             </h3>
-                                            <p className="ml-5 mt-1">
+                                            <p className="ml-5 mt-1 dark:text-gray-300">
                                                 eCast Bankie is a service introduced to make sure that our customers 
                                                 (Podcast Hosts) have an opportunity to make money as they work 
                                                 to release content regularly. We do understand the costs that follow 
@@ -308,10 +314,10 @@ const Overview = () => {
                                             </p>
 
                                             <div className="mt-2">
-                                                <h3 className="font-medium text-lg">
+                                                <h3 className="font-medium text-lg dark:text-gray-200">
                                                 How does it work?
                                             </h3>
-                                            <p className="ml-5 mt-1">
+                                            <p className="ml-5 mt-1 dark:text-gray-300">
                                                 with eCast Bankie, you first register for the service. When you do, you 
                                                 now have access to enlist any choice series as paid content, meaning 
                                                 people have to pay to make sure they listen to the series...

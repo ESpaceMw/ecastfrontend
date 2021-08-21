@@ -50,7 +50,7 @@ const Item: React.FC<Props> = ({ title, children }) => {
 
 const HelpCenter = () => {
   return (
-    <div className="dark:bg-black">
+    <div className="dark:bg-gray-900">
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
         <div className="flex flex-col mb-16 sm:text-center">
@@ -95,7 +95,7 @@ const HelpCenter = () => {
         </p>
         <textarea
           placeholder="Ask a question"
-          className="mt-4 dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm"
+          className="mt-4 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-blue-400 focus:border-blue-400 focus:z-10 sm:text-sm"
         />
         <button
                 type="submit"

@@ -9,7 +9,7 @@ const CountryListItem: React.FC<Props> = ({ continent, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border dark:border-gray-600 shadow-sm mb-3 rounded-sm">
+    <div className="border dark:border-gray-700 shadow-sm mb-3 rounded-sm">
       <button
         type="button"
         aria-label="Open item"
@@ -18,7 +18,7 @@ const CountryListItem: React.FC<Props> = ({ continent, children }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <p className="text-lg font-medium dark:text-gray-300">{continent}</p>
-        <div className="flex items-center justify-center w-8 h-8 dark:border-gray-600 border rounded-full">
+        <div className="flex items-center justify-center w-8 h-8 dark:border-gray-700 border rounded-full">
           <svg
             viewBox="0 0 24 24"
             className={`w-3 text-gray-600 transition transform duration-200 ${

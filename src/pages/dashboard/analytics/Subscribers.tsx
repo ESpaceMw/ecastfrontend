@@ -20,24 +20,24 @@ const subscribers = [
 
 const Subscribers = () => {
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
                 <div>
                     <div className="w-full flex">
-                        <div className="w-3/5 mr-5 rounded-sm bg-white shadow-sm hover:shadow-md p-3">
-                            <div className="flex border px-3 py-3">
+                        <div className="w-3/5 mr-5 rounded-sm bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-3">
+                            <div className="flex border px-3 py-3 dark:border-gray-700">
                                 <svg className="w-4 h-4 mt-1 flex-shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-4 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
                                     <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
                                 </svg>
                                 <input
                                     id="modal-search" 
-                                    className="w-full rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                                    className="w-full dark:bg-transparent dark:text-gray-300 rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
                                     type="search" 
                                     placeholder="Search for a subscriber" />
                             </div>
                             <div className="mt-3">
-                                <h3 className="text-md uppercase">{subscribers.length} subscribers</h3>
+                                <h3 className="text-md uppercase dark:text-gray-200">{subscribers.length} subscribers</h3>
 
                                 {
                                     subscribers.map((item) => (
@@ -49,7 +49,7 @@ const Subscribers = () => {
                                     alt="contact-user"
                                     className="rounded-full w-10 h-10 object-cover object-center hover:opacity-75 transition duration-150"
                                     />
-                                    <Link to="#" className="text-md text-center ml-3 hover:text-gray-700">{item.name}</Link>
+                                    <Link to="#" className="text-md text-center ml-3 hover:text-gray-700 dark:text-gray-300">{item.name}</Link>
                                 </div>
                                 </div>
                                 ))
@@ -58,11 +58,11 @@ const Subscribers = () => {
                             </div>
                         </div>
                         <div className="w-2/5">
-                            <div className="bg-white rounded-sm shadow hover:shadow-md p-3">
+                            <div className="bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
                                 <div className="flex justify-between">
-                                    <h3 className="text-md font-medium">All Episodes</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                    <h3 className="text-md font-medium dark:text-gray-200">All Episodes</h3>
+                                    <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
                                     </button>
                                 </div>
                                 <div className="mt-2">
@@ -108,9 +108,9 @@ const Subscribers = () => {
                                     </div>
 
                                     <div>
-                                        <h3 className="text-md text-medium mb-2 mt-2">Annual listens</h3>
+                                        <h3 className="text-md text-medium mb-2 mt-2 dark:text-gray-200">Annual listens</h3>
                                         <SubscribersChart/>
-                                        <p className="text-2xl mt-2">1,050,657 Total Listens</p>
+                                        <p className="text-2xl mt-2 dark:text-gray-300">1,050,657 Total Listens</p>
                                         <div className="flex">
                                             <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                                 <p className="text-center">
@@ -119,7 +119,7 @@ const Subscribers = () => {
                                             </div>
                                             <p className="text-blue-400 ml-2 text-sm">+ 33.45% <span className="text-gray-600"> 2021</span></p>
                                         </div>
-                                        <p className="mt-2 text-sm"><span className="font-semibold">Disclaimer:</span> These are insights based on eCast Streaming Service
+                                        <p className="mt-2 text-sm dark:text-gray-300"><span className="font-semibold dark:text-gray-200">Disclaimer:</span> These are insights based on eCast Streaming Service
                                             and not of those integrated to the podcast. </p>
                                     </div>
                                 </div>
@@ -127,8 +127,8 @@ const Subscribers = () => {
                             <div className="p-3 mt-5 bg-blue-400 rounded-sm shadow-sm hover:shadow-md">
                                 <div className="justify-between flex">
                                     <h3 className="font-semibold text-white">Boost Audience</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                    <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-300"/>
                                     </button>
                                 </div>
                                 <p className="text-white mt-1">

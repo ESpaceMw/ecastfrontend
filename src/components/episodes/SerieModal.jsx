@@ -38,12 +38,12 @@ const SerieModal  = ({title, published}) => {
         ref={trigger}
         to="#" 
         onClick={() => { setSearchOpen(!searchOpen) }}
-        className="flex justify-between p-3 border-b border-gray-200 hover:bg-gray-100 transition duration-150">
+        className="flex justify-between p-3 border-b dark:border-gray-700 dark:hover:bg-gray-800 border-gray-200 hover:bg-gray-100 transition duration-150">
             <div>
-                <h3 className="text-md">{title}</h3>
-                <p className="text-sm mt-2 text-gray-500">{published}</p>
+                <h3 className="text-md dark:text-gray-200">{title}</h3>
+                <p className="text-sm mt-2 dark:text-gray-300 text-gray-500">{published}</p>
             </div>
-            <button className="p-1 rounded-sm h-6 w-6">
+            <button className="p-1 rounded-sm h-6 w-6 dark:text-gray-400">
                 <DotsHorizontal className="h-4 w-4"/>
             </button>
         </Link>

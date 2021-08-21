@@ -41,23 +41,23 @@ const continents = [
 
 const Statistics = () => {
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
                 <div>
                     <div className="flex w-full">
                         <div className="w-1/2 mr-5">
-                            <div className="bg-white rounded-sm shadow hover:shadow-md p-3">
+                            <div className="bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
                                 <img src={Map} alt="world-map"/>
                                 <div>
-                                    <h3 className="font-semibold text-lg">Countries listening</h3>
+                                    <h3 className="font-semibold text-lg dark:text-gray-200 mt-2">Countries listening</h3>
                                     <div className="mt-3 mb-3">
                                         {continents.map((continent) => (
                                         <CountryListItem continent={continent.name}>
                                             <ul>    
                                                 {continent.countries?.country.map((country) => (
                                                     <li className="mb-2 justify-between flex ml-3">
-                                                        <p>- {country.name}</p>
-                                                        <p className="text-gray-500">{country.count} listens</p>
+                                                        <p className="dark:text-gray-300">- {country.name}</p>
+                                                        <p className="text-gray-500 dark:text-gray-200">{country.count} listens</p>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -68,11 +68,11 @@ const Statistics = () => {
                             </div>
                         </div>
                         <div className="w-1/2">
-                            <div className="bg-white rounded-sm shadow hover:shadow-md p-3">
+                            <div className="bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
                                 <div className="flex justify-between">
-                                    <h3 className="text-md font-medium">All Episodes</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                    <h3 className="text-md font-medium dark:text-gray-200">All Episodes</h3>
+                                    <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
                                     </button>
                                 </div>
                                 <div className="mt-2">
@@ -118,18 +118,18 @@ const Statistics = () => {
                                     </div>
 
                                     <div>
-                                        <h3 className="text-md text-medium mb-2 mt-2">Annual listens</h3>
+                                        <h3 className="text-md text-medium mb-2 mt-2 dark:text-gray-200">Annual listens</h3>
                                         <AudienceChart/>
-                                        <p className="text-2xl mt-2">1,050,657 Total Listens</p>
+                                        <p className="text-2xl mt-2 dark:text-gray-300">1,050,657 Total Listens</p>
                                         <div className="flex">
                                             <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                                 <p className="text-center">
                                                     <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
                                                 </p> 
                                             </div>
-                                            <p className="text-blue-400 ml-2 text-sm">+ 33.45% <span className="text-gray-600"> 2021</span></p>
+                                            <p className="text-blue-400 ml-2 text-sm">+ 33.45% <span className="text-gray-600 dark:text-gray-400"> 2021</span></p>
                                         </div>
-                                        <p className="mt-2 text-sm"><span className="font-semibold">Disclaimer:</span> These are insights based on eCast Streaming Service
+                                        <p className="mt-2 text-sm dark:text-gray-300"><span className="font-semibold dark:text-gray-200">Disclaimer:</span> These are insights based on eCast Streaming Service
                                             and not of those integrated to the podcast. </p>
                                     </div>
                                 </div>
@@ -137,8 +137,8 @@ const Statistics = () => {
                             <div className="p-3 mt-5 bg-blue-400 rounded-sm shadow-sm hover:shadow-md">
                                 <div className="justify-between flex">
                                     <h3 className="font-semibold text-white">Boost Audience</h3>
-                                    <button className="bg-gray-100 p-1 rounded-sm">
-                                        <DotsHorizontal className="h-4 w-4"/>
+                                    <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
                                     </button>
                                 </div>
                                 <p className="text-white mt-1">

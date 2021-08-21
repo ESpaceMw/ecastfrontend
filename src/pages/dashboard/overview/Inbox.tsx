@@ -6,51 +6,51 @@ import Kit from '../../../media/kit.jpg'
 
 const Inbox = () => {
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
             <div className="flex flex-row h-screen bg-gray-100">
                 
-            <div className="flex flex-row flex-auto bg-white rounded-sm border-l shadow-sm hover:shadow-md">
-                <div className="flex flex-col w-1/5">
-                    <div className="flex border px-2 py-2 m-3">
+            <div className="sm:flex sm:flex-row sm:flex-auto bg-white dark:bg-gray-900 rounded-sm border-l dark:border-gray-700 shadow-sm hover:shadow-md">
+                <div className="flex flex-col sm:w-1/5">
+                    <div className="flex border px-2 py-2 m-3 dark:border-gray-700">
                         <svg className="w-4 h-4 mt-1 flex-shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-2 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
                             <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
                         </svg>
                         <input
                             id="modal-search" 
-                            className="w-full rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                            className="w-full dark:bg-transparent rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
                             type="search" 
                             placeholder="Search for a contact" />
                     </div>
                     <div className="flex-auto overflow-y-auto">
 
-                        <a className="block border-b">
-                        <div className="border-l-2 border-transparent hover:bg-gray-100 p-3 space-y-4">
+                        <a className="block border-b dark:border-gray-700">
+                        <div className="border-l-2 border-transparent hover:bg-gray-100 dark:hover:bg-gray-800 p-3 space-y-4">
                             <div className="flex flex-row items-center space-x-2">
                             <img src={Rb} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <strong className="flex-grow ">Nikola Tesla</strong>
-                            <div className=" text-gray-600">5hr</div>
+                            <strong className="flex-grow dark:text-gray-200">Nikola Tesla</strong>
+                            <div className=" text-gray-600 dark:text-gray-200">5hr</div>
                             </div>
 
                             <div className="flex flex-row items-center space-x-1">
-                                <p>✔✔</p>
-                            <div className="flex-grow truncate">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
+                                <p className="dark:text-blue-500">✔✔</p>
+                            <div className="flex-grow truncate dark:text-gray-300">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
                             </div>
                         </div>
                         </a>
 
-                        <a className="block border-b">
-                        <div className="border-l-2 border-blue-400 bg-blue-100 p-3 space-y-4">
+                        <a className="block border-b dark:border-gray-700">
+                        <div className="border-l-2 dark:border-gray-900 border-blue-400 bg-blue-100 dark:bg-gray-800 p-3 space-y-4">
                             <div className="flex flex-row items-center space-x-2">
                             <img src={Rb} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <strong className="flex-grow ">Nikola Tesla</strong>
-                            <div className=" text-gray-600">5hr</div>
+                            <strong className="flex-grow dark:text-gray-200">Nikola Tesla</strong>
+                            <div className=" text-gray-600 dark:text-gray-300">5hr</div>
                             </div>
 
                             <div className="flex flex-row items-center space-x-1">
-                            <p>✔✔</p>
-                            <div className="flex-grow truncate">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
+                            <p className="text-blue-500">✔✔</p>
+                            <div className="flex-grow truncate dark:text-gray-300">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
                             </div>
                             
                         </div>
@@ -59,17 +59,17 @@ const Inbox = () => {
                     </div>
                 </div>
 
-                <div className="w-full border-l border-gray-200 flex flex-col">
-                <div className="flex-none h-20 flex flex-row justify-between items-center p-5 border-b">
+                <div className="w-full border-l border-gray-200 flex flex-col dark:border-gray-700">
+                <div className="flex-none h-20 flex flex-row justify-between items-center dark:border-gray-700 p-5 border-b">
                     <div className="flex flex-row space-y-1">
                         <img src={Rb} alt="user-icon" className="w-12 h-12 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                         <div className="flex flex-col">
-                            <strong>Nikola Tesla</strong>
+                            <strong className="dark:text-gray-200">Nikola Tesla</strong>
                             <p className="text-green-500 text-sm">Online</p>
                         </div>
                     </div>
                     <div className="flex flex-row items-center">
-                        <Bell className="w-6 h-6 text-gray-600"/>
+                        <Bell className="w-6 h-6 text-gray-600 dark:text-gray-400"/>
                     </div>
 
                 </div>
@@ -81,7 +81,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -91,7 +91,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -101,7 +101,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -111,7 +111,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -121,7 +121,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -131,7 +131,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -141,7 +141,7 @@ const Inbox = () => {
                     <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 rounded p-5">
+                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
                                     Some message text
                                 </div>
                                 <div className=" text-gray-600">4hr ago</div>
@@ -168,17 +168,17 @@ const Inbox = () => {
                 </div>
 
                 <div className="flex-none h-12">
-                    <div className="flex border px-3 py-3 mb-5">
-                        <div className="bg-gray-100 rounded-full w-8 h-8 mr-3 hover:bg-gray-200 hover:text-gray-900 transition duration-150">
-                            <Camera className="w-6 h-6 m-1 text-gray-600"/>
+                    <div className="flex border dark:border-gray-700 px-3 py-3 mb-5">
+                        <div className="bg-gray-100 rounded-full w-8 h-8 mr-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
+                            <Camera className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
                         </div>
                         <input
-                            className="w-full rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                            className="w-full dark:bg-transparent dark:text-gray-200 rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
                             type="search" 
                             placeholder="Type your message here" 
                             />
-                        <div className="bg-gray-100 rounded-full w-8 h-8 ml-3 hover:bg-gray-200 hover:text-gray-900 transition duration-150">
-                            <Plus className="w-6 h-6 m-1 text-gray-600"/>
+                        <div className="bg-gray-100 rounded-full w-8 h-8 ml-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
+                            <Plus className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
                         </div>
                     </div>
                 </div>

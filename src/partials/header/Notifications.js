@@ -34,7 +34,7 @@ function Notifications() {
     <div className="relative inline-flex ml-3">
       <button
         ref={trigger}
-        className={`w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition duration-150 rounded-full ${dropdownOpen && 'bg-gray-200'}`}
+        className={`w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 transition duration-150 rounded-full ${dropdownOpen && 'bg-gray-200'}`}
         aria-haspopup="true"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
@@ -45,11 +45,11 @@ function Notifications() {
           <path className="fill-current text-gray-400" d="M16 9.5c0-.987-.429-1.897-1.147-2.639C14.124 10.348 10.66 13 6.5 13c-.103 0-.202-.018-.305-.021C7.231 13.617 8.556 14 10 14c.449 0 .886-.04 1.307-.11L15 16v-4h-.012C15.627 11.285 16 10.425 16 9.5z" />
         </svg> */}
         <Bell className="w-5 h-5 text-gray-500"/>
-        <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></div>
+        <div className="animate-pulse absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 dark:border-gray-700 border-white rounded-full"></div>
       </button>
 
       <Transition
-        className="origin-top-right z-10 absolute top-full w-72 right-0 -mr-48 sm:mr-0 min-w-80 bg-white border border-gray-200 py-1.5 rounded shadow-lg overflow-hidden mt-1"
+        className="origin-top-right z-10 absolute top-full w-72 right-0 -mr-48 sm:mr-0 min-w-80 bg-white dark:bg-gray-900 dark:border-gray-700 border border-gray-200 py-1.5 rounded shadow-lg overflow-hidden mt-1"
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"
@@ -63,35 +63,35 @@ function Notifications() {
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Alerts</div>
+          <div className="text-xs font-semibold text-gray-400 dark:text-gray-200 uppercase pt-1.5 pb-2 px-4">Recent alerts</div>
           <ul>
-            <li className="border-b border-gray-200 last:border-0">
+            <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
               <Link
-                className="block py-2 px-4 hover:bg-gray-50"
+                className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
                 to="#0"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                <span className="block text-sm mb-2">📣 <span className="font-medium text-gray-800">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-gray-400">Feb 12, 2021</span>
+                <span className="block text-sm mb-2 dark:text-gray-300">📣 <span className="font-medium text-gray-800 dark:text-gray-200">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
+                <span className="block text-xs font-medium text-gray-400 dark:text-gray-300">Feb 12, 2021</span>
               </Link>
             </li>
-            <li className="border-b border-gray-200 last:border-0">
+            <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
               <Link
-                className="block py-2 px-4 hover:bg-gray-50"
+                className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
                 to="#0"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                <span className="block text-sm mb-2">📣 <span className="font-medium text-gray-800">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-gray-400">Feb 9, 2021</span>
+                <span className="block text-sm mb-2 dark:text-gray-300">📣 <span className="font-medium text-gray-800 dark:text-gray-200">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
+                <span className="block text-xs font-medium text-gray-400 dark:text-gray-300">Feb 9, 2021</span>
               </Link>
             </li>
-            <li className="border-b border-gray-200 last:border-0">
+            <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
               <Link
-                className="block py-2 px-4 hover:bg-gray-50"
+                className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
                 to="#0"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                <span className="block text-sm mb-2">🚀<span className="font-medium text-gray-800">Say goodbye to paper receipts!</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
+                <span className="block text-sm mb-2 dark:text-gray-300">🚀<span className="font-medium text-gray-800 dark:text-gray-300">Say goodbye to paper receipts!</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
                 <span className="block text-xs font-medium text-gray-400">Jan 24, 2020</span>
               </Link>
             </li>

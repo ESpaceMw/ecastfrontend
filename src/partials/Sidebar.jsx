@@ -1,24 +1,29 @@
 import { useEffect, useRef } from 'react';
+
 import { NavLink, useLocation } from 'react-router-dom';
+
 import Analytics from '../data/Analytics';
+
 import UserPreferences from '../data/UserPreferences';
+
 import Podcasts from '../data/Podcasts';
+
 import Girl from '../media/onboard-girl.jpg'
 
-function Sidebar({
-  sidebarOpen,
-  setSidebarOpen
-}) {
+function Sidebar({sidebarOpen, setSidebarOpen}) {
 
   const location = useLocation();
+
   const { pathname } = location;
+
   const page = pathname.split('/')[1];
 
   const trigger = useRef(null);
+
   const sidebar = useRef(null);
 
-  // close on click outside
   useEffect(() => {
+
     const clickHandler = ({ target }) => {
       if (!sidebar.current || !trigger.current) return;
       if (!sidebarOpen || sidebar.current.contains(target) || trigger.current.contains(target)) return;
@@ -26,33 +31,33 @@ function Sidebar({
     };
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
+
   });
 
-  // close if the esc key is pressed
   useEffect(() => {
+
     const keyHandler = ({ keyCode }) => {
       if (!sidebarOpen || keyCode !== 27) return;
       setSidebarOpen(false);
     };
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
+
   });
 
   return (
-    <div className="lg:w-64">
-      {/* Sidebar backdrop (mobile only) */}
-      <div className={`fixed inset-0 bg-white bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-hidden="true"></div>
 
-      {/* Sidebar */}
+    <div className="lg:w-64">
+
+      <div className={`fixed inset-0 bg-white dark:bg-gray-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} aria-hidden="true"></div>
+
       <div
         id="sidebar"
         ref={sidebar}
-        className={`absolute z-40 no-scrollbar left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-white border-r p-4 transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-64'}`}
+        className={`absolute z-40 no-scrollbar left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r dark:border-gray-800 p-4 transition-transform duration-200 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-64'}`}
       >
 
-        {/* Sidebar header */}
         <div className="flex justify-between mb-10 pr-3 sm:px-2">
-          {/* Close button */}
           <button
             ref={trigger}
             className="lg:hidden text-gray-500 hover:text-gray-400"
@@ -65,28 +70,27 @@ function Sidebar({
               <path d="M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z" />
             </svg>
           </button>
-          {/* Logo */}
+
           <NavLink exact to="/dashboard/profile" className="block">
             <div className="flex justify-between">
               <div className="flex">
                 <img src={Girl} className="mr-2 border-2 border-yellow-500 rounded-full w-10 h-10 object-cover object-center" alt="user-icon"/>
                 <div>
-                  <h3 className="text-md text-gray-900">Nhlanhla Dhaka</h3>
-                  <p className="text-gray-500 text-sm">The Dee Podcast</p>
+                  <h3 className="text-md text-gray-900 dark:text-gray-200">Nhlanhla Dhaka</h3>
+                  <p className="text-gray-500 dark:text-gray-200 text-sm">The Dee Podcast</p>
                 </div>
               </div>
             </div>
           </NavLink>
         </div>
 
-        {/* Links */}
         <div>
-          <h3 className="text-md uppercase text-gray-500 font-semibold pl-3">preferences</h3>
+          <h3 className="text-md uppercase text-gray-500 dark:text-gray-200 font-semibold pl-3">preferences</h3>
           <ul className="mt-3">
             {
               UserPreferences.map((value) => (
-              <li className={`px-3 py-2 hover:bg-blue-400 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <li className={`px-3 py-2 hover:bg-blue-400 dark:hover:bg-gray-800 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
+              <NavLink exact to={value.LinkTo} className={`block text-gray-500 dark:text-gray-300 dark:hover:text-white hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="font-medium ml-4 text-md">{value.MenuTitle}</span>
@@ -101,12 +105,12 @@ function Sidebar({
             
           </ul>
 
-          <h3 className="text-md uppercase text-gray-500 font-semibold pl-3 mt-5">Podcasts</h3>
+          <h3 className="text-md uppercase text-gray-500 dark:text-gray-200 font-semibold pl-3 mt-5">Podcasts</h3>
           <ul className="mt-3">
             {
               Podcasts.map((value) => (
-              <li className={`px-3 py-2 hover:bg-blue-400 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <li className={`px-3 py-2 hover:bg-blue-400 dark:hover:bg-gray-800 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
+              <NavLink exact to={value.LinkTo} className={`block dark:text-gray-300 dark:hover:text-white text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="text-md font-medium ml-4">{value.MenuTitle}</span>
@@ -118,12 +122,12 @@ function Sidebar({
             
           </ul>
 
-          <h3 className="text-md uppercase text-gray-500 font-semibold pl-3 mt-5">Analytics</h3>
+          <h3 className="text-md uppercase text-gray-500 dark:text-gray-200 font-semibold pl-3 mt-5">Analytics</h3>
           <ul className="mt-3">
             {
               Analytics.map((value) => (
-              <li className={`px-3 py-2 hover:bg-blue-400 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <li className={`px-3 py-2 hover:bg-blue-400 dark:hover:bg-gray-800 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
+              <NavLink exact to={value.LinkTo} className={`block dark:text-gray-300 dark:hover:text-white text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="text-md font-medium ml-4">{value.MenuTitle}</span>

@@ -38,21 +38,21 @@ const EpidoseModal  = ({name, title, published, time}) => {
       ref={trigger}
       to="#" 
       onClick={() => { setSearchOpen(!searchOpen) }}
-      className="flex justify-between hover:bg-gray-100 transition duration-150 border-b border-gray-200 p-3">
+      className="flex justify-between dark:hover:bg-gray-800 hover:bg-gray-100 transition duration-150 border-b border-gray-200 dark:border-gray-700 p-3">
         <div className="flex">
-            <p className="bg-gray-100 p-1 h-8 text-center">
+            <p className="bg-gray-100 dark:bg-gray-800 dark:text-gray-200 p-1 h-8 text-center">
                 {name}
             </p>
             <div className="ml-3">
-                <h3 className="text-gray-900 text-md">{title}</h3>
-                <p className="text-sm text-gray-500">{published}</p>
+                <h3 className="text-gray-900 text-md dark:text-gray-300">{title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-300">{published}</p>
             </div>
         </div>
-        <p className="text-sm">
+        <p className="text-sm dark:text-gray-300">
             {time}
         </p>
     </Link>
-      {/* Modal backdrop */}
+
       <Transition
         className="fixed inset-0 bg-gray-900 bg-opacity-30 z-50 transition-opacity"
         show={searchOpen}
@@ -78,37 +78,37 @@ const EpidoseModal  = ({name, title, published, time}) => {
         leaveStart="opacity-100 translate-y-0"
         leaveEnd="opacity-0 translate-y-4"
       >
-        <div className="bg-white overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
+        <div className="bg-white dark:bg-gray-900 overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
           <div className="p-3">
             <div className="flex justify-between">
               <div className="flex">
-                <img src={Logo} className="w-32 h-32 border rounded-sm border-gray-200" alt="serie-cover-art"/>
+                <img src={Logo} className="w-32 h-32 border rounded-sm border-gray-200 dark:border-gray-700" alt="serie-cover-art"/>
                 <div className="ml-3">
-                  <h3 className="font-semibold text-lg">
+                  <h3 className="font-semibold text-lg dark:text-gray-300">
                     Impact Goals 
                   </h3>
-                  <h2 className="font-medium text-gray-500 text-md">
+                  <h2 className="font-medium text-gray-500 dark:text-gray-300 text-md">
                     Impact Goals [S1, E4]
                   </h2>
-                  <p>
+                  <p className="dark:text-gray-300">
                     Published [5/4/2021]
                   </p>
                   <div className="w-full flex justify-around">
                     <div className="flex mt-2 mr-2">
                       <img src={MusicalNote} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="">22043 Listens</p>
+                      <p className="dark:text-gray-300">22043 Listens</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div>
-                <button className="bg-gray-100 p-1 rounded-sm">
-                  <DotsHorizontal className="h-4 w-4"/>
+                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                  <DotsHorizontal className="h-4 w-4 text-gray-300"/>
                 </button>
               </div>
             </div>
             <div className="justify-center">
-              <p className="text-sm mb-2 mt-2">
+              <p className="text-sm mb-2 mt-2 dark:text-gray-300">
                 Impact Goals is an amazing series premiered on 12 - 04 - 21 by the renowned
                 Entrepreneur, Speaker, Gospel Minister and Philaphropist, Nhlanhla Dhaka who 
                 is also the author of this Podcast. The goal of this series to equip all visionaries 
@@ -118,12 +118,13 @@ const EpidoseModal  = ({name, title, published, time}) => {
               </p>
               
             </div>
-            <div className="text-center text-blue-500">
+            <div className="text-center">
               <ReactAudioPlayer
                 src={SaveYourTears}
                 autoPlay={false}
                 controls
-                style={{ width: '100%' }}
+                className="dark:bg-gray-900 text-blue-400"
+                style={{ width: '100%', color: 'blue' }}
               />
             </div>
           </div>

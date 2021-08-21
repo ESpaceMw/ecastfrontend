@@ -1,14 +1,28 @@
 import SearchModal from '../../partials/header/SearchModal';
-import Notifications from '../../partials/header/Notifications';
-import UserMenu from '../../partials/header/UserMenu';
-import { Moon } from 'heroicons-react';
 
-function Header({
-  sidebarOpen,
-  setSidebarOpen
-}) {
+import Notifications from '../../partials/header/Notifications';
+
+import UserMenu from '../../partials/header/UserMenu';
+
+import { 
+  Moon, 
+  Sun 
+} from 'heroicons-react';
+
+import { useContext } from 'react'
+
+import { ThemeContext } from '../../context/themeContext'
+
+function Header({sidebarOpen,setSidebarOpen}) {
+
+  const { theme, setTheme } = useContext(ThemeContext)
+
+    function isDark() {
+        return theme === 'dark'
+    }
+
   return (
-    <header className="sticky top-0 bg-white border-b border-gray-200 z-30">
+    <header className="sticky top-0 bg-white dark:bg-gray-900 border-b dark:border-gray-700 border-gray-200 z-30">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 -mb-px">
 
@@ -32,17 +46,18 @@ function Header({
 
           <div className="flex items-center">
 
-            <button className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition duration-150 rounded-full ">
-              <Moon className="text-gray-500"/>
-            </button>
+            <button 
+            onClick={() => { isDark() ? setTheme('light') : setTheme('dark')}}
+            className="w-8 h-8 focus:ring-none outline-none flex items-center justify-center bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 transition duration-150 rounded-full ">
+              { isDark() ?  <Sun className="text-yellow-500"/> 
+                :  <Moon className="text-gray-500"/> }
+             </button>
             
             <SearchModal />
 
             <Notifications />
 
-            {/* <Help /> */}
-
-            <hr className="w-px h-6 bg-gray-200 mx-3" />
+            <hr className="w-px h-6 bg-gray-200 dark:bg-gray-700 mx-3" />
             
             <UserMenu />
 

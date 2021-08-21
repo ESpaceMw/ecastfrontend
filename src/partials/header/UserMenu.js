@@ -42,15 +42,15 @@ function UserMenu() {
       >
         <img className="w-8 h-8 rounded-full object-cover border-2 border-yellow-500" src={UserAvatar} width="32" height="32" alt="User" />
         <div className="flex items-center truncate">
-          <span className="truncate ml-2 text-sm font-medium group-hover:text-gray-800">Acme Inc.</span>
-          <svg className="w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400" viewBox="0 0 12 12">
+          <span className="w-20 ml-2 text-sm font-medium dark:group-hover:text-gray-400 group-hover:text-gray-800 dark:text-gray-300 truncate">Nhlahla dhaka</span>
+          <svg className="w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-300" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
         </div>
       </button>
 
       <Transition
-        className="origin-top-right z-10 absolute top-full right-0 min-w-44 bg-white border border-gray-200 py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
+        className="origin-top-right z-10 absolute top-full right-0 min-w-44 bg-white border dark:bg-gray-900 dark:border-gray-700 border-gray-200 py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"
@@ -64,9 +64,9 @@ function UserMenu() {
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200">
-            <div className="font-medium text-gray-800">Acme Inc.</div>
-            <div className="text-xs text-gray-500 italic">eCast Member</div>
+          <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200 dark:border-gray-700">
+            <div className="font-medium text-gray-800 truncate dark:text-gray-200">Nhlanhla dhaka</div>
+            <div className="text-xs text-gray-500 italic dark:text-gray-300">eCast Member</div>
           </div>
           <ul>
             <li>
