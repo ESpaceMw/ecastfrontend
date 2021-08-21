@@ -76,7 +76,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
               <div className="flex">
                 <img src={Girl} className="mr-2 border-2 border-yellow-500 rounded-full w-10 h-10 object-cover object-center" alt="user-icon"/>
                 <div>
-                  <h3 className="text-md text-gray-900 dark:text-gray-200">Nhlanhla Dhaka</h3>
+                  <h3 className="text-md text-gray-900 dark:text-gray-200">{localStorage.getItem('username')}</h3>
                   <p className="text-gray-500 dark:text-gray-200 text-sm">The Dee Podcast</p>
                 </div>
               </div>

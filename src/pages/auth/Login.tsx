@@ -1,6 +1,7 @@
-import { useState } from 'react'
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import { useEffect, useState } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import PrimaryButton from '../../components/SubmitButton'
 
@@ -8,9 +9,13 @@ import LoginService from '../../services/auth/LoginService'
 
 const Login  = () => {
 
+  const history = useHistory()
+
   const [email, setEmail] = useState('')
 
   const [password, setPassword] = useState('')
+
+  const [loginState, setLoginState] = useState('')
 
   async function handleLogin (email: string, password: string){
 
@@ -25,11 +30,16 @@ const Login  = () => {
 
     const response = await LoginService.processLogin(postData)
 
-    console.log(response)
+    setLoginState(response.access_token)
 
   }
 
   return (
+    <>
+
+    {useEffect(() => {
+      loginState !== '' ? history.push('/dashboard/overview') : ''
+    })}
 
     <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="max-w-md w-full mb-10">
@@ -131,7 +141,7 @@ const Login  = () => {
           </form>
         </div>
       </div>
-            
+    </>    
   )
 }
 

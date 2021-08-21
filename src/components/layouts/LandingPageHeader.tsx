@@ -58,7 +58,7 @@ export default function LandingPageHeader() {
   return (
     <Popover className="relative bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center dark:border-gray-700 border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div className="flex justify-between items-center border-b-2 border-gray-100 dark:border-gray-700 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link
              to="/" 
@@ -102,7 +102,7 @@ export default function LandingPageHeader() {
             </Link>
             <Link
               to="sign-up"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-sm shadow-sm text-base font-medium text-white bg-blue-400 hover:bg-blue-500"
+              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border dark:border-gray-700 rounded-sm shadow-sm text-base font-medium text-white bg-blue-400 hover:bg-blue-500"
             >
               Sign up
             </Link>
@@ -120,7 +120,7 @@ export default function LandingPageHeader() {
         leaveTo="opacity-0 scale-95"
       >
         <Popover.Panel focus className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
-          <div className="rounded-sm shadow-md border ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+          <div className="rounded-sm shadow-md border dark:border-gray-700 ring-1 ring-black ring-opacity-5 dark:bg-gray-900 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
@@ -131,7 +131,7 @@ export default function LandingPageHeader() {
                   </Link>
                 </div>
                 <div className="-mr-2">
-                  <Popover.Button className="bg-white rounded-sm p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                  <Popover.Button className="bg-white dark:bg-gray-900 dark:border-gray-700 rounded-sm p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                     <span className="sr-only">Close menu</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
@@ -143,10 +143,10 @@ export default function LandingPageHeader() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-m-3 p-3 flex items-center rounded-sm hover:bg-gray-50"
+                      className="-m-3 p-3 flex items-center rounded-sm dark:hover:bg-gray-800 hover:bg-gray-50"
                     >
                       <item.icon className="flex-shrink-0 h-6 w-6 text-blue-400" aria-hidden="true" />
-                      <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
+                      <span className="ml-3 text-base font-medium text-gray-900 dark:text-gray-300">{item.name}</span>
                     </a>
                   ))}
                 </nav>

@@ -1,5 +1,6 @@
 import UrlService from "../UrlService"
 import axios from "axios"
+import { useHistory } from "react-router"
 
 interface Credentials{
 
@@ -9,6 +10,7 @@ interface Credentials{
 
 }
 
+
 class LoginService{
 
     async processLogin(credentials: Credentials){
@@ -17,7 +19,17 @@ class LoginService{
 
             let response = await axios.post(UrlService.loginUrl(), credentials)
 
-            return response
+            localStorage.setItem('access_token', response.data.access_token)
+
+            localStorage.setItem('username', response.data.user.first_name + ' ' + response.data.user.last_name)
+
+            localStorage.setItem('user_id', response.data.user.id)
+
+            localStorage.setItem('basic_info_id', response.data.basic_info.id)
+
+            localStorage.setItem('channel_id', response.data.channel.id)
+
+            return response.data
 
         }catch(error){
 
