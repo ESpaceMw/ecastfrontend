@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { ExclamationCircleOutline } from 'heroicons-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CountryDropdown } from 'react-country-region-selector'
 import { Link, useHistory } from 'react-router-dom'
-import DatePicker from '../../components/DatePicker'
 import SubmitButton from '../../components/SubmitButton'
 import RegisterService from '../../services/auth/RegisterService'
 
@@ -32,6 +31,10 @@ const Register = () => {
 
   const [registerStatus, setRegisterStatus] = useState('')
 
+  const [onLoading, setOnLoading] = useState(false)
+
+  const [showError, setShowError] = useState('')
+
   async function handleRegister (email: string, phoneNumber: string, gender: string, firstName: string, lastName: string, dateOfBirth: string, country: string, city: string, password: string){
     
     const postData = {
@@ -58,11 +61,23 @@ const Register = () => {
 
     const response = await RegisterService.processRegister(postData)
 
-    setRegisterStatus(response)
+    if(response === 'You have registered successfully!'){
+      setOnLoading(false)
+      setRegisterStatus(response)
+    }else{
+      setOnLoading(false)
+      setShowError('Something went wrong, please try again.')
+    }
 
   }
 
   let history = useHistory();
+
+  useEffect(() => {
+    if(registerStatus === 'You have registered successfully!'){
+      history.push('/choose-category')
+    }
+  }, [registerStatus, history])
   
     return (
           <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -81,9 +96,15 @@ const Register = () => {
               </div>
               <form className="mt-2 space-y-6" onSubmit={(event) => {
                 event.preventDefault()
+                setOnLoading(true)
                 handleRegister(email, phoneNumber, gender, firstName, lastName, dateOfBirth, country, city, password)
               }} method="POST">
+
+                {showError !== "" ? <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                  <ExclamationCircleOutline className="w-5 h-5 mr-3"/>{showError}</p> : ''}
+
                 <input type="hidden" name="remember" defaultValue="true" />
+
                 <div className="space-y-2">
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">First name<span className="text-red-500">*</span></label>
@@ -236,7 +257,7 @@ const Register = () => {
                       className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                       placeholder="Confirm password"
                     />
-                    {password === c_password ? <></> : <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2 animate-pulse">
+                    {password === c_password ? <></> : <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2">
                     <ExclamationCircleOutline className="w-5 h-5 mr-3"/> Passwords do not match</p>}
                   </div>
 
@@ -253,10 +274,9 @@ const Register = () => {
                 </div>
 
                 <div>
-                  <SubmitButton text="Continue to sign up" onLoad={false}/>
+                  <SubmitButton text="Continue to sign up" onLoad={onLoading}/>
                   <p className="text-green-400 p-2 text-center font-semibold">
                     {registerStatus}
-                    {registerStatus === 'You have registered successfully!' ? history.push('/choose-category') : ''}
                   </p>
                 </div>
 
