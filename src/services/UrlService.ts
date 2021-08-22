@@ -23,6 +23,13 @@ class UrlService {
         return apiDomain + 'api/v1/auth/register'
         
     }
+
+
+    static mainUrl(){
+
+        return apiDomain + 'api/v1/'
+        
+    }
 }
 
 export default UrlService

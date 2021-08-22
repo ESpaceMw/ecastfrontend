@@ -35,11 +35,13 @@ const Login  = () => {
 
     const response = await LoginService.processLogin(postData)
 
-    if(response.access_token !== null){
+
+    if(response.access_token){
       setOnLoading(false)
       setLoginState(response.access_token)
-    }else{
+      history.push('/dashboard/overview')
       console.log(response)
+    }else{
       if(response === false){
         setOnLoading(false)
         setShowError('Error validating your member details')
@@ -51,10 +53,6 @@ const Login  = () => {
 
   return (
     <>
-
-    {useEffect(() => {
-      loginState !== '' ? history.push('/dashboard/overview') : ''
-    })}
 
     <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="max-w-md w-full mb-10">
