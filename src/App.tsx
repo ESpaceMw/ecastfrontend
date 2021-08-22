@@ -41,6 +41,14 @@ function App() {
   //   }
   // }
 
+  function isFirstTime(){
+    if('first_time' in localStorage){
+      return true
+    }else{
+      return false
+    }
+  }
+
   function isLoggedIn(){
     if('access_token' in localStorage){
       return true
@@ -54,10 +62,17 @@ function App() {
       <ThemeProvider initialTheme="light">
       <Switch>
 
-          <Route path="/" exact> 
-            <LandingPageHeader/>
-              <LandingPage/>
-            <LandingPageFooter/>
+          <Route path="/" exact render={() => (
+            isFirstTime() ? ( 
+            <>
+              <LandingPageHeader />
+                  <LandingPage />
+              <LandingPageFooter />
+            </>
+            ) : (
+              <Redirect to="/get-started"/>
+            )
+          )}>
           </Route>
 
           <Route path="/get-started"> 
