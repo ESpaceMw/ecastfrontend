@@ -1,8 +1,13 @@
 import moment from "moment"
+
 import { useEffect, useState } from "react"
+
 import Skeleton from "react-loading-skeleton"
+
 import { Link } from "react-router-dom"
+
 import Alert from "../../../components/Alert"
+
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
 const Alerts =  () => {
@@ -12,6 +17,8 @@ const Alerts =  () => {
     const [alerts, setAlerts] = useState<any[]>([])
 
     const [showAlert, setShowAlert] = useState(false)
+
+    const [alertMessage, setAlertMessage] = useState('')
     
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/alerts/get-alerts',{
@@ -24,8 +31,27 @@ const Alerts =  () => {
         }).then((data) => {
             setIsLoading(false)
             setAlerts(data.alerts)
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
         })
     }, [])
+
+    function deleteAlert(alertId: string){
+        fetch('http://127.0.0.1:8000/api/v1/alerts/delete',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ id: alertId })
+            }).then(response => {
+                return response.json()
+            }).then(data => {
+                console.log(alertId)
+                setShowAlert(true)
+                setAlertMessage(data.message)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
 
     return(
         <div>
@@ -34,11 +60,14 @@ const Alerts =  () => {
                 <div>
                     <div className="bg-white dark:bg-gray-900 p-3 rounded-sm shadow-sm hover:shadow-md">
                     {
-                        alerts && (
+                        alerts &&  (
                             alerts.map((value) => (
                             
                             <div key={value.id}>
-                                <Link className="p-3 transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 flex justify-justify border-b dark:border-gray-700 border-gray-200 pb-2" onDoubleClick={() => {setShowAlert(true)}} to="#" >
+                                <Link className="p-3 transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 flex justify-justify border-b dark:border-gray-700 border-gray-200 pb-2"
+                                 onDoubleClick={() => {
+                                     deleteAlert(value.id)
+                                     }} to="#" >
                                     <div className="w-full">
                                         <h3 className="font-semibold text-md dark:text-gray-200">{value.title}</h3>
                                         <p className="dark:text-gray-300">{value.content}</p>
@@ -64,7 +93,7 @@ const Alerts =  () => {
                                 <Link className="p-3 transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 flex justify-justify border-b dark:border-gray-700 border-gray-200 pb-2" onDoubleClick={() => {setShowAlert(true)}} to="#" >
                                     <div className="w-full">
                                         <h3 className="font-semibold text-md dark:text-gray-200">
-                                            <Skeleton height={20} width={300}/>
+                                            <Skeleton  height={20} width={300}/>
                                         </h3>
                                         <p className="dark:text-gray-300"><Skeleton height={50} width={500}/></p>
                                     </div>
@@ -80,7 +109,7 @@ const Alerts =  () => {
                     </div>
                 </div>
                 }
-                {showAlert ? <Alert icon={'Some text'} message='Item deleted successfully'/> : <></>}
+                {showAlert ? <Alert icon={'📢'} message={alertMessage}/> : <></>}
             </DashboardMain>
         </div>
     )
