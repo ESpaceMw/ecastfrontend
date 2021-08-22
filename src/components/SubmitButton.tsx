@@ -1,15 +1,16 @@
+import Oval from "react-loading-icons/dist/components/oval"
+
 interface Props {
     text: string,
-    onClick: () => void
+    onLoad: boolean
 }
 
-const SubmitButton: React.FC<Props> = ({text, onClick}) => {
+const SubmitButton: React.FC<Props> = ({text, onLoad}) => {
     return(
         <button
-            onClick={onClick}
             type="submit"
             className="group w-full flex justify-center p-4 border border-transparent text-sm font-medium rounded-none text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >{text}</button>
+        > {onLoad  ? <Oval className="w-5 h-5"/> : text}</button>
     )
 }
 

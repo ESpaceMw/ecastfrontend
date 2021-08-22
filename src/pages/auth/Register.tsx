@@ -134,7 +134,19 @@ const Register = () => {
                   </div>
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">Date of birth<span className="text-red-500">*</span></label>
-                    <DatePicker/>
+                    <input
+                      id="dateOfBirth"
+                      name="dateOfBirth"
+                      type="text"
+                      value={dateOfBirth}
+                      onChange={(event) => {
+                        setDateOfBirth(event.target.value)
+                      }}
+                      autoComplete="name"
+                      required
+                      className="dark:bg-transparent dark:border-gray-800 dark:text-gray-300 p-3 appearance-none rounded-none  block w-full border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                      placeholder="For example: 2021-01-01"
+                    />
                   </div>
                   <div className="mb-2">
                     <label className="block text-gray-700 dark:text-gray-300">Country<span className="text-red-500">*</span></label>
@@ -241,9 +253,7 @@ const Register = () => {
                 </div>
 
                 <div>
-                  <SubmitButton text="Continue to sign up" onClick={() => {
-                    
-                  }}/>
+                  <SubmitButton text="Continue to sign up" onLoad={false}/>
                   <p className="text-green-400 p-2 text-center font-semibold">
                     {registerStatus}
                     {registerStatus === 'You have registered successfully!' ? history.push('/choose-category') : ''}

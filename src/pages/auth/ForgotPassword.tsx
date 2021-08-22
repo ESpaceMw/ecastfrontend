@@ -29,9 +29,7 @@ const ForgotPassword = () => {
               </div>
 
             <div>
-              <SubmitButton text="Reset password" onClick={() => {
-                
-              }}/>
+              <SubmitButton text="Reset password" onLoad={false}/>
             </div>
 
           </form>

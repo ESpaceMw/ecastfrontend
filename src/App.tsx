@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import LandingPageFooter from './components/layouts/LandingPageFooter';
 import LandingPageHeader from './components/layouts/LandingPageHeader';
@@ -30,6 +30,25 @@ import OnBoarding from './pages/OnBoarding';
 import PageNotFound from './pages/PageNotFound';
 
 function App() {
+
+  // if(localStorage.getItem('remember_me') === 'true'){
+  //   window.onunload = () => {
+
+  //   }
+  // }else{
+  //   window.onunload = () => {
+  //     localStorage.clear()
+  //   }
+  // }
+
+  function isLoggedIn(){
+    if('access_token' in localStorage){
+      return true
+    }else{
+      return false
+    }
+  }
+
   return (
     <div>
       <ThemeProvider initialTheme="light">
@@ -107,57 +126,74 @@ function App() {
 
           {/* Dashboard routes */}
 
-          <Route path="/dashboard/overview"> 
-            <Overview/>
+          <Route path="/dashboard/overview" render={() => (
+            isLoggedIn() ? (
+              <Overview/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
           </Route>
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/inbox"> 
             <Inbox/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/profile"> 
             <UserInfo/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/alerts"> 
             <Alerts/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/episodes"> 
             <Episodes/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/new-episode"> 
             <NewEpisode/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/media"> 
             <Media/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/contacts"> 
             <Contacts/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/events"> 
             <Events/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/integrations"> 
             <Integrations/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/statistics"> 
             <Statistics/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/channels"> 
             <Channels/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
+          {localStorage.getItem('access_token') === '' ?
           <Route path="/dashboard/subscribers"> 
             <Subscribers/>
-          </Route>
+          </Route> : <Redirect to="/sign-in"/>}
 
           {/* 404 Error route */}
 

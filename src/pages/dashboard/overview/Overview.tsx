@@ -53,6 +53,8 @@ const Overview = () => {
 
     const color: string = 'blue'
 
+    console.log(localStorage.getItem('access_token'))
+
     return(
         <div className="dark:bg-gray-800">
             <DashboardMain>

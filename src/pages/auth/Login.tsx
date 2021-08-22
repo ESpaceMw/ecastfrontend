@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+import { ExclamationCircleOutline } from 'heroicons-react'
 import { useEffect, useState } from 'react'
 
 import { Link, useHistory } from 'react-router-dom'
@@ -17,6 +18,10 @@ const Login  = () => {
 
   const [loginState, setLoginState] = useState('')
 
+  const [onLoading, setOnLoading] = useState(false)
+
+  const [showError, setShowError] = useState('')
+
   async function handleLogin (email: string, password: string){
 
     
@@ -30,7 +35,17 @@ const Login  = () => {
 
     const response = await LoginService.processLogin(postData)
 
-    setLoginState(response.access_token)
+    if(response.access_token !== null){
+      setOnLoading(false)
+      setLoginState(response.access_token)
+    }else{
+      console.log(response)
+      if(response === false){
+        setOnLoading(false)
+        setShowError('Error validating your member details')
+      }
+    }
+    
 
   }
 
@@ -62,8 +77,12 @@ const Login  = () => {
 
           <form className="mt-2 space-y-6" onSubmit={(event) => {
             event.preventDefault()
+            setOnLoading(true)
             handleLogin(email, password)
           }} method="POST">
+
+            {showError !== "" ? <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                    <ExclamationCircleOutline className="w-5 h-5 mr-3"/>{showError}</p> : ''}
 
             <input type="hidden" name="remember" defaultValue="true" />
 
@@ -107,8 +126,9 @@ const Login  = () => {
                 <input
                   id="remember-me"
                   name="remember-me"
+                  checked={localStorage.getItem('remember_me') === 'true' ? true : false}
                   type="checkbox"
-                  onChange={() => {}}
+                  onChange={() => {localStorage.setItem('remember_me', 'true')}}
                   className="h-4 w-4 dark:bg-transparent bg-white text-blue-400 focus:ring-blue-500 dark:border-gray-900 border-gray-300 rounded-none"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
@@ -126,9 +146,8 @@ const Login  = () => {
             <div>
               <PrimaryButton 
               text="Continue to sign in"
-              onClick={() => {
-                
-              }}/>
+              onLoad={onLoading}
+              />
             </div>
 
             <div>
