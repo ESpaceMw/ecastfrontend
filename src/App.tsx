@@ -124,7 +124,7 @@ function App() {
             <LandingPageFooter/>
           </Route>
 
-          {/* Dashboard routes */}
+          {/* Dashboard -Authenticated- routes */}
 
           <Route path="/dashboard/overview" render={() => (
             isLoggedIn() ? (
@@ -135,65 +135,113 @@ function App() {
           )}> 
           </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/inbox"> 
-            <Inbox/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/inbox" render={() => (
+            isLoggedIn() ? (
+              <Inbox/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/profile"> 
-            <UserInfo/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/profile" render={() => (
+            isLoggedIn() ? (
+              <UserInfo/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}>
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/alerts"> 
-            <Alerts/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/alerts" render={() => (
+            isLoggedIn() ? (
+              <Alerts/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/episodes"> 
-            <Episodes/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/episodes" render={() => (
+            isLoggedIn() ? (
+              <Episodes/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/new-episode"> 
-            <NewEpisode/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/new-episode" render={() => (
+            isLoggedIn() ? (
+              <NewEpisode/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/media"> 
-            <Media/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/media" render={() => (
+            isLoggedIn() ? (
+              <Media/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/contacts"> 
-            <Contacts/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/contacts" render={() => (
+            isLoggedIn() ? (
+              <Contacts/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/events"> 
-            <Events/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/events" render={() => (
+            isLoggedIn() ? (
+              <Events/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/integrations"> 
-            <Integrations/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/integrations" render={() => (
+            isLoggedIn() ? (
+              <Integrations/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/statistics"> 
-            <Statistics/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/statistics" render={() => (
+            isLoggedIn() ? (
+              <Statistics/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/channels"> 
-            <Channels/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/channels" render={() => (
+            isLoggedIn() ? (
+              <Channels/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
-          {localStorage.getItem('access_token') === '' ?
-          <Route path="/dashboard/subscribers"> 
-            <Subscribers/>
-          </Route> : <Redirect to="/sign-in"/>}
+          <Route path="/dashboard/subscribers" render={() => (
+            isLoggedIn() ? (
+              <Subscribers/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
           {/* 404 Error route */}
 
