@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import{ useState, useRef, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import Transition from '../../utils/Transition';
 
 import UserAvatar from '../../media/onboard-girl.jpg';
@@ -9,7 +9,10 @@ function UserMenu() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef(null);
+
   const dropdown = useRef(null);
+
+  let history = useHistory();
 
   // close on click outside
   useEffect(() => {
@@ -82,7 +85,12 @@ function UserMenu() {
               <Link
                 className="font-medium text-sm text-blue-400 hover:bg-red-600 hover:text-white flex items-center py-1 px-3"
                 to="/"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => 
+                  {
+                    setDropdownOpen(!dropdownOpen)
+                    localStorage.clear()
+                    history.push('/sign-in')
+                  }}
               >
                 Sign Out
               </Link>
