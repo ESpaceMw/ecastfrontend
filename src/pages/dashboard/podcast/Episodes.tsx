@@ -1,10 +1,26 @@
 import { Transition } from "@headlessui/react"
-import { DotsHorizontal, PencilAlt, Plus, ViewList} from "heroicons-react"
-import { useState, useRef, useEffect } from "react"
+
+import { 
+    DotsHorizontal, 
+    PencilAlt, 
+    Plus, 
+    ViewList
+} from "heroicons-react"
+
+import { 
+    useState, 
+    useRef, 
+    useEffect 
+} from "react"
+
 import { Link } from "react-router-dom"
+
 import SerieModal from "../../../components/episodes/SerieModal"
+
 import DashboardMain from "../../../components/layouts/DashboardMain"
+
 import EpisodeModal from '.././../../components/episodes/EpisodeModal.jsx'
+
 import Skeleton from "react-loading-skeleton"
 
 const Episodes = () => {

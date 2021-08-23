@@ -5,6 +5,9 @@ import DashboardMain from "../../../../components/layouts/DashboardMain"
 import SubmitButton from "../../../../components/SubmitButton";
 import { useDropzone } from "react-dropzone";
 import ReactAudioPlayer from "react-audio-player";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const NewEpisode = () => {
@@ -15,6 +18,9 @@ const NewEpisode = () => {
 
     const [files, setFiles] = React.useState([]);
 
+    const [uploadedImage, setUpLoadedImage] = React.useState('')
+
+    const [startDate, setStartDate] = React.useState(new Date());
 
     const {getRootProps, getInputProps} = useDropzone(
         {accept: 'audio/*', noClick: true, noKeyboard: true, onDrop: acceptedFiles => {
@@ -31,7 +37,7 @@ const NewEpisode = () => {
     return(
         <div>
             <DashboardMain>
-            <section className="body-font bg-white shadow-sm hover:shadow-md rounded-sm">
+            <section className="body-font dark:bg-gray-900 bg-white shadow-sm hover:shadow-md rounded-sm">
                 <div className="flex mx-auto flex-wrap mb-20  p-2 px-40">
                     <ul
                         className="flex mb-0 flex-wrap pt-3 pb-4"
@@ -42,8 +48,8 @@ const NewEpisode = () => {
                             className={
                             "text-md  dark:hover:text-gray-300  font-medium inline-flex items-center sm:px-6 py-3 w-1/2 text-md sm:w-auto justify-center sm:justify-start border-b-2 border-gray-300 title-font bg-gray-50 leading-none  tracking-wider rounded-t" +
                             (openTab === 1
-                                ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white text-gray-600")
+                                ? "text-" + color + "-400 dark:bg-gray-800 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
+                                : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -61,8 +67,8 @@ const NewEpisode = () => {
                             className={
                             "text-md  dark:hover:text-gray-300  font-medium inline-flex items-center sm:px-6 py-3 w-1/2 text-md sm:w-auto justify-center sm:justify-start border-b-2 border-gray-300 title-font bg-gray-50 leading-none  tracking-wider rounded-t" +
                             (openTab === 2
-                                ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white  text-gray-600")
+                                ? "text-" + color + "-400 dark:bg-gray-800 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
+                                : "bg-white dark:bg-gray-900  text-gray-600 dark:text-gray-300")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -80,8 +86,8 @@ const NewEpisode = () => {
                             className={
                             "text-md  dark:hover:text-gray-300  font-medium inline-flex items-center sm:px-6 py-3 w-1/2 text-md sm:w-auto justify-center sm:justify-start border-b-2 border-gray-300 title-font bg-gray-50 leading-none  tracking-wider rounded-t" +
                             (openTab === 3
-                                ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white text-gray-600")
+                                ? "text-" + color + "-400 dark:bg-gray-800 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
+                                : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -100,8 +106,8 @@ const NewEpisode = () => {
                             className={
                             "dark:hover:text-gray-300  font-medium inline-flex items-center sm:px-6 py-3 w-1/2 text-md sm:w-auto justify-center sm:justify-start border-b-2 border-gray-300 title-font bg-gray-50 leading-none  tracking-wider rounded-t" +
                             (openTab === 4
-                                ? "text-" + color + "-400 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
-                                : "bg-white text-gray-600 ")
+                                ? "text-" + color + "-400 dark:bg-gray-800 dark:text-blue-400 text-blue-400 border-b-2 border-blue-400"
+                                : "bg-white dark:bg-gray-900 text-gray-600  dark:text-gray-300")
                             }
                             onClick={e => {
                             e.preventDefault();
@@ -122,41 +128,37 @@ const NewEpisode = () => {
                             <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                 <div className="relative">
                                     
-                                    <div className="container mx-auto max-w-screen-lg h-full">
+                                    <div className="container mx-auto max-w-screen-lg h-full overflow-hidden">
                                     
-                                    <article aria-label="File Upload Modal" className="relative h-full flex flex-col bg-white">
+                                    <article aria-label="File Upload Modal" className="relative overflow-hidden h-full flex flex-col bg-white dark:bg-gray-900">
                                 
-                                        <div className="h-full overflow-auto p-8 w-full flex flex-col">
+                                        <div className="h-full overflow-hidden p-8 w-full flex flex-col ">
                                             
                                             <div>
-                                                <label className="block font-medium text-gray-700">Audio file</label>
+                                                <label className="block font-medium text-gray-700 dark:text-gray-200">Audio file</label>
                                                 <div {...getRootProps({className: "mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed hover:border-green-400 transition duration-150 rounded-sm dropzone"})}>
                                                 <div className="space-y-1 text-center">
                                                     <MusicNoteOutline className="text-gray-400 w-12 h-12 mx-auto"/>
                                                     <div className="flex text-gray-600">
                                                     <label
                                                         htmlFor="file-upload"
-                                                        className="relative cursor-pointer bg-white rounded-sm font-medium text-blue-400 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                        className="relative cursor-pointer bg-white dark:bg-gray-900 rounded-sm font-medium text-blue-400 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                                     >
                                                         <span>Upload an audio file</span>
                                                         <input {...getInputProps()} />
                                                     </label>
-                                                    <p className="pl-1">or drag and drop</p>
+                                                    <p className="pl-1 dark:text-gray-300">or drag and drop</p>
                                                     </div>
-                                                    <p className="text-xs text-gray-500">MP3, OOG up to 10MB</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-300">MP3, OOG up to 10MB</p>
                                                 </div>
                                                 </div>
                                             </div>
 
-                                            <h1 className="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                                            <h1 className="pt-8 pb-3 font-semibold sm:text-lg text-gray-900 dark:text-gray-300">
                                             Preview
                                             </h1>
 
                                             <ul id="gallery" className="flex flex-1 flex-wrap -m-1">
-                                            {/* <li id="empty" className="h-full w-full text-center flex flex-col items-center justify-center">
-                                                <img className="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
-                                                <span className="text-small text-gray-500">No file selected</span>
-                                            </li> */}
                                             {files.map((file) => (
                                                 <ReactAudioPlayer
                                                 {...console.log(file.preview)}
@@ -180,12 +182,12 @@ const NewEpisode = () => {
                                     
                                 <div className="container mx-auto max-w-screen-lg h-full">
                                     
-                                    <article aria-label="File Upload Modal" className="relative h-full flex flex-col bg-white">
+                                    <article aria-label="File Upload Modal" className="relative h-full flex flex-col bg-white dark:bg-gray-900">
                                 
-                                        <div className="h-full overflow-auto p-8 w-full flex flex-col">
+                                        <div className="h-full overflow-hidden p-8 w-full flex flex-col">
                                             <div>
-                                                <label className="block font-medium text-gray-700">Cover photo</label>
-                                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-sm">
+                                                <label className="block font-medium text-gray-700 dark:text-gray-200">Cover photo</label>
+                                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 hover:border-green-500 transition duration-150 border-dashed rounded-sm">
                                                 <div className="space-y-1 text-center">
                                                     <svg
                                                     className="mx-auto h-12 w-12 text-gray-400"
@@ -204,27 +206,30 @@ const NewEpisode = () => {
                                                     <div className="flex text-gray-600">
                                                     <label
                                                         htmlFor="file-upload"
-                                                        className="relative cursor-pointer bg-white rounded-md font-medium text-blue-400 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                        className="relative cursor-pointer outline-none focus:ring=none bg-white dark:bg-gray-900 font-medium text-blue-400 hover:text-blue-500"
                                                     >
-                                                        <span>Upload a file</span>
-                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                        <span>Upload an image</span>
+                                                        <input onChange={(item) => {setUpLoadedImage(URL.createObjectURL(item.target.files[0]))}} id="file-upload" name="file-upload" type="file" className="sr-only" />
                                                     </label>
-                                                    <p className="pl-1">or drag and drop</p>
                                                     </div>
-                                                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-300">PNG, JPG, GIF up to 10MB</p>
                                                 </div>
                                                 </div>
                                             </div>
 
-                                            <h1 className="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                                            <h1 className="pt-8 pb-3 font-semibold sm:text-lg text-gray-900 dark:text-gray-300">
                                             Preview
                                             </h1>
 
                                             <ul id="gallery" className="flex flex-1 flex-wrap -m-1">
-                                            <li id="empty" className="h-full w-full text-center flex flex-col items-center justify-center">
-                                                <img className="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
-                                                <span className="text-small text-gray-500">No files selected</span>
+                                                {uploadedImage ? <img className="object-cover w-64 h-64" src={uploadedImage} alt="uploaded-img"/>
+                                                 :
+                                                 <li id="empty" className="h-full w-full text-center flex flex-col items-center justify-center">
+                                                    <img className="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                                                <span className="text-small text-gray-500 dark:text-gray-300">No cover art selected</span>
                                             </li>
+                                                 }
+                                            
                                             </ul>
                                         </div>
                                    </article>
@@ -234,7 +239,7 @@ const NewEpisode = () => {
                             </div>
                             <div className={openTab === 3 ? "block" : "hidden"} id="link3">
 
-                                <div className="relative">
+                                <div className="relative dark:text-gray-300">
                                     
                                     <p>Enter episode details</p>
 
@@ -244,7 +249,7 @@ const NewEpisode = () => {
                                                 <p className="mr-2 text-md">Title:</p>
                                             </div>
                                             <div className="w-full">
-                                                <input className="appearance-none block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="The Dee Podcast" type="text"/>
+                                                <input className="appearance-none dark:bg-transparent dark:border-gray-700 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="The Dee Podcast" type="text"/>
                                             </div>
                                         </div>
                                         <div className="flex items-center mt-2">
@@ -252,7 +257,7 @@ const NewEpisode = () => {
                                                 <p className="mr-2 text-md">Series:</p>
                                             </div>
                                             <div className="inline-block relative w-full">
-                                                <select className="appearance-none block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                                                <select className="appearance-none dark:bg-transparent dark:border-gray-700 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                                 <option>The Underdog </option>
                                                 </select>
                                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
@@ -266,7 +271,7 @@ const NewEpisode = () => {
                                                 <p className="mr-2 text-md">Season:</p>
                                             </div>
                                             <div className="inline-block relative w-full ml-6">
-                                                <select className="appearance-none block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                                                <select className="appearance-none dark:bg-transparent dark:border-gray-700 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -281,7 +286,7 @@ const NewEpisode = () => {
                                                 <p className="mr-2 text-md">Episode:</p>
                                             </div>
                                             <div className="inline-block relative w-full ml-2">
-                                                <select className="appearance-none block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                                                <select className="appearance-none dark:bg-transparent dark:border-gray-700 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                                 <option>12</option>
                                                 
                                                 </select>
@@ -297,7 +302,7 @@ const NewEpisode = () => {
                                                 <p className="mr-2 text-md">Description:</p>
                                             </div>
                                             <div className="w-full">
-                                                <textarea className="appearance-none h-20 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">Hello Everyone, welcome to the Dee Podcast. Here you will be inspired to become the best version of yourself - the man/woman that God created you to be. So, subscribe and let's vibe together.
+                                                <textarea className="appearance-none dark:bg-transparent dark:border-gray-700 h-20 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">Hello Everyone, welcome to the Dee Podcast. Here you will be inspired to become the best version of yourself - the man/woman that God created you to be. So, subscribe and let's vibe together.
                                                 </textarea>
                                             </div>
                                         </div>
@@ -308,7 +313,7 @@ const NewEpisode = () => {
                                         <p className="mr-2 text-md">Privacy:</p>
                                     </div>
                                     <div className="inline-block relative w-full">
-                                        <select className="appearance-none block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                                        <select className="appearance-none dark:bg-transparent dark:border-gray-700 block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         <option>Public</option>
                                         <option>Private</option>
                                         </select>
@@ -322,14 +327,14 @@ const NewEpisode = () => {
                             </div>
                             <div className={openTab === 4 ? "block" : "hidden"} id="link4">
 
-                                <div className="relative">
+                                <div className="relative dark:text-gray-200">
                                     
                                     <div className="flex items-center mt-2 mb-2">
                                             <div className="w-1/6">
                                                 <p className="mr-2 text-md">Date:</p>
                                             </div>
                                             <div className="w-full">
-                                                <input className="appearance-none block w-full text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" type="datetime"/>
+                                                <DatePicker className="w-full py-2 dark:bg-transparent outline-none border dark:border-gray-700 pl-2" selected={startDate} onChange={(date) => setStartDate(date)} />
                                             </div>
                                     </div>
 
