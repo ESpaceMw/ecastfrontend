@@ -90,7 +90,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
             {
               UserPreferences.map((value) => (
               <li className={`px-3 py-2 hover:bg-blue-400 dark:hover:bg-gray-800 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block text-gray-500 dark:text-gray-300 dark:hover:text-white hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <NavLink key={value.MenuTitle} exact to={value.LinkTo} className={`block text-gray-500 dark:text-gray-300 dark:hover:text-white hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="font-medium ml-4 text-md">{value.MenuTitle}</span>
@@ -110,7 +110,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
             {
               Podcasts.map((value) => (
               <li className={`px-3 py-2 hover:bg-blue-400 dark:hover:bg-gray-800 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block dark:text-gray-300 dark:hover:text-white text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <NavLink exact key={value.MenuTitle} to={value.LinkTo} className={`block dark:text-gray-300 dark:hover:text-white text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="text-md font-medium ml-4">{value.MenuTitle}</span>
@@ -127,7 +127,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
             {
               Analytics.map((value) => (
               <li className={`px-3 py-2 hover:bg-blue-400 dark:hover:bg-gray-800 hover:text-white rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
-              <NavLink exact to={value.LinkTo} className={`block dark:text-gray-300 dark:hover:text-white text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
+              <NavLink exact key={value.MenuTitle} to={value.LinkTo} className={`block dark:text-gray-300 dark:hover:text-white text-gray-500 hover:text-white transition duration-150 ${page === '' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <img src={value.Icon} className="w-5 h-5" alt={value.MenuTitle}/>
                   <span className="text-md font-medium ml-4">{value.MenuTitle}</span>

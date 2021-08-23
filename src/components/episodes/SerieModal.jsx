@@ -6,6 +6,7 @@ import { DotsHorizontal} from "heroicons-react"
 import MusicalNote from '../../icons/musical-note.png'
 import Love from '../../icons/like.png'
 import Chat from '../../icons/chat.png'
+import moment from "moment";
 
 const SerieModal  = ({title, published}) => {
 
@@ -41,7 +42,9 @@ const SerieModal  = ({title, published}) => {
         className="flex justify-between p-3 border-b dark:border-gray-700 dark:hover:bg-gray-800 border-gray-200 hover:bg-gray-100 transition duration-150">
             <div>
                 <h3 className="text-md dark:text-gray-200">{title}</h3>
-                <p className="text-sm mt-2 dark:text-gray-300 text-gray-500">{published}</p>
+                <p className="text-sm mt-2 dark:text-gray-300 text-gray-500">
+                  Began [{moment(published).format("DD-MM-YYYY h:mm:ss")}]
+                </p>
             </div>
             <button className="p-1 rounded-sm h-6 w-6 dark:text-gray-400">
                 <DotsHorizontal className="h-4 w-4"/>

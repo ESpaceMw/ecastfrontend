@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { ExclamationCircleOutline } from 'heroicons-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Link, useHistory } from 'react-router-dom'
 
@@ -44,6 +44,7 @@ const Login  = () => {
     }else{
       if(response === false){
         setOnLoading(false)
+        console.log(loginState)
         setShowError('Error validating your member details')
       }
     }

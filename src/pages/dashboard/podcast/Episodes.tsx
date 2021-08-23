@@ -7,44 +7,6 @@ import DashboardMain from "../../../components/layouts/DashboardMain"
 import EpisodeModal from '.././../../components/episodes/EpisodeModal.jsx'
 import Skeleton from "react-loading-skeleton"
 
-const episodes_ = [
-    {
-        name: 'S02E02',
-        title: 'The God of the Hills and Valleys',
-        published: 'Published 2 days ago',
-        time: '12:00 PM'
-    },
-    {
-        name: 'S02E03',
-        title: 'The Innovation Gap',
-        published: 'Published 3 days ago',
-        time: '09:11 AM'
-    }
-    ,
-    {
-        name: 'S02E04',
-        title: 'Technology and the African Mind',
-        published: 'Published a week ago',
-        time: '11:01 AM'
-    }
-]
-
-const series = [
-
-    {
-        title: 'Impact Goals [Season 1]',
-        time: 'Began 12 / 01 / 2021'
-    },
-    {
-        title: 'The Underdog',
-        time: 'Began 12 / 01 / 2021'
-    },
-    {
-        title: 'The Millennial Architecture ',
-        time: 'Began 12 / 01 / 2021'
-    },
-]
-
 const Episodes = () => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -100,7 +62,7 @@ const Episodes = () => {
                                             clip_art: string,
                                             listens: []
                                          }) => (
-                                        <EpisodeModal 
+                                        <EpisodeModal key={item.id}
                                             name={'S'+item.season+'E'+item.episode_number} 
                                             title={item.title} 
                                             published={item.created_at} 
@@ -147,9 +109,18 @@ const Episodes = () => {
                             </div>
 
                             <div className="p-3">
-                                {series.map((value) => (
-                                <SerieModal title={value.title} published={value.time}/>
-                                ))}
+                                {!isLoading ? episodes.map((value) => (
+                                <div key={value.id}>
+                                    <SerieModal title={value.title} published={value.created_at}/>
+                                </div>
+                                )) : <div
+                                    className="flex justify-between p-3 border-b dark:border-gray-700 dark:hover:bg-gray-800 border-gray-200 hover:bg-gray-100 transition duration-150">
+                                        <div className="flex flex-col">
+                                            <Skeleton height={20} width={100}/>
+                                            <Skeleton className="mt-2" height={10} width={30}/>
+                                        </div>
+                                        <Skeleton height={10} width={30}/>
+                                    </div>}
                             </div>
                             </div>
 
