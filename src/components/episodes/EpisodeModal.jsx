@@ -1,18 +1,24 @@
 import { Transition } from "@headlessui/react";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Logo from '../../media/logo.png'
 import { DotsHorizontal} from "heroicons-react"
 import ReactAudioPlayer from 'react-audio-player';
 import MusicalNote from '../../icons/musical-note.png'
-import SaveYourTears from '../../media/01 Save Your Tears - (SongsLover.com).mp3'
+import moment from 'moment'
+import Audio from "react-loading-icons/dist/components/audio";
 
-const EpidoseModal  = ({name, title, published, time}) => {
+const EpidoseModal  = ({
+  name, title, published, time, 
+  description, audio_file, seriesCoverArt, 
+  seriesEpisode, seriesName, seriesPublishedDate, listens}) => {
 
   const [searchOpen, setSearchOpen] = useState(false);
   
   const trigger = useRef(null);
+
   const searchContent = useRef(null);
+
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -45,11 +51,11 @@ const EpidoseModal  = ({name, title, published, time}) => {
             </p>
             <div className="ml-3">
                 <h3 className="text-gray-900 text-md dark:text-gray-300">{title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-300">{published}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-300">Published on {new Date(published).toDateString()}</p>
             </div>
         </div>
         <p className="text-sm dark:text-gray-300">
-            {time}
+            {moment.utc(time).local().fromNow()}
         </p>
     </Link>
 
@@ -82,21 +88,23 @@ const EpidoseModal  = ({name, title, published, time}) => {
           <div className="p-3">
             <div className="flex justify-between">
               <div className="flex">
-                <img src={Logo} className="w-32 h-32 border rounded-sm border-gray-200 dark:border-gray-700" alt="serie-cover-art"/>
+                <div>
+                  {isPlaying ? <Audio className="bg-blue-400 dark:bg-transparent p-2 h-32 w-32"/> : <img src={"http://127.0.0.1:8000/storage/podcasts/"+seriesCoverArt} className="w-32 h-32 border rounded-sm border-gray-200 dark:border-gray-700" alt="serie-cover-art"/>}
+                </div>
                 <div className="ml-3">
                   <h3 className="font-semibold text-lg dark:text-gray-300">
-                    Impact Goals 
+                    {seriesName} 
                   </h3>
                   <h2 className="font-medium text-gray-500 dark:text-gray-300 text-md">
-                    Impact Goals [S1, E4]
+                    {seriesEpisode}
                   </h2>
                   <p className="dark:text-gray-300">
-                    Published [5/4/2021]
+                    Published [{moment(seriesPublishedDate).format("DD-MM-YYYY h:mm:ss")}]
                   </p>
-                  <div className="w-full flex justify-around">
+                  <div className="w-full">
                     <div className="flex mt-2 mr-2">
                       <img src={MusicalNote} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="dark:text-gray-300">22043 Listens</p>
+                      <p className="dark:text-gray-300">{listens} Listens</p>
                     </div>
                   </div>
                 </div>
@@ -109,20 +117,17 @@ const EpidoseModal  = ({name, title, published, time}) => {
             </div>
             <div className="justify-center">
               <p className="text-sm mb-2 mt-2 dark:text-gray-300">
-                Impact Goals is an amazing series premiered on 12 - 04 - 21 by the renowned
-                Entrepreneur, Speaker, Gospel Minister and Philaphropist, Nhlanhla Dhaka who 
-                is also the author of this Podcast. The goal of this series to equip all visionaries 
-                and architects with spectacular knowledge on coming up with not only big 
-                goals, but great goals full of impact. So, buy yourself this great content, and 
-                have you and yourself on the path of leaving behind a great legacy.
+                {description}
               </p>
               
             </div>
             <div className="text-center">
               <ReactAudioPlayer
-                src={SaveYourTears}
+                src={"http://127.0.0.1:8000/storage/podcasts/"+audio_file}
                 autoPlay={false}
                 controls
+                onPlay={() => {setIsPlaying(true)}}
+                onPause={() => {setIsPlaying(false)}}
                 className="dark:bg-gray-900 text-blue-400"
                 style={{ width: '100%', color: 'blue' }}
               />
