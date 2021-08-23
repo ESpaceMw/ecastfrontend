@@ -43,9 +43,11 @@ function UserMenu() {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >
-        <img className="w-8 h-8 rounded-full object-cover border-2 border-yellow-500" src={UserAvatar} width="32" height="32" alt="User" />
+        {JSON.parse(localStorage.getItem('basic_info')).map((item) => (
+        <img className="w-8 h-8 rounded-full object-cover border-2 border-yellow-500" src={'http://127.0.0.1:8000/storage/profile/'+item.clip_art} width="32" height="32" alt="User" />
+        ))}
         <div className="flex items-center truncate">
-          <span className="w-20 ml-2 text-sm font-medium dark:group-hover:text-gray-400 group-hover:text-gray-800 dark:text-gray-300 truncate">Nhlahla dhaka</span>
+          <span className="w-20 ml-2 text-sm font-medium dark:group-hover:text-gray-400 group-hover:text-gray-800 dark:text-gray-300 truncate">{localStorage.getItem('username')}</span>
           <svg className="w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-300" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
@@ -68,7 +70,7 @@ function UserMenu() {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200 dark:border-gray-700">
-            <div className="font-medium text-gray-800 truncate dark:text-gray-200">Nhlanhla dhaka</div>
+            <div className="font-medium text-gray-800 truncate dark:text-gray-200">{localStorage.getItem('username')}</div>
             <div className="text-xs text-gray-500 italic dark:text-gray-300">eCast Member</div>
           </div>
           <ul>

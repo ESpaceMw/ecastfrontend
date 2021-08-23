@@ -1,14 +1,17 @@
-import { Camera, ChevronDown, Plus } from "heroicons-react"
-import { useState, useEffect, Key } from "react"
+import { Camera } from "heroicons-react"
+import { useState, useEffect, ChangeEvent } from "react"
 import Skeleton from "react-loading-skeleton"
 import { Link } from "react-router-dom"
 import ContactListItem from "../../../components/ContactListItem"
-import CountryListItem from "../../../components/CountryListItem"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
 const Contacts = () => {
 
     const [contacts, setContacts] = useState<any[]>([])
+
+    const [filteredData,setFilteredData] = useState(contacts);
+
+    const [name, setName] = useState('');
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -25,6 +28,7 @@ const Contacts = () => {
         }).then((data) => {
             setIsLoading(false)
             setContacts(data.subscribers)
+            setFilteredData(data.subscribers)
             console.log(data.subscribers);
             
         }).catch((err) => {
@@ -32,6 +36,23 @@ const Contacts = () => {
             console.log(err)
         })
     }, [])
+
+    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+
+        let value = event.target.value.toLowerCase();
+        
+
+        if (value !== '') {
+        const results = contacts.filter((user) => {
+            return user.first_name.toLowerCase().startsWith(value.toLowerCase());
+        });
+        setFilteredData(results);
+        } else {
+        setFilteredData(contacts);
+        }
+
+        setName(value);
+    }
 
     return(
         <div className="dark:bg-gray-800">
@@ -47,14 +68,20 @@ const Contacts = () => {
                                 <input
                                     id="modal-search" 
                                     className="w-full dark:bg-transparent rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
-                                    type="search" 
-                                    placeholder="Search contact" />
-                            </div>
+                                    type="text"
+                                    value={name}
+                                    onChange={(event) =>handleSearch(event)}
+                                    placeholder="Search contact by first name" />
+                                {name !== '' ? <Link to="#" onClick={() => {
+                                    setName('') 
+                                    setFilteredData(contacts)}} className="font-semibold text-blue-400">Clear</Link> : ''}
+                                </div>
+                                
                             <div className="mt-3">
                                 <h3 className="text-md uppercase">All contacts</h3>
 
                                 {!isLoading ?
-                                    contacts.map((item) => (
+                                    filteredData.map((item) => (
                                     <ContactListItem 
                                         key={item.id}
                                         imageUrl={item.basic_info.clip_art} 
@@ -73,9 +100,7 @@ const Contacts = () => {
                                                         />
                                                     {
                                                     !isTyping ? 
-                                                    <div className="bg-gray-100 rounded-full w-8 h-8 ml-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
-                                                        <Plus className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
-                                                    </div> : <p className="font-semibold text-blue-400">Send</p>
+                                                    '' : <Link to="#" className="font-semibold text-blue-400">Send</Link>
                                                     }
                                                 </div>
                                             </div>
@@ -84,13 +109,14 @@ const Contacts = () => {
                                     Array(9)
                                     .fill(9)
                                     .map((index) => (
-                                        <div key={index}>
-                                            <div className="px-10 py-4 flex">
+                                        <div key={index} className="flex justify-between">
+                                        <div className="px-10 py-4 flex">
                                             <Skeleton height={40} width={40}
                                              style={{ borderRadius: 200 }}
                                             />
                                             <Skeleton height={20} width={100} className="ml-3"/>
                                         </div>
+                                        <Skeleton style={{ borderRadius: 200 }} height={20} width={20} className="ml-3"/>
                                         </div>
                                     ))
                                 )

@@ -30,6 +30,8 @@ class LoginService{
 
             localStorage.setItem('basic_info_id', response.data.basic_info.id)
 
+            localStorage.setItem('basic_info', JSON.stringify(response.data.basic_info))
+
             localStorage.setItem('channel_id', response.data.channel.id)
 
             return response.data
