@@ -1,22 +1,38 @@
+import { Camera, ChevronDown, Plus } from "heroicons-react"
+import { useState, useEffect, Key } from "react"
+import Skeleton from "react-loading-skeleton"
 import { Link } from "react-router-dom"
+import ContactListItem from "../../../components/ContactListItem"
+import CountryListItem from "../../../components/CountryListItem"
 import DashboardMain from "../../../components/layouts/DashboardMain"
-import Alexander from '../../../media/16075282192866.jpg'
-import Gowa from '../../../media/DrBrianMcGowanHeadshot-crop-1024x1024.jpg'
-
-const Subscribers = [
-    {
-        name: 'Alexander Macqueen',
-        avatar: Alexander
-    },
-    {
-        name: 'Alnord Phiri',
-        avatar: Gowa
-    }
-]
 
 const Contacts = () => {
 
-    
+    const [contacts, setContacts] = useState<any[]>([])
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    const [isTyping, setIsTyping] = useState(false);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/subscription/subscribers',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ channel_id: 7 })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsLoading(false)
+            setContacts(data.subscribers)
+            console.log(data.subscribers);
+            
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
+        })
+    }, [])
+
     return(
         <div className="dark:bg-gray-800">
             <DashboardMain>
@@ -37,20 +53,47 @@ const Contacts = () => {
                             <div className="mt-3">
                                 <h3 className="text-md uppercase">All contacts</h3>
 
-                                {
-                                    Subscribers.map((item) => (
-                                    
-                                    <div>
-                                    <div className="px-10 py-4 flex">
-                                    <img 
-                                    src={item.avatar} 
-                                    alt="contact-user"
-                                    className="rounded-full w-10 h-10 object-cover object-center hover:opacity-75 transition duration-150"
-                                    />
-                                    <Link to="#" className="text-md text-center ml-3 hover:text-gray-700">{item.name}</Link>
-                                </div>
-                                </div>
-                                ))
+                                {!isLoading ?
+                                    contacts.map((item) => (
+                                    <ContactListItem 
+                                        key={item.id}
+                                        imageUrl={item.basic_info.clip_art} 
+                                        contactName={item.first_name+' '+item.last_name}>
+                                            <div className="flex-none h-12 pl-8 mb-4">
+                                                <p className="mt-1 mb-1 text-blue-400 font-semibold">Say hello👋 to {item.first_name}</p>
+                                                <div className="flex border dark:border-gray-700 px-3 py-3 mb-5">
+                                                    <div className="bg-gray-100 rounded-full w-8 h-8 mr-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
+                                                        <Camera className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
+                                                    </div>
+                                                    <input
+                                                        className="w-full dark:bg-transparent dark:text-gray-200 rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                                                        type="text" 
+                                                        onChange={(e)=>{e.target.value.length !== 0 ? setIsTyping(true) : setIsTyping(false)}}                                                     
+                                                        placeholder="Type your message here" 
+                                                        />
+                                                    {
+                                                    !isTyping ? 
+                                                    <div className="bg-gray-100 rounded-full w-8 h-8 ml-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
+                                                        <Plus className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
+                                                    </div> : <p className="font-semibold text-blue-400">Send</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                    </ContactListItem>
+                                )) : (
+                                    Array(9)
+                                    .fill(9)
+                                    .map((index) => (
+                                        <div key={index}>
+                                            <div className="px-10 py-4 flex">
+                                            <Skeleton height={40} width={40}
+                                             style={{ borderRadius: 200 }}
+                                            />
+                                            <Skeleton height={20} width={100} className="ml-3"/>
+                                        </div>
+                                        </div>
+                                    ))
+                                )
                                 }
                                 
                             </div>
