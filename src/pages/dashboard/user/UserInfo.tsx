@@ -8,6 +8,7 @@ import { XIcon } from "@heroicons/react/outline";
 import SubscribeModal from "../../../components/subscription/SubscribeModal";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import JsonParse from "../../../utils/JsonParse";
 
 const UserInfo = () => {
 
@@ -16,6 +17,12 @@ const UserInfo = () => {
     const color: string = 'blue'
 
     const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+
+    const basicInfo = JsonParse(localStorage.getItem('basic_info'))
+
+    console.log('====================================');
+    console.log(basicInfo);
+    console.log('====================================');
     
     return(
         <div className="dark:bg-gray-800">
@@ -88,6 +95,12 @@ const UserInfo = () => {
                         <div className="px-4 flex-auto">
                         <div className="tab-content tab-space">
                             <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                                {basicInfo.map((user: { 
+                                    tagline: string | number | readonly string[] | undefined, 
+                                    title: string,
+                                    clip_art: string,
+                                    description: string
+                                }) => (
                                 <div className="relative">
                                         
                                     <p className="mt-2 dark:text-gray-200">
@@ -96,10 +109,10 @@ const UserInfo = () => {
 
                                 <div className="flex items-stretch mt-2">
                                     <div className="flex-0">
-                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200 dark:text-gray-200">Podcast url:</p>
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Podcast url:</p>
                                     </div>
                                     <div className="flex-0">
-                                        <a href="#" className="text-blue-400 text-md truncate">https://www.ecast.espacemw.com/podcasts/dhakanhlanhla</a>
+                                        <a href="#" className="text-blue-400 text-md truncate">https://www.ecast.espacemw.com/podcasts/{localStorage.getItem('username')}</a>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
@@ -107,7 +120,9 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Title:</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="The Dee Podcast" type="text"/>
+                                        <input 
+                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" 
+                                        value={user.title} type="text"/>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
@@ -115,7 +130,8 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Tag line:</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="Become the best version of yourself" type="text"/>
+                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1"
+                                         value={user.tagline} type="text"/>
                                     </div>
                                 </div>
                                 <div className="md:flex md:items-center mt-2">
@@ -124,7 +140,7 @@ const UserInfo = () => {
                                         <label className="block text-gray-500 font-bold">
                                             <input className="mr-2 leading-tight" type="checkbox"/>
                                             <span className="text-md dark:text-gray-200">
-                                                Display Title and Tagline in the page masgthead
+                                                Display Title and Tagline in the page msgthead
                                             </span>
                                         </label>
                                     </div>
@@ -134,7 +150,9 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Cover art</p>
                                     </div>
                                     <div className="w-full flex w-ull">
-                                        <img className="rounded-sm hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" src={ClipArt} alt="user-clip-art"/>
+                                        <img className="rounded-sm hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" 
+                                        src={"http://127.0.0.1:8000/storage/profile/"+user.clip_art} 
+                                        alt="user-clip-art"/>
                                         <div>
                                             <p className="ml-3 text-gray-700 text-md dark:text-gray-200">Choose your photo from Media Library:</p>
                                             <input className="appearance-none ml-3 mt-2 block w-full dark:text-gray-300 text-gray-700 text-md border dark:border-gray-700 border-gray-300 rounded-sm py-1 px-1 leading-tight focus:outline-none focus:ring-1" type="file"/>
@@ -146,7 +164,7 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Description:</p>
                                     </div>
                                     <div className="w-full">
-                                        <textarea className="dark:text-gray-300 dark:bg-transparent dark:border-gray-700 appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">Hello Everyone, welcome to the Dee Podcast. Here you will be inspired to become the best version of yourself - the man/woman that God created you to be. So, subscribe and let's vibe together.
+                                        <textarea className="dark:text-gray-300 dark:bg-transparent dark:border-gray-700 appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">{user.description}
                                         </textarea>
                                     </div>
                                 </div>
@@ -182,6 +200,7 @@ const UserInfo = () => {
                                 </div>
 
                                 </div>
+                                ))}
                             </div>
                             <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                             <div className="relative">
