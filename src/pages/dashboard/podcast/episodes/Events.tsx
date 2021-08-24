@@ -4,6 +4,7 @@ import DashboardMain from "../../../../components/layouts/DashboardMain"
 import GirlWithBeats from '../../../../media/soundtrap-d0sXdsCnhF8-unsplash.jpg'
 import Growth from '../../../../media/business-success-growing-growth-increase-up-concept-wooded-cube-block-with-word-growth_20693-206.jpg'
 import moment from "moment"
+import Skeleton from "react-loading-skeleton"
 
 const Events = () => {
 
@@ -77,7 +78,7 @@ const Events = () => {
                    </div>
                </div>
                <div className="pb-10">
-                   {events.map((event) => (
+                   {!isLoading ? events.map((event) => (
                        <div key={event.id} className="border rounded-sm dark:border-gray-700">
                        <div className="p-3 h-72 bg-cover bg-gradient-to-r from-gray-600 via-gray-300 to-white bg-opacity-10" style={{ backgroundImage: `url('http://127.0.0.1:8000/storage/events/${event.cover_art}')` }}>
                            <p className="text-white">Published {moment.utc(event.created_at).local().fromNow()}</p>
@@ -94,7 +95,27 @@ const Events = () => {
                            </Link>
                        </div>
                     </div>
-                   ))} 
+                   )) : (
+                       Array(9)
+                       .fill(9)
+                       .map((item) => (
+                           <>
+                           <div key={item} className="mb-5 border rounded-sm dark:border-gray-700">
+                                <div className="p-3 h-72 bg-cover bg-gradient-to-r from-gray-600 via-gray-300 to-white bg-opacity-10">
+                                    <Skeleton height={20} width={50}/>
+                                </div>
+                                <p className="p-3 dark:text-gray-300">
+                                    <Skeleton height={80} width={600}/>
+                                </p>
+                                <div className="flex justify-between mb-5 pl-3 pr-3">
+                                   <Skeleton height={20} width={50}/>
+                                   <Skeleton height={20} width={50}/> 
+                                </div>
+                                </div>
+                           </>
+                       ))
+                   )
+                } 
                </div>
             </div>
           </DashboardMain>
