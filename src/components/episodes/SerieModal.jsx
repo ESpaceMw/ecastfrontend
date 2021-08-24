@@ -76,16 +76,16 @@ const SerieModal  = ({title, published}) => {
         leaveStart="opacity-100 translate-y-0"
         leaveEnd="opacity-0 translate-y-4"
       >
-        <div className="bg-white overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
+        <div className="bg-white dark:bg-gray-900 dark:text-gray-300 overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
           <div className="p-3">
             <div className="flex justify-between">
               <div className="flex">
-                <img src={Logo} className="w-32 h-32 border rounded-sm border-gray-200" alt="serie-cover-art"/>
+                <img src={Logo} className="w-32 h-32 border rounded-sm dark:border-gray-700 border-gray-200" alt="serie-cover-art"/>
                 <div className="ml-3">
                   <h3 className="font-semibold text-lg">
                     Impact Goals 
                   </h3>
-                  <h2 className="font-medium text-gray-500 text-md">
+                  <h2 className="font-medium text-gray-500 dark:text-gray-300 text-md">
                     Season 1
                   </h2>
                   <p>
@@ -101,17 +101,17 @@ const SerieModal  = ({title, published}) => {
                     </div>
                     <div className="flex mt-2 mr-2">
                       <img src={Love} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="">22043 Listens</p>
+                      <p className="">22043 Likes</p>
                     </div>
                     <div className="flex mt-2 mr-2">
                       <img src={Chat} className="w-4 h-4 mr-2 mt-1" alt="music-note"/>
-                      <p className="">22043 Listens</p>
+                      <p className="">22043 Comments</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div>
-                <button className="bg-gray-100 p-1 rounded-sm">
+                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
                   <DotsHorizontal className="h-4 w-4"/>
                 </button>
               </div>
