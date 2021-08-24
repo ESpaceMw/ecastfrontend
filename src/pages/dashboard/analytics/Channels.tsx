@@ -1,14 +1,71 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom"
+
 import DashboardMain from "../../../components/layouts/DashboardMain"
-import Engange from "../../../media/s2e9-engaging-influencers-LJnEWBfbpMj-sta84Bz7q3b.500x500.png"
-import Growth from '../../../media/Market-Growth-scaled.jpg'
-import Vincent from '../../../media/cory-vincent-NNDDi-UmEEk-unsplash.jpg'
-import { Popover, Transition } from "@headlessui/react"
-import { UserGroup, User, Microphone, ArrowRight } from "heroicons-react"
-import { Fragment } from "react"
+
+import { 
+    Popover, 
+    Transition
+ } from "@headlessui/react"
+
+import { 
+    UserGroup, 
+    User, 
+    Microphone, 
+    ArrowRight
+ } from "heroicons-react"
+
+import { 
+    ChangeEvent,
+    Fragment, 
+    useEffect, 
+    useState } from "react"
+
+import Skeleton from "react-loading-skeleton"
 
 const Channels = () => {
+
+    const [channels, setChannels] = useState<any[]>([])
+
+    const [filteredData,setFilteredData] = useState(channels);
+
+    const [name, setName] = useState('');
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/channels/get',{
+            method: 'get',
+            headers: {'Content-Type':'application/json'}
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsLoading(false)
+            setChannels(data.channels)
+            setFilteredData(data.channels)
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
+        })
+    }, [])
+
+    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+
+        let value = event.target.value.toLowerCase();
+        
+
+        if (value !== '') {
+        const results = channels.filter((item) => {
+            return item.name.toLowerCase().startsWith(value.toLowerCase());
+        });
+        setFilteredData(results);
+        } else {
+        setFilteredData(channels);
+        }
+
+        setName(value);
+    }
 
     return(
         <div className="dark:bg-gray-800">
@@ -26,150 +83,151 @@ const Channels = () => {
                         </svg>
                         <input
                             id="modal-search" 
-                            className="w-full dark:bg-transparent dark:text-gray-300 rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
-                            type="search" 
-                            placeholder="Search for a channel" />
-                    </div>
+                            className="w-full dark:text-gray-300 dark:bg-transparent rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                            type="text"
+                            value={name}
+                            onChange={(event) =>handleSearch(event)}
+                            placeholder="Search contact by first name" />
+                        {name !== '' ? <Link to="#" onClick={() => {
+                            setName('') 
+                            setFilteredData(channels)}} className="font-semibold text-blue-400">Clear</Link> : ''}
+                        </div>
                     <div className="-my-8 divide-y-2 divide-gray-100 dark:divide-gray-700">
-                    <div className="py-8 flex flex-wrap md:flex-nowrap">
-                        <Link to="#">
-                            <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col mr-5">
-                                <Popover>
-                                    {({ open }) => (
-                                    <>
-                                      
-                                            
-                                    <Popover.Button>
-                                            <img src={Engange} alt="channel" className="w-full"/>
-                                    </Popover.Button>
-                                      
-                                      <Transition
-                                        show={open}
-                                        as={Fragment}
-                                        enter="transition ease-out duration-200"
-                                        enterFrom="opacity-0 translate-y-1"
-                                        enterTo="opacity-100 translate-y-0"
-                                        leave="transition ease-in duration-150"
-                                        leaveFrom="opacity-100 translate-y-0"
-                                        leaveTo="opacity-0 translate-y-1"
-                                        >
-                                        <Popover.Panel
-                                        static>
-                                           <div className="absolute mt-0 bg-white dark:bg-gray-800 px-4 py-4 w-72 shadow rounded cursor-default z-10">
-                                            <div className="flex space-x-3">
-                                            <div className="flex flex-shrink-0">
-                                                <img src={Engange} alt="channel-cover-art" className="object-cover h-16 w-16 rounded-full"/>
-                                            </div>
-                                            <div className="flex flex-col space-y-2">
-                                                <div className="font-semibold">
-                                                <a href="#" className="hover:underline dark:text-gray-300">
-                                                    The Dee Podcast
-                                                </a>
+                    
+                     {!isLoading ?
+                         filteredData.map((channel: {
+                             subscribers: [],
+                             id: string,
+                             name: string,
+                             description: string,
+                             episodes: [],
+                             cover_art: string
+                         }) => (
+                            <div key={channel.id} className="py-8 flex flex-wrap md:flex-nowrap">
+                            <Link to="#">
+                                <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col mr-5">
+                                    <Popover>
+                                        {({ open }) => (
+                                        <>
+                                        
+                                                
+                                        <Popover.Button>
+                                                <img src={'http://127.0.0.1:8000/storage/channels/'+channel.cover_art} alt="channel" className="w-full"/>
+                                        </Popover.Button>
+                                        
+                                        <Transition
+                                            show={open}
+                                            as={Fragment}
+                                            enter="transition ease-out duration-200"
+                                            enterFrom="opacity-0 translate-y-1"
+                                            enterTo="opacity-100 translate-y-0"
+                                            leave="transition ease-in duration-150"
+                                            leaveFrom="opacity-100 translate-y-0"
+                                            leaveTo="opacity-0 translate-y-1"
+                                            >
+                                            <Popover.Panel
+                                            static>
+                                            <div className="absolute mt-0 bg-white dark:bg-gray-800 px-4 py-4 w-72 shadow rounded cursor-default z-10">
+                                                <div className="flex space-x-3">
+                                                <div className="flex flex-shrink-0">
+                                                    <img src={'http://127.0.0.1:8000/storage/channels/'+channel.cover_art} alt="channel-cover-art" className="object-cover h-16 w-16 rounded-full"/>
                                                 </div>
-                                                <div className="flex justify-start items-center space-x-2">
-                                                <div>
-                                                    <UserGroup className="w-5 h-5 text-gray-600 dark:text-gray-400"/>
+                                                <div className="flex flex-col space-y-2">
+                                                    <div className="font-semibold">
+                                                    <a href="#" className="hover:underline dark:text-gray-300">
+                                                        {channel.name}
+                                                    </a>
+                                                    </div>
+                                                    <div className="flex justify-start items-center space-x-2">
+                                                    <div>
+                                                        <UserGroup className="w-5 h-5 text-gray-600 dark:text-gray-400"/>
+                                                    </div>
+                                                    <div className="w-auto text-sm leading-none dark:text-gray-400">
+                                                        <small>
+                                                            {channel.subscribers.length} <span className="text-black font-semibold dark:text-gray-400">Subscribers</span>
+                                                        </small>
+                                                    </div>
+                                                    </div>
+                                                    <div className="flex justify-start items-center space-x-2">
+                                                    <div>
+                                                        <Microphone className="w-5 h-5 text-gray-600 dark:text-gray-400"/>
+                                                    </div>
+                                                    <div className="w-auto text-sm leading-none dark:text-gray-400">
+                                                        <small>
+                                                            {channel.episodes.length} <span className="text-black dark:text-gray-400 font-semibold">Podcasts</span>
+                                                        </small>
+                                                    </div>
+                                                    </div>
                                                 </div>
-                                                <div className="w-auto text-sm leading-none dark:text-gray-400">
-                                                    <small>
-                                                        173 <span className="text-black font-semibold dark:text-gray-400">Subscribers</span>
-                                                    </small>
+                                                </div>
+                                                <div className="flex space-x-1 mt-2">
+                                                <div className="sm:w-1/2">
+                                                    <a href="#" className="text-xs text-blue-400 hover:bg-opacity-60 font-semibold flex items-center justify-center px-3 py-2 bg-blue-300 dark:bg-gray-900 bg-opacity-50">
+                                                        Subscribe 
+                                                    <div className="ml-1">
+                                                        <ArrowRight className="w-3 h-3"/>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                                <div className="w-auto">
+                                                    <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
+                                                    <div className="mr-1">
+                                                        <User className="w-4 h-4 dark:text-gray-400 dak"/>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                                <div className="w-auto">
+                                                    <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
+                                                    <div className="mr-1">
+                                                        <svg className="w-4 h-4 dark:text-gray-400 dak" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                                
+                                                <div className="w-auto">
+                                                    <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
+                                                    <div className="mr-1">
+                                                        <svg className="w-4 h-4 dark:text-gray-400 dak" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                                                    </div>
+                                                    </a>
                                                 </div>
                                                 </div>
-                                                <div className="flex justify-start items-center space-x-2">
-                                                <div>
-                                                    <Microphone className="w-5 h-5 text-gray-600 dark:text-gray-400"/>
-                                                </div>
-                                                <div className="w-auto text-sm leading-none dark:text-gray-400">
-                                                    <small>
-                                                        12 <span className="text-black dark:text-gray-400 font-semibold">Podcasts</span>
-                                                    </small>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div className="flex space-x-1 mt-2">
-                                            <div className="sm:w-1/2">
-                                                <a href="#" className="text-xs text-blue-600 hover:bg-opacity-60 font-semibold flex items-center justify-center px-3 py-2 bg-blue-300 dark:bg-gray-900 bg-opacity-50">
-                                                    Subscribe 
-                                                <div className="ml-1">
-                                                    <ArrowRight className="w-3 h-3"/>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            <div className="w-auto">
-                                                <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
-                                                <div className="mr-1">
-                                                    <User className="w-4 h-4 dark:text-gray-400 dak"/>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            <div className="w-auto">
-                                                <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
-                                                <div className="mr-1">
-                                                    <svg className="w-4 h-4 dark:text-gray-400 dak" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            
-                                            <div className="w-auto">
-                                                <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
-                                                <div className="mr-1">
-                                                    <svg className="w-4 h-4 dark:text-gray-400 dak" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            </div>
-                                        </div> 
-                                        </Popover.Panel>
-                                        </Transition>
-                                    </>
-                                    )}
-                                </Popover>
+                                            </div> 
+                                            </Popover.Panel>
+                                            </Transition>
+                                        </>
+                                        )}
+                                    </Popover>
+                                </div>
+                            </Link>
+                            
+                            <div className="md:flex-grow">
+                            <h2 className="text-lg font-semibold title-font mb-2 dark:text-gray-200">{channel.name}</h2>
+                            <p className="leading-relaxed dark:text-gray-300">{channel.description}</p>
+                            <Link to="#" className="text-white transition duration-150 hover:bg-blue-500 bg-blue-400 rounded-sm py-2 px-5 inline-flex items-center mt-4">Subscribe
+                                <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                                </svg>
+                            </Link>
                             </div>
-                        </Link>
-                        
-                        <div className="md:flex-grow">
-                        <h2 className="text-lg font-semibold title-font mb-2 dark:text-gray-200">The Dee Podcast</h2>
-                        <p className="leading-relaxed text-gray-300">Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha lumbersexual pork belly polaroid hoodie portland craft beer.</p>
-                        <Link to="#" className="text-white transition duration-150 hover:bg-blue-500 bg-blue-400 rounded-sm py-2 px-5 inline-flex items-center mt-4">Subscribe
-                            <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </Link>
-                        </div>
-                    </div>
-                    <div className="py-8 flex flex-wrap md:flex-nowrap">
-                        <div style={{ backgroundImage: `url(${Growth})` }}
-                         className="md:w-64 md:mb-0 mb-6 flex-shrink-0 bg-cover flex flex-col mr-5">
-                        </div>
-                        <div className="md:flex-grow">
-                        <h2 className="text-lg font-semibold title-font mb-2">Market Place Icon</h2>
-                        <p className="leading-relaxed">Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha lumbersexual pork belly polaroid hoodie portland craft beer.</p>
-                        <Link to="#" className="text-white transition duration-150 hover:bg-blue-500 bg-blue-400 rounded-sm py-2 px-5 inline-flex items-center mt-4">Subscribe
-                            <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </Link>
-                        </div>
-                    </div>
-                    <div className="py-8 flex flex-wrap md:flex-nowrap">
-                        <div style={{ backgroundImage: `url(${Vincent})` }}
-                         className="md:w-64 md:mb-0 mb-6 bg-cover flex-shrink-0 flex flex-col mr-5">
-                        </div>
-                        <div className="md:flex-grow">
-                        <h2 className="text-lg font-semibold title-font mb-2">The World is Ending🔥</h2>
-                        <p className="leading-relaxed">Glossier echo park pug, church-key sartorial biodiesel vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf moon party messenger bag selfies, poke vaporware kombucha lumbersexual pork belly polaroid hoodie portland craft beer.</p>
-                        <Link to="#" className="text-white transition duration-150 hover:bg-blue-500 bg-blue-400 rounded-sm py-2 px-5 inline-flex items-center mt-4">Subscribe
-                            <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </Link>
-                        </div>
-                    </div>
+                            </div>
+                         )) : (
+                             Array(9)
+                             .fill(9)
+                             .map((index => (
+                                 <div key={index} className="py-8 flex">
+                                 <Skeleton width={200} height={200}/>
+                                 <div className="ml-3 spac-x-4 flex flex-col">
+                                     <Skeleton width={200} height={40}/>
+                                     <Skeleton width={100} height={30}/>
+                                     <Skeleton width={50} height={20}/>
+                                 </div>
+                            </div>
+                             )))
+                         )
+                     }
+                    
                     </div>
                 </div>
                 </section>
