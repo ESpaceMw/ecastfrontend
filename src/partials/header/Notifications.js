@@ -1,16 +1,31 @@
-import { Bell } from 'heroicons-react';
-import React, { useState, useRef, useEffect } from 'react';
+import { Bell,ExclamationCircleOutline } from 'heroicons-react';
+
+import { 
+  useState, 
+  useRef, 
+  useEffect 
+} from 'react';
+
 import { Link } from 'react-router-dom';
+
 import Transition from '../../utils/Transition';
+
+import moment from 'moment';
+
+import Skeleton from 'react-loading-skeleton';
 
 function Notifications() {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef(null);
+
   const dropdown = useRef(null);
 
-  // close on click outside
+  const [isLoading, setIsLoading] = useState(true)
+
+  const [alerts, setAlerts] = useState([])
+
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
@@ -20,7 +35,7 @@ function Notifications() {
     return () => document.removeEventListener('click', clickHandler);
   });
 
-  // close if the esc key is pressed
+  
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
       if (!dropdownOpen || keyCode !== 27) return;
@@ -29,6 +44,24 @@ function Notifications() {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/alerts/get-alerts',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsLoading(false)
+            setAlerts(data.alerts)
+            console.log(data.alerts);
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
+        })
+    }, [])
 
   return (
     <div className="relative inline-flex ml-3">
@@ -40,11 +73,7 @@ function Notifications() {
         aria-expanded={dropdownOpen}
       >
         <span className="sr-only">Notifications</span>
-        {/* <svg className="w-4 h-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-          <path className="fill-current text-gray-500" d="M6.5 0C2.91 0 0 2.462 0 5.5c0 1.075.37 2.074 1 2.922V12l2.699-1.542A7.454 7.454 0 006.5 11c3.59 0 6.5-2.462 6.5-5.5S10.09 0 6.5 0z" />
-          <path className="fill-current text-gray-400" d="M16 9.5c0-.987-.429-1.897-1.147-2.639C14.124 10.348 10.66 13 6.5 13c-.103 0-.202-.018-.305-.021C7.231 13.617 8.556 14 10 14c.449 0 .886-.04 1.307-.11L15 16v-4h-.012C15.627 11.285 16 10.425 16 9.5z" />
-        </svg> */}
-        <Bell className="w-5 h-5 text-gray-500"/>
+          <Bell className="w-5 h-5 text-gray-500"/>
         <div className="animate-pulse absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 dark:border-gray-700 border-white rounded-full"></div>
       </button>
 
@@ -65,36 +94,55 @@ function Notifications() {
         >
           <div className="text-xs font-semibold text-gray-400 dark:text-gray-200 uppercase pt-1.5 pb-2 px-4">Recent alerts</div>
           <ul>
-            <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
-              <Link
-                className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
-                to="#0"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                <span className="block text-sm mb-2 dark:text-gray-300">📣 <span className="font-medium text-gray-800 dark:text-gray-200">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-gray-400 dark:text-gray-300">Feb 12, 2021</span>
-              </Link>
-            </li>
-            <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
-              <Link
-                className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
-                to="#0"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                <span className="block text-sm mb-2 dark:text-gray-300">📣 <span className="font-medium text-gray-800 dark:text-gray-200">Edit your information in a swipe</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-gray-400 dark:text-gray-300">Feb 9, 2021</span>
-              </Link>
-            </li>
-            <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
-              <Link
-                className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
-                to="#0"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                <span className="block text-sm mb-2 dark:text-gray-300">🚀<span className="font-medium text-gray-800 dark:text-gray-300">Say goodbye to paper receipts!</span> Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</span>
-                <span className="block text-xs font-medium text-gray-400">Jan 24, 2020</span>
-              </Link>
-            </li>
+            {!isLoading ?
+            <div>
+                {alerts.length !== 0 ?  (
+                    alerts.map((value) => (
+                    <li className="border-b border-gray-200 dark:border-gray-700 last:border-0">
+                    <Link
+                      className="block py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
+                      to="/dashboard/alerts"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                    >
+                      <span className="block text-sm mb-2 dark:text-gray-300">📢 {value.title} <span className="font-medium text-gray-800 dark:text-gray-200">{value.content}</span></span>
+                      <span className="block text-xs font-medium text-gray-400 dark:text-gray-300">{moment(value.created_at).format("DD-MM-YYYY h:mm:ss")}</span>
+                    </Link>
+                  </li>
+                    ))) : 
+                    <div className="sm:px-10 px-5 py-20 flex flex-col items-center">
+                      <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                        <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                          You have no new alerts, have a good day!
+                      </p>
+                </div>
+                }
+                </div>
+                : <div>
+                    <div className="bg-white dark:bg-gray-900 p-3 rounded-sm shadow-sm hover:shadow-md">
+                    {
+                        Array(5)
+                            .fill(5)
+                            .map((_value, index) => (
+                            
+                            <div key={index}>
+                                <Link className="p-3 transition duration-150 hover:bg-gray-100 dark:hover:bg-gray-800 flex justify-justify border-b dark:border-gray-700 border-gray-200 pb-2" to="#" >
+                                    <div className="w-full">
+                                        <h3 className="font-semibold text-md dark:text-gray-200">
+                                            <Skeleton  height={20} width={300}/>
+                                        </h3>
+                                        <p className="dark:text-gray-300"><Skeleton height={50} width={500}/></p>
+                                    </div>
+                                    <p className="text-sm w-20 dark:text-gray-300">
+                                        <Skeleton height={10} width={50}/>
+                                    </p>
+                                </Link>
+                            </div>
+
+                        ))
+                        
+                    }
+                    </div>
+                </div>}
           </ul>
         </div>
       </Transition>
