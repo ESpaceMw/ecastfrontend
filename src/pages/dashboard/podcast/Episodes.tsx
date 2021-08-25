@@ -2,6 +2,7 @@ import { Transition } from "@headlessui/react"
 
 import { 
     DotsHorizontal, 
+    ExclamationCircleOutline, 
     PencilAlt, 
     Plus, 
     ViewList
@@ -39,7 +40,7 @@ const Episodes = () => {
         fetch('http://127.0.0.1:8000/api/v1/podcasts/series/get',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ channel_id: 1 })
+            body: JSON.stringify({ channel_id: localStorage.getItem('channel_id') })
             }
         ).then(async (response) => {
             return response.json()
@@ -66,11 +67,12 @@ const Episodes = () => {
                                 <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
                                     <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
                                 </button>
-                            </div>
+                            </div> 
 
                             <div className="p-3">
                                 {!isLoading ?
-                                    episodes.map((value) => (
+                                    
+                                    (episodes.length !== 0 ? episodes.map((value) => (
                                         value.podcast_episodes.map((item: { 
                                             id: any, title: string,
                                             created_at: string, season: string, 
@@ -92,7 +94,14 @@ const Episodes = () => {
                                             listens={item.listens.length}
                                             />
                                         ))
-                                    )) : Array(9)
+                                    )) : 
+                                    <div className="sm:px-24 py-20 flex flex-col items-center">
+                                        <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                                        <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                                        You have no podcast episodes, <span className="text-blue-400 underline">create</span>
+                                        </p>
+                                    </div>
+                                    ) : Array(9)
                                     .fill(5)
                                     .map((index) => (
                                         <div
@@ -125,11 +134,20 @@ const Episodes = () => {
                             </div>
 
                             <div className="p-3">
-                                {!isLoading ? episodes.map((value) => (
+                                {!isLoading ?
+                                (episodes.length !== 0 ?
+                                 episodes.map((value) => (
                                 <div key={value.id}>
                                     <SerieModal title={value.title} published={value.created_at}/>
                                 </div>
-                                )) : <div
+                                )) : 
+                                <div className="sm:px-14 py-20 flex flex-col items-center">
+                                        <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                                        <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                                        You have no podcast series, <Link to="/dashboard/new-serie" className="text-blue-400 underline">create</Link>
+                                        </p>
+                                    </div>
+                                ) : <div
                                     className="flex justify-between p-3 border-b dark:border-gray-700 dark:hover:bg-gray-800 border-gray-200 hover:bg-gray-100 transition duration-150">
                                         <div className="flex flex-col">
                                             <Skeleton height={20} width={100}/>

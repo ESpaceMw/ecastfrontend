@@ -1,3 +1,4 @@
+import { ExclamationCircleOutline } from "heroicons-react"
 import moment from "moment"
 
 import { useEffect, useState } from "react"
@@ -60,7 +61,7 @@ const Alerts =  () => {
                 <div>
                     <div className="bg-white dark:bg-gray-900 p-3 rounded-sm shadow-sm hover:shadow-md">
                     {
-                        alerts &&  (
+                        alerts.length !== 0 ?  (
                             alerts.map((value) => (
                             
                             <div key={value.id}>
@@ -76,8 +77,13 @@ const Alerts =  () => {
                                 </Link>
                             </div>
 
-                        ))
-                        )
+                        )) 
+                        ): <div className="sm:px-24 py-20 flex flex-col items-center">
+                            <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                            <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                             You have no new alerts, have a good day!
+                            </p>
+                        </div>
                     }
                     </div>
                 </div>
