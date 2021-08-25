@@ -130,7 +130,7 @@ const Channels = () => {
                                             <div className="absolute mt-0 bg-white dark:bg-gray-800 px-4 py-4 w-72 shadow rounded cursor-default z-10">
                                                 <div className="flex space-x-3">
                                                 <div className="flex flex-shrink-0">
-                                                    <img src={'http://127.0.0.1:8000/storage/channels/'+channel.cover_art} alt="channel-cover-art" className="object-cover h-16 w-16 rounded-full"/>
+                                                    <img src={'http://127.0.0.1:8000/storage/profile/'+channel.cover_art} alt="channel-cover-art" className="object-cover h-16 w-16 rounded-full"/>
                                                 </div>
                                                 <div className="flex flex-col space-y-2">
                                                     <div className="font-semibold">
