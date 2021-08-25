@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SearchBar from '../../components/SearchBar.js';
 import Transition from '../../utils/Transition.js';
 
 function SearchModal() {
@@ -7,10 +8,9 @@ function SearchModal() {
   const [searchOpen, setSearchOpen] = useState(false);
   
   const trigger = useRef(null);
-  const searchContent = useRef(null);
-  const searchInput = useRef(null);
 
-  // close on click outside
+  const searchContent = useRef(null);
+
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!searchOpen || searchContent.current.contains(target) || trigger.current.contains(target)) return;
@@ -20,7 +20,7 @@ function SearchModal() {
     return () => document.removeEventListener('click', clickHandler);
   });
 
-  // close if the esc key is pressed
+  
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
       if (!searchOpen || keyCode !== 27) return;
@@ -32,11 +32,10 @@ function SearchModal() {
 
   return (
     <div>
-      {/* Button */}
       <button
         ref={trigger}
         className={`w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 transition duration-150 rounded-full ml-3 ${searchOpen && 'bg-gray-200'}`}
-        onClick={() => { setSearchOpen(!searchOpen); setImmediate(() => searchInput.current.focus()); }}
+        onClick={() => { setSearchOpen(!searchOpen) }}
         aria-controls="search-modal"
       >
         <span className="sr-only">Search</span>
@@ -45,7 +44,7 @@ function SearchModal() {
           <path className="fill-current text-gray-400" d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
         </svg>
       </button>
-      {/* Modal backdrop */}
+      
       <Transition
         className="fixed inset-0 bg-gray-900 bg-opacity-30 z-50 transition-opacity"
         show={searchOpen}
@@ -57,7 +56,7 @@ function SearchModal() {
         leaveEnd="opacity-0"
         aria-hidden="true"
       />
-      {/* Modal dialog */}
+      
       <Transition
         id="search-modal"
         className="fixed inset-0 z-50 overflow-hidden flex items-start top-20 mb-4 justify-center transform px-4 sm:px-6"
@@ -72,21 +71,14 @@ function SearchModal() {
         leaveEnd="opacity-0 translate-y-4"
       >
         <div className="bg-white dark:bg-gray-900 dark:text-gray-200 overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
-          {/* Search form */}
+          
           <form className="border-b border-gray-200 dark:border-gray-700">
             <div className="relative">
-              <label htmlFor="modal-search" className="sr-only dark:text-gray-200">Search</label>
-              <input id="modal-search" className="w-full dark:bg-transparent focus:ring-none outline-none border dark:border-gray-700 focus:border-transparent placeholder-gray-400 appearance-none py-3 pl-10 pr-4" type="search" placeholder="Search Anything…" ref={searchInput} />
-              <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
-                <svg className="w-4 h-4 flex-shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-4 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
-                  <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
-                </svg>
-              </button>
+              <SearchBar placeholder="Search for podcasts..."/>
             </div>
           </form>
           <div className="py-4 px-2" onFocus={() => setSearchOpen(true)} onBlur={() => setSearchOpen(false)}>
-            {/* Recent searches */}
+            
             <div className="mb-3 last:mb-0">
               <div className="text-xs font-semibold text-gray-400 uppercase px-2 mb-2 dark:text-gray-200">Recent searches</div>
               <ul className="text-sm">

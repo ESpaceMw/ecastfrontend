@@ -1,11 +1,9 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
-import { Link } from 'react-router-dom'
 
-import BG from '../../media/kit.jpg'
-import { Camera } from 'heroicons-react'
+import { Dialog, Transition } from '@headlessui/react'
+
+import { XIcon } from '@heroicons/react/outline'
+
 import SubmitButton from '../SubmitButton'
 
 export default function EditChannel() {

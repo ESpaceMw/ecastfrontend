@@ -85,6 +85,15 @@ function UserMenu() {
             </li>
             <li>
               <Link
+                className="font-medium text-sm text-blue-400 hover:text-blue-500 flex items-center py-1 px-3"
+                to="/dashboard/settings"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                Settings
+              </Link>
+            </li>
+            <li>
+              <Link
                 className="font-medium text-sm text-blue-400 hover:bg-red-600 hover:text-white flex items-center py-1 px-3"
                 to="/"
                 onClick={() => 

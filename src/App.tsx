@@ -20,6 +20,7 @@ import Events from './pages/dashboard/podcast/episodes/Events';
 import NewEpisode from './pages/dashboard/podcast/episodes/NewEpisode.jsx';
 import NewSerie from './pages/dashboard/podcast/episodes/NewSerie.jsx';
 import Media from './pages/dashboard/podcast/Media';
+import Settings from './pages/dashboard/user/Settings';
 import UserInfo from './pages/dashboard/user/UserInfo';
 import AboutUs from './pages/landing/AboutUs';
 import Blog from './pages/landing/Blog';
@@ -163,6 +164,15 @@ function App() {
           <Route path="/dashboard/profile" render={() => (
             isLoggedIn() ? (
               <UserInfo/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}>
+          </Route>
+
+          <Route path="/dashboard/settings" render={() => (
+            isLoggedIn() ? (
+              <Settings/>
             ) : (
               <Redirect to="/sign-in"/>
             )
