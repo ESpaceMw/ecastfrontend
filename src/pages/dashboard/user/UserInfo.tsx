@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ExclamationCircle, LockClosed, ShoppingCart, User } from "heroicons-react";
-import React from "react";
+import { ExclamationCircle, ExclamationCircleOutline, LockClosed, ShoppingCart, User } from "heroicons-react";
+import React, { useState } from "react";
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import ClipArt from '../../../media/dusan-jovic-2V4Qhq55maY-unsplash.jpg'
 import BG from '../../../media/bg.png'
@@ -20,6 +20,8 @@ const UserInfo = () => {
     const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
     const basicInfo = JsonParse(localStorage.getItem('basic_info'))
+
+    const [tagline, setTagline] = useState('')
 
     
     return(
@@ -128,8 +130,11 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Tag line:</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1"
-                                         value={user.tagline} type="text"/>
+                                        <input maxLength={20} className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1"
+                                         value={tagline} onChange={(e) => {setTagline(e.target.value)}} type="text"/>
+                                         {tagline.length > 15 ? 
+                                         <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                                            <ExclamationCircleOutline className="w-5 h-5 mr-3"/>Tagline should be not more than 20 words</p> : ''}
                                     </div>
                                 </div>
                                 <div className="md:flex md:items-center mt-2">

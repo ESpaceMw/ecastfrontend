@@ -71,7 +71,7 @@ export default function EditChannel() {
                     <div className="absolute inset-0 px-4 sm:px-6">
                       <div className="h-full border-2 border-dashed border-gray-200 dark:border-gray-700" aria-hidden="true">
                         <div className="flex flex-col p-10">
-                            <div className="border-4 border-blue-300 h-72 w-72 bg-cover rounded-full" style={{ backgroundImage: `url('http://127.0.0.1:8000/storage/profile/${localStorage.getItem('channel_cover_art')}')` }}>
+                            <div className="h-72 w-72 bg-cover rounded-full" style={{ backgroundImage: `url('http://127.0.0.1:8000/storage/profile/${localStorage.getItem('channel_cover_art')}')` }}>
                                
                             </div>
                             <div className="flex flex-col">
