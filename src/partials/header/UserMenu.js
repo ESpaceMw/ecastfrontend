@@ -44,7 +44,7 @@ function UserMenu() {
         aria-expanded={dropdownOpen}
       >
         {JSON.parse(localStorage.getItem('basic_info')).map((item) => (
-        <img className="w-8 h-8 rounded-full object-cover border-2 border-yellow-500" src={'http://127.0.0.1:8000/storage/profile/'+item.clip_art} width="32" height="32" alt="User" />
+        <img className="w-8 h-8 rounded-full object-cover" src={'http://127.0.0.1:8000/storage/profile/'+item.clip_art} width="32" height="32" alt="User" />
         ))}
         <div className="flex items-center truncate">
           <span className="w-20 ml-2 text-sm font-medium dark:group-hover:text-gray-400 group-hover:text-gray-800 dark:text-gray-300 truncate">{localStorage.getItem('username')}</span>

@@ -73,7 +73,7 @@ function Sidebar({sidebarOpen, setSidebarOpen}) {
             {JSON.parse(localStorage.getItem('basic_info')).map((item) => (
                <div className="flex justify-between">
               <div className="flex">
-                <img src={'http://127.0.0.1:8000/storage/profile/'+item.clip_art} className="mr-2 border-2 border-yellow-500 rounded-full w-10 h-10 object-cover object-center" alt="user-icon"/>
+                <img src={'http://127.0.0.1:8000/storage/profile/'+item.clip_art} className="mr-2 rounded-full w-10 h-10 object-cover object-center" alt="user-icon"/>
                 <div>
                   <h3 className="text-md text-gray-900 dark:text-gray-200">{localStorage.getItem('username')}</h3>
                   <p className="text-gray-500 dark:text-gray-200 text-sm">{item.tagline}</p>
