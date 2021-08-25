@@ -16,7 +16,6 @@ import moment from "moment";
 
 import { TrashIcon } from "@heroicons/react/outline";
 
-import Oval from "react-loading-icons/dist/components/oval";
 import Skeleton from "react-loading-skeleton";
 
 const SerieModal  = ({serieId, title, published, description, seriesPublishedDate, seasons, subscription, seriesCoverArt}) => {
@@ -86,7 +85,7 @@ const SerieModal  = ({serieId, title, published, description, seriesPublishedDat
                 </p>
             </div>
         </Link>
-      {/* Modal backdrop */}
+      
       <Transition
         className="fixed inset-0 bg-gray-900 bg-opacity-30 z-50 transition-opacity"
         show={searchOpen}
@@ -98,7 +97,7 @@ const SerieModal  = ({serieId, title, published, description, seriesPublishedDat
         leaveEnd="opacity-0"
         aria-hidden="true"
       />
-      {/* Modal dialog */}
+      
       <Transition
         id="search-modal"
         className="fixed inset-0 z-50 overflow-hidden flex items-start top-20 mb-4 justify-center transform px-4 sm:px-6"

@@ -1,8 +1,8 @@
 import{ useState, useRef, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import Transition from '../../utils/Transition';
 
-import UserAvatar from '../../media/onboard-girl.jpg';
+import { Link, useHistory } from 'react-router-dom';
+
+import Transition from '../../utils/Transition';
 
 function UserMenu() {
 

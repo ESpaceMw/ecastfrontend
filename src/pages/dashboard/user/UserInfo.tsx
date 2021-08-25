@@ -195,7 +195,7 @@ const UserInfo = () => {
                                     Save
                                     </button>
                                     <button className="flex-shrink-0 border-transparent border-4 text-blue-400 hover:text-blue-600 text-md py-1 px-2 rounded-sm" type="button">
-                                    Revert to last
+                                    Edit channel information
                                     </button>
                                 </div>
 

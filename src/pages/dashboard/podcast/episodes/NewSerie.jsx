@@ -14,8 +14,6 @@ const NewSerie = () => {
 
     const [categories, setCategories] = useState([])
 
-    const [isLoading, setIsLoading] = useState(false)
-
     const [onLoad, setOnLoad] = useState(false)
 
     const [title, setTitle] = useState('')
@@ -36,19 +34,13 @@ const NewSerie = () => {
         ).then(async (response) => {
             return response.json()
         }).then((data) => {
-            setIsLoading(false)
             setCategories(data.categories)
         }).catch((err) => {
-            setIsLoading(false)
             console.log(err)
         })
     }, [])
 
     const handleSubmit = () => {
-        
-        console.log('====================================');
-        console.log(localStorage.getItem('channel_id'));
-        console.log('====================================');
 
         const formData = new FormData();
         formData.append("cover_art", uploadedImage);

@@ -8,8 +8,6 @@ import UserPreferences from '../data/UserPreferences';
 
 import Podcasts from '../data/Podcasts';
 
-import Girl from '../media/onboard-girl.jpg'
-
 function Sidebar({sidebarOpen, setSidebarOpen}) {
 
   const location = useLocation();

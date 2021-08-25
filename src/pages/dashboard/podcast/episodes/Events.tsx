@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react"
+
 import { Link } from "react-router-dom"
+
 import DashboardMain from "../../../../components/layouts/DashboardMain"
+
 import GirlWithBeats from '../../../../media/soundtrap-d0sXdsCnhF8-unsplash.jpg'
-import Growth from '../../../../media/business-success-growing-growth-increase-up-concept-wooded-cube-block-with-word-growth_20693-206.jpg'
+
 import moment from "moment"
+
 import Skeleton from "react-loading-skeleton"
 
 const Events = () => {
