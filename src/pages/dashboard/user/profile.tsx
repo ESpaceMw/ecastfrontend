@@ -7,9 +7,9 @@ const Profile = () => {
     
     
     return(
-        <div>
+        <div className="dark:bg-gray-800">
             <DashboardMain>
-                <div className="bg-white h-full shadow-sm hover:shadow-md p-5">
+                <div className="bg-white dark:bg-gray-900 h-full shadow-sm hover:shadow-md p-5">
                    
                     <div className="w-11/12">
                         <div className="flex justify-center pb-10">
@@ -18,7 +18,7 @@ const Profile = () => {
                                     alt="username"/>
                                 <div className="ml-10">
                                     <div className="flex items-center">
-                                        <h2 className="block leading-relaxed font-light text-gray-700 text-3xl">Kells Kamuzu</h2>
+                                        <h2 className="block leading-relaxed font-light text-gray-700 dark:text-gray-200 text-3xl">Kells Kamuzu</h2>
                                         
                                         <button className="flex items-center ml-3 border border-yellow-600 hover:bg-blue-600 hover:text-white rounded-sm outline-none focus:outline-none bg-transparent text-yellow-600 text-sm py-1 px-2">
                                             <span className="block">Premium member</span>
@@ -29,24 +29,24 @@ const Profile = () => {
                                     </div>
                                     <ul className="flex justify-content-around items-center">
                                         <li>
-                                            <span className="text-base flex"><span className="font-bold mr-2">23 </span> Podcasts</span>
+                                            <span className="text-base flex dark:text-gray-200"><span className="font-bold mr-2 dark:text-gray-300">23 </span> Podcasts</span>
                                         </li>
                                         <li>
-                                            <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">102k </span> Subscribers</span>
+                                            <span className="cursor-pointer text-base flex ml-5 dark:text-gray-200"><span className="font-bold mr-2 dark:text-gray-300">102k </span> Subscribers </span>
                                         </li>
                                         <li>
-                                            <span className="cursor-pointer text-base flex ml-5"><span className="font-bold mr-2">654 </span> Subscribed</span>
+                                            <span className="cursor-pointer text-base flex ml-5 dark:text-gray-200"><span className="font-bold mr-2 dark:text-gray-300"> 654 </span> Subscribed</span>
                                         </li>
                                     </ul>
                                     <br/>
                                     <div className="">
-                                        <h1 className="text-base font-bold">The Fire Cracker</h1>
-                                        <span className="text-base">Unleash the fire 🔥 to the world 🌍</span>
-                                        <a className="block text-base text-blue-400 mt-2" target="_blank">http://www.ecast.espacemw.com/podcasts/profile/kells </a>
+                                        <h1 className="text-base font-bold dark:text-gray-200">The Fire Cracker</h1>
+                                        <span className="text-base dark:text-gray-300">Unleash the fire 🔥 to the world 🌍</span>
+                                        <a className="block text-base text-blue-400 hover:text-blue-500 mt-2" target="_blank">http://www.ecast.espacemw.com/podcasts/profile/kells </a>
                                     </div>
                                 </div>
                         </div>
-                        <div className="border-b border-gray-300"></div>
+                        <div className="border-b border-gray-300 dark:border-gray-700"></div>
                         <article className="mt-5 grid grid-cols-3 gap-10">
                             <div className="cursor-pointer relative">
                                 <img src="https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
