@@ -28,6 +28,8 @@ const Episodes = () => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
+    const [serieDropdownOpen, setSerieDropdownOpen] = useState(false);
+
     const trigger = useRef(null);
 
     const dropdown = useRef(null);
@@ -40,7 +42,7 @@ const Episodes = () => {
         fetch('http://127.0.0.1:8000/api/v1/podcasts/series/get',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ channel_id: localStorage.getItem('channel_id') })
+            body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
             }
         ).then(async (response) => {
             return response.json()
@@ -127,9 +129,32 @@ const Episodes = () => {
                             <div className="bg-white dark:bg-gray-900">
                             <div className="p-3 flex justify-between">
                                 <h3 className="text-md font-medium dark:text-gray-200">Series</h3>
-                                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
-                                    <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
-                                </button>
+                                <Link to="#" onClick={() => setSerieDropdownOpen(!serieDropdownOpen)}
+                                        aria-expanded={serieDropdownOpen} ref={trigger} className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-200"/>
+                                        <Transition
+                                        className="z-10 absolute right-14 min-w-44 dark:bg-gray-800 bg-white py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
+                                        show={serieDropdownOpen}
+                                    >
+                                        <div
+                                        ref={dropdown}
+                                        onFocus={() => setSerieDropdownOpen(true)}
+                                        onBlur={() => setSerieDropdownOpen(false)}
+                                        >
+                                        <ul>
+                                            <li>
+                                            <Link
+                                                className="font-medium text-sm dark:text-gray-300 dark:hover:bg-gray-700 hover:bg-gray-50 flex items-center py-1 px-3"
+                                                to="/dashboard/new-serie"
+                                                onClick={() => setSerieDropdownOpen(!serieDropdownOpen)}
+                                            >
+                                                <PencilAlt className="text-gray-600 dark:text-gray-300 w-5 h-5"/> Create a serie
+                                            </Link>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </Transition>
+                                    </Link>
                             
                             </div>
 
@@ -138,7 +163,16 @@ const Episodes = () => {
                                 (episodes.length !== 0 ?
                                  episodes.map((value) => (
                                 <div key={value.id}>
-                                    <SerieModal title={value.title} published={value.created_at}/>
+                                    <SerieModal 
+                                    serieId={value.id}
+                                    title={value.title} 
+                                    published={value.created_at} 
+                                    description={value.description} 
+                                    seriesPublishedDate={value.created_at} 
+                                    seasons={value.seasons} 
+                                    subscription={value.subscription_type}
+                                    seriesCoverArt={value.cover_art}
+                                    />
                                 </div>
                                 )) : 
                                 <div className="sm:px-14 py-20 flex flex-col items-center">

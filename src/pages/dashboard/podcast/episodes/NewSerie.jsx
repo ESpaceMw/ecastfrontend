@@ -4,9 +4,13 @@ import PrimaryButton from '../../../../components/SubmitButton'
 
 import { useState, useEffect } from "react"
 
+import { useHistory } from "react-router"
+
 const NewSerie = () => {
 
     const [uploadedImage, setUpLoadedImage] = useState('')
+
+    const [selectedImage, setSelectedImage] = useState('')
 
     const [categories, setCategories] = useState([])
 
@@ -16,12 +20,13 @@ const NewSerie = () => {
 
     const [title, setTitle] = useState('')
 
-    const [getCategory, setGetCategory] = useState('')
+    const [getCategory, setGetCategory] = useState('Science')
 
-    const [seasons, setSeasons] = useState('')
+    const [seasons, setSeasons] = useState('1')
 
     const [description, setDescription] = useState('')
     
+    const history = useHistory()
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/category/categories',{
@@ -40,42 +45,36 @@ const NewSerie = () => {
     }, [])
 
     const handleSubmit = () => {
-
-        console.log(uplo);
         
-        const formData = new FormData()
+        console.log('====================================');
+        console.log(localStorage.getItem('channel_id'));
+        console.log('====================================');
 
-        formData.append('title', title)
-        formData.append('channels_id', '9')
+        const formData = new FormData();
+        formData.append("cover_art", uploadedImage);
+        formData.append("title", title)
+        formData.append("channels_id", localStorage.getItem('channel_id').toString())
         formData.append('description', description)
         formData.append('seasons', seasons)
-        formData.append('cover_art', uploadedImage)
         formData.append('subscription_type', 'Basic')
         formData.append('category', getCategory)
-        
-        let headers = new Headers();
 
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer '+localStorage.getItem('access_token'));
-        headers.append('Origin','http://localhost:3000');
+        const requestOptions = {
+            method: 'POST',
+            body: formData,
+            redirect: 'follow'
+        };
 
-        fetch('http://127.0.0.1:8000/api/v1/podcasts/series/create',{
-            method: 'post',
-            headers: headers,
-            body: formData
-            }
-        ).then(async (response) => {
-            return response.json()
-        }).then((data) => {
+        fetch("http://127.0.0.1:8000/api/v1/podcasts/series/create", requestOptions)
+        .then(response => response.json())
+        .then(result => {
             setOnLoad(false)
-            console.log(data)
-        }).catch((err) => {
-            setOnLoad(false)
-            console.log(err)
-        })
+            if(result.message === "You have successfully created a new series"){
+            history.push('/dashboard/episodes')
+        }})
+        .catch(error => console.log('error', error));
     }
-    
+
     return(
         <div className="dark:bg-gray-800">
         <DashboardMain>
@@ -117,7 +116,10 @@ const NewSerie = () => {
                                                         className="relative cursor-pointer outline-none focus:ring=none bg-white dark:bg-gray-900 font-medium text-blue-400 hover:text-blue-500"
                                                     >
                                                         <span>Upload an image</span>
-                                                        <input onChange={(item) => {setUpLoadedImage(URL.createObjectURL(item.target.files[0]))}} id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                        <input onChange={(item) => {
+                                                            setUpLoadedImage(item.target.files[0])
+                                                            setSelectedImage(URL.createObjectURL(item.target.files[0]))
+                                                        }} id="file-upload" name="file-upload" type="file" className="sr-only" />
                                                     </label>
                                                     </div>
                                                     <p className="text-xs text-gray-500 dark:text-gray-300">PNG, JPG, GIF up to 10MB</p>
@@ -130,7 +132,7 @@ const NewSerie = () => {
                                             </h1>
 
                                             <ul id="gallery" className="flex flex-1 flex-wrap -m-1">
-                                                {uploadedImage ? <img className="object-cover w-64 h-64" src={uploadedImage} alt="uploaded-img"/>
+                                                {uploadedImage ? <img className="object-cover w-64 h-64" src={selectedImage} alt="uploaded-img"/>
                                                  :
                                                  <li id="empty" className="h-full w-full text-center flex flex-col items-center justify-center">
                                                     <img className="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />

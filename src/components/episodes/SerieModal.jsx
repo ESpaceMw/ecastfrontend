@@ -1,24 +1,46 @@
 import { Transition } from "@headlessui/react";
+
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Logo from '../../media/logo.png'
+
+import { Link, useHistory } from "react-router-dom";
+
 import { DotsHorizontal} from "heroicons-react"
+
 import MusicalNote from '../../icons/musical-note.png'
+
 import Love from '../../icons/like.png'
+
 import Chat from '../../icons/chat.png'
+
 import moment from "moment";
 
-const SerieModal  = ({title, published}) => {
+import { TrashIcon } from "@heroicons/react/outline";
+
+import Oval from "react-loading-icons/dist/components/oval";
+import Skeleton from "react-loading-skeleton";
+
+const SerieModal  = ({serieId, title, published, description, seriesPublishedDate, seasons, subscription, seriesCoverArt}) => {
 
   const [searchOpen, setSearchOpen] = useState(false);
   
   const trigger = useRef(null);
+
+  const dropdownTrigger = useRef(null);
+
+  const dropdown = useRef(null);
+
   const searchContent = useRef(null);
+
+  const [serieDropdownOpen, setSerieDropdownOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const clickHandler = ({ target }) => {
-      if (!searchOpen || searchContent.current.contains(target) || trigger.current.contains(target)) return;
-      setSearchOpen(false);
+      if(searchContent !== null && trigger !== null){
+        if (!searchOpen || searchContent.current.contains(target) || trigger.current.contains(target)) return;
+        setSearchOpen(false);
+      }
     };
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
@@ -33,6 +55,23 @@ const SerieModal  = ({title, published}) => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const history = useHistory()
+
+  const deleteSerie = () => {
+    fetch('http://127.0.0.1:8000/api/v1/podcasts/series/delete',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ id: serieId })
+            }).then(response => {
+                return response.json()
+            }).then(data => {
+                setIsLoading(false)
+                history.push('/dashboard/overview')
+        }).catch((error) => {
+            console.log(error)
+        })
+  }
+
   return (
     <div>
       <Link
@@ -46,9 +85,6 @@ const SerieModal  = ({title, published}) => {
                   Began [{moment(published).format("DD-MM-YYYY h:mm:ss")}]
                 </p>
             </div>
-            <button className="p-1 rounded-sm h-6 w-6 dark:text-gray-400">
-                <DotsHorizontal className="h-4 w-4"/>
-            </button>
         </Link>
       {/* Modal backdrop */}
       <Transition
@@ -77,22 +113,23 @@ const SerieModal  = ({title, published}) => {
         leaveEnd="opacity-0 translate-y-4"
       >
         <div className="bg-white dark:bg-gray-900 dark:text-gray-300 overflow-auto max-w-2xl w-full max-h-full rounded shadow-lg" ref={searchContent}>
-          <div className="p-3">
+          {!isLoading ? (
+            <div className="p-3">
             <div className="flex justify-between">
               <div className="flex">
-                <img src={Logo} className="w-32 h-32 border rounded-sm dark:border-gray-700 border-gray-200" alt="serie-cover-art"/>
+                <img src={"http://127.0.0.1:8000/storage/series/"+seriesCoverArt}className="w-32 h-32 border rounded-sm dark:border-gray-700 border-gray-200 object-cover" alt="serie-cover-art"/>
                 <div className="ml-3">
                   <h3 className="font-semibold text-lg">
-                    Impact Goals 
+                    {title}
                   </h3>
                   <h2 className="font-medium text-gray-500 dark:text-gray-300 text-md">
-                    Season 1
+                    Seasons {seasons}
                   </h2>
                   <p>
-                    Premium Content
+                    {subscription} content
                   </p>
                   <p>
-                    Premiered [5/4/2021]
+                    Published [{moment(seriesPublishedDate).format("DD-MM-YYYY h:mm:ss")}]
                   </p>
                   <div className="w-full flex justify-around">
                     <div className="flex mt-2 mr-2">
@@ -111,19 +148,41 @@ const SerieModal  = ({title, published}) => {
                 </div>
               </div>
               <div>
-                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
-                  <DotsHorizontal className="h-4 w-4"/>
-                </button>
+                <Link to="#" onClick={() => setSerieDropdownOpen(!serieDropdownOpen)}
+                    aria-expanded={serieDropdownOpen} ref={dropdownTrigger} className="px-2 rounded-sm w-8 h-8">
+                    <DotsHorizontal className="h-4 w-4 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"/>
+                    <Transition
+                    className="z-10 absolute right-14 min-w-44 py-1.5 rounded-sm shadow-lg overflow-hidden"
+                    show={serieDropdownOpen}
+                >
+                    <div
+                    ref={dropdown}
+                    onFocus={() => setSerieDropdownOpen(true)}
+                    onBlur={() => setSerieDropdownOpen(false)}
+                    >
+                    <ul>
+                        <li>
+                        <Link
+                            className="font-medium text-sm dark:text-gray-300 dark:hover:bg-gray-700 hover:bg-gray-50 flex items-center py-1 px-3"
+                            to="#"
+                            onClick={() => {
+                              setSerieDropdownOpen(!serieDropdownOpen)
+                              setIsLoading(true)
+                              deleteSerie()
+                            }}
+                        >
+                            <TrashIcon className="text-gray-600 dark:text-gray-300 w-5 h-5"/> Delete
+                        </Link>
+                        </li>
+                    </ul>
+                    </div>
+                </Transition>
+                </Link>
               </div>
             </div>
             <div className="justify-center">
               <p className="text-sm mb-2 mt-2">
-                Impact Goals is an amazing series premiered on 12 - 04 - 21 by the renowned
-                Entrepreneur, Speaker, Gospel Minister and Philaphropist, Nhlanhla Dhaka who 
-                is also the author of this Podcast. The goal of this series to equip all visionaries 
-                and architects with spectacular knowledge on coming up with not only big 
-                goals, but great goals full of impact. So, buy yourself this great content, and 
-                have you and yourself on the path of leaving behind a great legacy.
+                {description}
               </p>
               
             </div>
@@ -131,6 +190,55 @@ const SerieModal  = ({title, published}) => {
               <Link to="#">Check Out All Episodes in this Series</Link>
             </div>
           </div>
+          ) : (
+            <div className="p-3">
+            <div className="flex justify-between">
+              <div className="flex">
+                <Skeleton height={100} width={100}/>
+                <div className="ml-3">
+                  <h3 className="font-semibold text-lg">
+                    <Skeleton height={20} width={100}/>
+                  </h3>
+                  <h2 className="font-medium text-gray-500 dark:text-gray-300 text-md">
+                    <Skeleton height={20} width={100}/>
+                  </h2>
+                  <p>
+                    <Skeleton height={20} width={100}/>
+                  </p>
+                  <p>
+                    <Skeleton height={20} width={100}/>
+                  </p>
+                  <div className="w-full flex justify-around">
+                    <div className="flex mt-2 mr-2">
+                      <Skeleton height={20} width={40} className="mr-2"/>
+                      <Skeleton height={20} width={100}/>
+                    </div>
+                    <div className="flex mt-2 mr-2">
+                      <Skeleton height={20} width={40} className="mr-2"/>
+                      <Skeleton height={20} width={100}/>
+                    </div>
+                    <div className="flex mt-2 mr-2">
+                      <Skeleton height={20} width={40} className="mr-2"/>
+                      <Skeleton height={20} width={100}/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Skeleton height={20} width={20}/>
+              </div>
+            </div>
+            <div className="justify-center">
+              <p className="text-sm mb-2 mt-2 w-full">
+                <Skeleton height={50}/>
+              </p>
+              
+            </div>
+            <div className="text-center text-blue-500">
+              <Skeleton height={20} width={300}/>
+            </div>
+          </div>
+          )}
         </div>
       </Transition>
     </div>
