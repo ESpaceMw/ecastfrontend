@@ -9,6 +9,7 @@ import SubscribeModal from "../../../components/subscription/SubscribeModal";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import JsonParse from "../../../utils/JsonParse";
+import EditChannel from "../../../components/user/EditChannel";
 
 const UserInfo = () => {
 
@@ -20,9 +21,6 @@ const UserInfo = () => {
 
     const basicInfo = JsonParse(localStorage.getItem('basic_info'))
 
-    console.log('====================================');
-    console.log(basicInfo);
-    console.log('====================================');
     
     return(
         <div className="dark:bg-gray-800">
@@ -194,9 +192,7 @@ const UserInfo = () => {
                                     <button className="flex-shrink-0 bg-blue-400 hover:bg-blue-500 text-md border-none text-white py-2 px-8 rounded-sm" type="button">
                                     Save
                                     </button>
-                                    <button className="flex-shrink-0 border-transparent border-4 text-blue-400 hover:text-blue-600 text-md py-1 px-2 rounded-sm" type="button">
-                                    Edit channel information
-                                    </button>
+                                    <EditChannel/>
                                 </div>
 
                                 </div>

@@ -112,7 +112,7 @@ const Channels = () => {
                                         
                                                 
                                         <Popover.Button>
-                                                <img src={'http://127.0.0.1:8000/storage/channels/'+channel.cover_art} alt="channel" className="w-full"/>
+                                                <img src={'http://127.0.0.1:8000/storage/profile/'+channel.cover_art} alt="channel" className="w-72 h-32 object-cover"/>
                                         </Popover.Button>
                                         
                                         <Transition
