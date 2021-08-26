@@ -22,7 +22,7 @@ import NewSerie from './pages/dashboard/podcast/episodes/NewSerie.jsx';
 import Media from './pages/dashboard/podcast/Media';
 import Profile from './pages/dashboard/user/Profile';
 import Settings from './pages/dashboard/user/Settings';
-import UserInfo from './pages/dashboard/user/UserInfo';
+import UserInfo from './pages/dashboard/user/UserInfo.jsx';
 import AboutUs from './pages/landing/AboutUs';
 import Blog from './pages/landing/Blog';
 import Download from './pages/landing/Download';

@@ -170,11 +170,11 @@ const Channels = () => {
                                                     </a>
                                                 </div>
                                                 <div className="w-auto">
-                                                    <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
+                                                    <Link to={"/dashboard/podcasts/"+channel.name} className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
                                                     <div className="mr-1">
                                                         <User className="w-4 h-4 dark:text-gray-400 dak"/>
                                                     </div>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="w-auto">
                                                     <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">

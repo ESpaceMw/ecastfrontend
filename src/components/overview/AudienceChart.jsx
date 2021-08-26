@@ -54,7 +54,7 @@ const AudienceChart = () => {
 
         return (
             <div id="chart">
-                <ReactApexChart className="dark:text-gray-300" options={state.options} series={state.series} type="bar" height={350} />
+                <ReactApexChart className="dark:text-gray-300 dark:bg-gray-900" options={state.options} series={state.series} type="bar" height={350} />
             </div>
           )
         

@@ -15,13 +15,15 @@ const UserInfo = () => {
 
     const [openTab, setOpenTab] = React.useState(1);
 
-    const color: string = 'blue'
+    const color = 'blue'
 
     const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
     const basicInfo = JsonParse(localStorage.getItem('basic_info'))
 
     const [tagline, setTagline] = useState('')
+
+    const [uploadedImage, setUploadedImage] = useState('')
 
     
     return(
@@ -95,12 +97,7 @@ const UserInfo = () => {
                         <div className="px-4 flex-auto">
                         <div className="tab-content tab-space">
                             <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                                {basicInfo.map((user: { 
-                                    tagline: string | number | readonly string[] | undefined, 
-                                    title: string,
-                                    clip_art: string,
-                                    description: string
-                                }) => (
+                                {basicInfo.map((user) => (
                                 <div className="relative">
                                         
                                     <p className="mt-2 dark:text-gray-200">
@@ -154,11 +151,22 @@ const UserInfo = () => {
                                     </div>
                                     <div className="w-full flex w-ull">
                                         <img className="rounded-sm hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" 
-                                        src={"http://127.0.0.1:8000/storage/profile/"+user.clip_art} 
+                                        src={uploadedImage ? uploadedImage : "http://127.0.0.1:8000/storage/profile/"+user.clip_art} 
                                         alt="user-clip-art"/>
                                         <div>
-                                            <p className="ml-3 text-gray-700 text-md dark:text-gray-200">Choose your photo from Media Library:</p>
-                                            <input className="appearance-none ml-3 mt-2 block w-full dark:text-gray-300 text-gray-700 text-md border dark:border-gray-700 border-gray-300 rounded-sm py-1 px-1 leading-tight focus:outline-none focus:ring-1" type="file"/>
+                                            <p className="ml-3 mb-5 text-gray-700 text-md dark:text-gray-200">Choose your photo from Media Library:</p>
+                                            <label
+                                                htmlFor="fileInput"
+                                                className="w-full ml-3 mt-5 cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-sm text-left text-gray-600 bg-white hover:bg-gray-100 dark:text-gray-300 dark:bg-transparent dark:hover:bg-gray-800 dark:border-gray-700 font-medium"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                                                    <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                                    <circle cx="12" cy="13" r="3" />
+                                                </svg>
+                                                Browse Photo
+                                            </label>
+                                            <input type="file" onChange={(e) => setUploadedImage(URL.createObjectURL(e.target.files[0]))} hidden className="sr-only" id="fileInput"/>
                                         </div>
                                     </div>
                                 </div>
@@ -365,6 +373,7 @@ const UserInfo = () => {
                         </div>
                         </div>
                     </div>
+                    
                 </div>
             </DashboardMain>
         </div>

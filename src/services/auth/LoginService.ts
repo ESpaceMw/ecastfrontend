@@ -32,6 +32,8 @@ class LoginService{
 
             localStorage.setItem('channel_name', response.data.channel[0].name)
 
+            localStorage.setItem('channel_description', response.data.channel[0].description)
+
             localStorage.setItem('channel_cover_art', response.data.channel[0].cover_art)
 
             return response.data
