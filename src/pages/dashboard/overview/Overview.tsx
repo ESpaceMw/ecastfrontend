@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUp, DotsHorizontal, Star } from "heroicons-react"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { Link } from "react-router-dom"
 
@@ -13,6 +13,8 @@ import CashCards from '../../../icons/cards-with-dollar-sign.png'
 import Money from '../../../media/pexels-burst-545065.jpg'
 
 import Girl from '../../../media/onboard-girl.jpg'
+import moment from "moment"
+import Skeleton from "react-loading-skeleton"
 
 const popularEpisodes = [
     {
@@ -55,7 +57,26 @@ const Overview = () => {
 
     const color: string = 'blue'
 
-    console.log(localStorage.getItem('access_token'))
+    const [reviews, setReviews] = useState<any[]>([])
+
+    const [reviewsLoading, setReviewsLoading] = useState(false)
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/channels/listener-review-get',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setReviewsLoading(false)
+            setReviews(data.reviews)
+        }).catch((err) => {
+            setReviewsLoading(false)
+            console.log(err)
+        })
+    }, [])
 
     return(
         <div className="dark:bg-gray-800">
@@ -203,30 +224,50 @@ const Overview = () => {
                                 </div>
                                 <div className="pt-5">
                                     
-                                    {
-                                        Array(2).fill(2).map((index) => (
-                                            <div key={index} className="w-full flex justify-between p-3 dark:hover:bg-gray-800 hover:bg-gray-100 transition duration-150 rounded-sm">
+                                    {!reviewsLoading ?
+                                        reviews.map((index) => (
+                                            <div key={index.id} className="w-full flex justify-between p-3 dark:hover:bg-gray-800 hover:bg-gray-100 transition duration-150 rounded-sm">
                                         <div className="flex">
-                                            <img src={Girl} alt="reviewer" className="rounded-full object-cover w-12 h-12" />
+                                            <img src={"http://127.0.0.1:8000/storage/profile/"+index.reviewer_avatar} alt="reviewer" className="rounded-full object-cover w-12 h-12" />
                                             <div className="ml-2">
                                                 <div className="flex flex-row">
-                                                    <Star className="w-4 h-4 text-yellow-400"/>
-                                                    <Star className="w-4 h-4 text-yellow-400"/>
-                                                    <Star className="w-4 h-4 text-yellow-400"/>
-                                                    <Star className="w-4 h-4 text-yellow-400"/>
-                                                    <Star className="w-4 h-4 text-yellow-400"/>
-                                                    <p className="text-xs bg-blue-400 p-1 text-white rounded-sm">4 Rated</p>
+                                                    {
+                                                        Array(index.stars).fill(index.stars).map((item) => (
+                                                            <div key={item} className="flex flex-row">
+                                                                <Star className="w-4 h-4 text-yellow-400"/>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                    <p className="text-xs bg-blue-400 p-1 text-white rounded-sm">{index.stars} Rated</p>
                                                 </div>
-                                                <p className="mt-2 h-20 text-sm dark:text-gray-300">
-                                                    Kells Kamuzu: "This channel is the best, though you make your sound too low"
+                                                <p className="mt-2 text-sm dark:text-gray-300">
+                                                    {index.reviewer_name}: "{index.review}"
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="w-32 right-0 text-sm dark:text-gray-300">
-                                            2 days ago
+                                        <div className="w-36 right-0 text-sm dark:text-gray-300">
+                                            {moment.utc(index.created_at).local().fromNow()}
                                         </div>
                                     </div>
                                         ))
+                                        : (
+                                             Array(3).fill(3).map((index) => (
+                                             <div key={index} className="w-full flex justify-between p-3 dark:hover:bg-gray-800 hover:bg-gray-100 transition duration-150 rounded-sm">
+                                                <div className="flex">
+                                                    <Skeleton style={{ borderRadius: 200 }} height={40} width={40}/>
+                                                    <div className="ml-2">
+                                                        <Skeleton height={20} width={50}/>
+                                                        <p className="mt-2 text-sm dark:text-gray-300">
+                                                            <Skeleton height={40} width={200}/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="w-36 right-0 text-sm dark:text-gray-300">
+                                                    <Skeleton height={20} width={50}/>
+                                                </div>
+                                            </div>
+                                             ))
+                                        )
                                     }
                                     
                                     <p className="p-3 text-blue-400 font-semibold">More reviews...</p>
