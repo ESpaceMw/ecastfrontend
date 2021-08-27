@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, DotsHorizontal } from "heroicons-react"
+import { ArrowDown, ArrowUp, DotsHorizontal, Star } from "heroicons-react"
 
 import React from "react"
 
@@ -11,6 +11,8 @@ import AudienceChart from "../../../components/overview/AudienceChart"
 import CashCards from '../../../icons/cards-with-dollar-sign.png'
 
 import Money from '../../../media/pexels-burst-545065.jpg'
+
+import Girl from '../../../media/onboard-girl.jpg'
 
 const popularEpisodes = [
     {
@@ -195,9 +197,39 @@ const Overview = () => {
                                 <p className="text-white mt-1 hover:text-gray-100 transition duration-150 font-semibold text-sm">Read more...</p>
                             </div>
 
-                            <div className="mt-5 bg-white dark:bg-gray-900 rounded-sm shadow h-72 hover:shadow-md p-3">
+                            <div className="mt-5 bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
                                 <div>
                                     <p className="dark:text-gray-200">Listeners reviews</p>
+                                </div>
+                                <div className="pt-5">
+                                    
+                                    {
+                                        Array(2).fill(2).map((index) => (
+                                            <div key={index} className="w-full flex justify-between p-3 dark:hover:bg-gray-800 hover:bg-gray-100 transition duration-150 rounded-sm">
+                                        <div className="flex">
+                                            <img src={Girl} alt="reviewer" className="rounded-full object-cover w-12 h-12" />
+                                            <div className="ml-2">
+                                                <div className="flex flex-row">
+                                                    <Star className="w-4 h-4 text-yellow-400"/>
+                                                    <Star className="w-4 h-4 text-yellow-400"/>
+                                                    <Star className="w-4 h-4 text-yellow-400"/>
+                                                    <Star className="w-4 h-4 text-yellow-400"/>
+                                                    <Star className="w-4 h-4 text-yellow-400"/>
+                                                    <p className="text-xs bg-blue-400 p-1 text-white rounded-sm">4 Rated</p>
+                                                </div>
+                                                <p className="mt-2 h-20 text-sm dark:text-gray-300">
+                                                    Kells Kamuzu: "This channel is the best, though you make your sound too low"
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="w-32 right-0 text-sm dark:text-gray-300">
+                                            2 days ago
+                                        </div>
+                                    </div>
+                                        ))
+                                    }
+                                    
+                                    <p className="p-3 text-blue-400 font-semibold">More reviews...</p>
                                 </div>
                             </div>
                         </div>
