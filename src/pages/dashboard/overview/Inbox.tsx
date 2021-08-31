@@ -3,8 +3,40 @@ import { Bell, Camera, Plus } from "heroicons-react"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import Rb from '../../../media/rb.jpg'
 import Kit from '../../../media/kit.jpg'
+import { Link } from "react-router-dom"
+import { useState } from "react"
+
+const messages = [
+    {
+        id: 1,
+        avatar: Rb,
+        name: 'Abel Andersons',
+        messages: [
+            {
+                id: 21,
+                message: 'Hey man',
+                created_at: '2 hours ago'
+            }
+        ],   
+    },
+    {
+        id: 2,
+        avatar: Kit,
+        name: 'Hannah Mngoli',
+        messages: [
+            {
+                id: 21,
+                message: 'We seriously need to talk',
+                created_at: '4 hours ago'
+            }
+        ]
+    }
+]
 
 const Inbox = () => {
+
+    const [isSelected, setIsSelected] = useState(false)
+    
     return(
         <div className="dark:bg-gray-800">
             <DashboardMain>
@@ -25,36 +57,25 @@ const Inbox = () => {
                     </div>
                     <div className="flex-auto overflow-y-auto">
 
-                        <a className="block border-b dark:border-gray-700">
-                        <div className="border-l-2 border-transparent hover:bg-gray-100 dark:hover:bg-gray-800 p-3 space-y-4">
-                            <div className="flex flex-row items-center space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <strong className="flex-grow dark:text-gray-200">Nikola Tesla</strong>
-                            <div className=" text-gray-600 dark:text-gray-200">5hr</div>
-                            </div>
+                        {
+                            messages.map((item) => (
+                                <Link key={item.id} onClick={()=> {setIsSelected(true)}} to="#" className="block border-b dark:border-gray-700">
+                                    <div key={item.id} className={isSelected ? "border-blue-400 bg-blue-100 border-l-2 dark:border-gray-900  dark:bg-gray-800 p-3 space-y-4" : "border-gray-100 bg-white border-l-2 p-3 space-y-4"}>
+                                        <div key={item.id} className="flex flex-row items-center space-x-2">
+                                            <img src={Rb} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                                            <strong className="flex-grow dark:text-gray-200">{item.name}</strong>
+                                            <div className="text-sm text-gray-600 dark:text-gray-300">{item.messages[0].created_at}</div>
+                                            </div>
 
-                            <div className="flex flex-row items-center space-x-1">
-                                <p className="dark:text-blue-500">✔✔</p>
-                            <div className="flex-grow truncate dark:text-gray-300">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
-                            </div>
-                        </div>
-                        </a>
-
-                        <a className="block border-b dark:border-gray-700">
-                        <div className="border-l-2 dark:border-gray-900 border-blue-400 bg-blue-100 dark:bg-gray-800 p-3 space-y-4">
-                            <div className="flex flex-row items-center space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <strong className="flex-grow dark:text-gray-200">Nikola Tesla</strong>
-                            <div className=" text-gray-600 dark:text-gray-300">5hr</div>
-                            </div>
-
-                            <div className="flex flex-row items-center space-x-1">
-                            <p className="text-blue-500">✔✔</p>
-                            <div className="flex-grow truncate dark:text-gray-300">some message content whedkjwhed wkjehdkjweh dkjhwekjdhwekjhd </div>
-                            </div>
-                            
-                        </div>
-                        </a>
+                                            <div className="flex flex-row items-center space-x-1">
+                                            <p className="text-blue-500">✔✔</p>
+                                            <div className="flex-grow truncate dark:text-gray-300">{item.messages[0].message}</div>
+                                        </div>
+                                        
+                                    </div>
+                                </Link>
+                            ))
+                        }
 
                     </div>
                 </div>
