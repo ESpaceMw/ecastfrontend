@@ -61,6 +61,7 @@ const Overview = () => {
             return response.json()
         }).then((data) => {
             setIsErrorPopularEpisodes(false)
+            setIsLoadingPopularEpisodes(false)
             setPopularEpisodes(data.popular_podcasts)
             console.log(data.popular_podcasts);
             
