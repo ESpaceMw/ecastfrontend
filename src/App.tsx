@@ -12,7 +12,9 @@ import Integrations from './pages/dashboard/analytics/Integrations';
 import Statistics from './pages/dashboard/analytics/Statistics';
 import Subscribers from './pages/dashboard/analytics/Subscribers';
 import Alerts from './pages/dashboard/overview/Alerts';
+import Bankie from './pages/dashboard/overview/fragments/Bankie';
 import PopularEpisodes from './pages/dashboard/overview/fragments/PopularEpisodes';
+import Reviews from './pages/dashboard/overview/fragments/Reviews';
 import Inbox from './pages/dashboard/overview/Inbox';
 import Overview from './pages/dashboard/overview/Overview';
 import Contacts from './pages/dashboard/podcast/Contacts';
@@ -163,6 +165,23 @@ function App() {
           )}> 
           </Route>
           
+          <Route path="/dashboard/e-cast-bank" render={() => (
+            isLoggedIn() ? (
+              <Bankie/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
+
+          <Route path="/dashboard/listeners-reviews" render={() => (
+            isLoggedIn() ? (
+              <Reviews/>
+            ) : (
+              <Redirect to="/sign-in"/>
+            )
+          )}> 
+          </Route>
 
           <Route path="/dashboard/inbox" render={() => (
             isLoggedIn() ? (

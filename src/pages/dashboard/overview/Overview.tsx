@@ -214,7 +214,7 @@ const Overview = () => {
                                     way to make money. Here at eCast, we 
                                     surely will have you make a lot of it!
                                 </p>
-                                <p className="text-blue-400 hover:text-blue-500 transition duration-150 font-semibold text-sm">Read more...</p>
+                                <Link to="/dashboard/e-cast-bank" className="text-blue-400 hover:text-blue-500 transition duration-150 font-semibold text-sm">Read more...</Link>
                             </div>
 
                             <div className="p-3 mt-5 bg-blue-400 rounded-sm shadow-sm hover:shadow-md">
@@ -233,7 +233,7 @@ const Overview = () => {
                                     way to make money. Here at eCast, we 
                                     surely will have you make a lot of it!
                                 </p>
-                                <p className="text-white mt-1 hover:text-gray-100 transition duration-150 font-semibold text-sm">Read more...</p>
+                                <Link to="/dashboard/e-cast-bank" className="text-white mt-1 hover:text-gray-100 transition duration-150 font-semibold text-sm">Read more...</Link>
                             </div>
 
                             <div className="mt-5 bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
@@ -288,7 +288,7 @@ const Overview = () => {
                                         )
                                     }
                                     
-                                    <p className="p-3 text-blue-400 font-semibold">More reviews...</p>
+                                    <Link to="/dashboard/listeners-reviews" className="p-3 text-blue-400 font-semibold">More reviews...</Link>
                                 </div>
                             </div>
                         </div>
