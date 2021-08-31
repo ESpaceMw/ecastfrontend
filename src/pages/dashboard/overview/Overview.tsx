@@ -237,7 +237,7 @@ const Overview = () => {
 
                             <div className="mt-5 bg-white dark:bg-gray-900 rounded-sm shadow hover:shadow-md p-3">
                                 <div>
-                                    <p className="dark:text-gray-200">Listeners reviews</p>
+                                    <p className="dark:text-gray-200 font-semibold text-md">Listeners reviews</p>
                                 </div>
                                 <div className="pt-5">
                                     
