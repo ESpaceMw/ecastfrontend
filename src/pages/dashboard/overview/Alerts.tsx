@@ -115,7 +115,7 @@ const Alerts =  () => {
                     </div>
                 </div>
                 }
-                {showAlert ? <Alert icon={'📢'} message={alertMessage}/> : <></>}
+                {showAlert ? <Alert icon={'📢'} message={alertMessage} show={true}/> : <></>}
             </DashboardMain>
         </div>
     )

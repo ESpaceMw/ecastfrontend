@@ -22,6 +22,8 @@ import {
     useState } from "react"
 
 import Skeleton from "react-loading-skeleton"
+import { Oval } from "react-loading-icons"
+import Alert from "../../../components/Alert"
 
 const Channels = () => {
 
@@ -31,7 +33,13 @@ const Channels = () => {
 
     const [name, setName] = useState('');
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+
+    const [showAlert, setShowAlert] = useState(false)
+
+    const [onSubscribe, setOnSubscribe] = useState(false)
+
+    const [successMessage, setSuccessMessage] = useState('')
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/channels/get',{
@@ -65,6 +73,32 @@ const Channels = () => {
         }
 
         setName(value);
+    }
+
+    const subscribeToChannel = (channelId: string) => {
+        
+        setOnSubscribe(true)
+        
+
+        fetch('http://127.0.0.1:8000/api/v1/subscription/subscribe',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(
+                {user_id: 1, channels_id: 9}
+            )
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setOnSubscribe(false)
+            setSuccessMessage(data.message)
+            setShowAlert(true)
+            console.log(successMessage);
+            
+        }).catch((err) => {
+            setOnSubscribe(false)
+            console.log(err)
+        })
     }
 
     return(
@@ -162,12 +196,14 @@ const Channels = () => {
                                                 </div>
                                                 <div className="flex space-x-1 mt-2">
                                                 <div className="sm:w-1/2">
-                                                    <a href="#" className="text-xs text-blue-400 hover:bg-opacity-60 font-semibold flex items-center justify-center px-3 py-2 bg-blue-300 dark:bg-gray-900 bg-opacity-50">
-                                                        Subscribe 
-                                                    <div className="ml-1">
-                                                        <ArrowRight className="w-3 h-3"/>
-                                                    </div>
-                                                    </a>
+                                                    <button onClick={() => {subscribeToChannel(channel.id)}} className="text-xs text-blue-400 hover:bg-opacity-60 font-semibold flex items-center justify-center px-3 py-2 bg-blue-300 dark:bg-gray-900 bg-opacity-50">
+                                                        {!onSubscribe ? 'Subscribe' : 'Subscribing...'} 
+                                                        {!onSubscribe ? <div className="ml-1">
+                                                            <ArrowRight className="w-3 h-3"/>
+                                                        </div> : <div className="ml-1">
+                                                            <Oval className="text-white w-4 h-4"/>
+                                                        </div>}
+                                                    </button>
                                                 </div>
                                                 <div className="w-auto">
                                                     <Link to={"/dashboard/podcasts/"+channel.name} className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
@@ -231,6 +267,8 @@ const Channels = () => {
                     </div>
                 </div>
                 </section>
+                
+                {showAlert ? <Alert icon={"🎉"} message={successMessage} show={true}/> : <></>}
             </DashboardMain>
         </div>
     )
