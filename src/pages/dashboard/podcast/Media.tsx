@@ -1,16 +1,68 @@
-import React from "react";
+import { 
+    useEffect, 
+    useState 
+} from "react"
+
 import DashboardMain from "../../../components/layouts/DashboardMain"
-import Impact from '../../../media/logo.png'
-import Growth from '../../../media/business-success-growing-growth-increase-up-concept-wooded-cube-block-with-word-growth_20693-206.jpg'
-import Engage from '../../../media/s2e9-engaging-influencers-LJnEWBfbpMj-sta84Bz7q3b.500x500.png'
-import { MusicNote } from "heroicons-react";
-import ReactAudioPlayer from 'react-audio-player';
+
+import { ExclamationCircleOutline, MusicNote } from "heroicons-react"
+
+import ReactAudioPlayer from 'react-audio-player'
+
+import Skeleton from "react-loading-skeleton"
+
+import Error from "../../../media/503 Error Service Unavailable-rafiki.png"
+import { Link } from "react-router-dom"
 
 const Media = () => {
 
-    const [openTab, setOpenTab] = React.useState(1);
+    const [openTab, setOpenTab] = useState(1);
 
     const color: string = 'blue'
+
+    const [photos, setPhotos] = useState<any[]>([])
+
+    const [isPhotosLoading, setIsPhotosLoading] = useState(true)
+
+    const [isErrorPhotos, setIsErrorPhotos] = useState(false)
+
+    const [audios, setAudios] = useState<any[]>([])
+
+    const [isAudiosLoading, setIsAudiosLoading] = useState(true)
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/podcasts/media/photos',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ channels_id: 7 })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsPhotosLoading(false)
+            setPhotos(data.photos)
+        }).catch((err) => {
+            setIsPhotosLoading(false)
+            setIsErrorPhotos(true)
+            console.log(err)
+        })
+
+        fetch('http://127.0.0.1:8000/api/v1/podcasts/media/audios',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ channels_id: 7 })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsAudiosLoading(false)
+            setAudios(data.audios)
+        }).catch((err) => {
+            setIsAudiosLoading(false)
+            // setIsErrorPhotos(true)
+            console.log(err)
+        })
+    }, [])
     
     return(
         <div className="dark:bg-gray-800">
@@ -86,24 +138,23 @@ const Media = () => {
                             <div className="relative">
                                     
                                 <div className="flex flex-wrap -m-4">
-                                    <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                        <div className="flex relative">
-                                        <img alt="gallery" className="absolute hover:opacity-90 transition duration-150 inset-0 w-full h-60 object-cover object-center" src={Impact}/>
-                                        
+                                    
+                                    {!isErrorPhotos ?
+                                    !isPhotosLoading ?
+                                        photos.map((item) => (
+                                            <div style={{ backgroundImage: `url('http://localhost:8000/storage/podcasts/${item}')` }} className="w-1/5 mb-3 mr-2 h-60 hover:opacity-90 transition duration-150 bg-cover">
+                                            </div>
+                                        )) : (
+                                            Array(6).fill(6).map((index) => (
+                                                <Skeleton className="mr-2" height={250} width={250}/>
+                                            ))
+                                        ) : (
+                                            <div className="flex items-center flex-col pb-10">
+                                            <img src={Error} alt="network-error-illustration" className="w-72 h-72 object-cover" />
+                                            <p className="text-center dark:text-gray-300">An error occurred, check your internet connection or <Link onClick={()=> window.location.reload()} to="#" className="text-blue-400">reload the page</Link></p>
                                         </div>
-                                    </div>
-                                    <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                        <div className="flex relative">
-                                        <img alt="gallery" className="absolute hover:opacity-90 transition duration-150 inset-0 w-full h-60 object-cover object-center" src={Growth}/>
-                                        
-                                        </div>
-                                    </div>
-                                    <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                        <div className="flex relative">
-                                        <img alt="gallery" className="absolute hover:opacity-90 transition duration-150 inset-0 w-full h-60 object-cover object-center" src={Engage}/>
-                                        
-                                        </div>
-                                    </div>
+                                        )
+                                    }
                                     
                                 </div>
 
@@ -121,23 +172,8 @@ const Media = () => {
                                 <div className="relative mb-10">
                                     
                                     <div className="flex flex-wrap -m-4 mb-10">
-                                        <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border dark:border-gray-700  ">
-                                                <div className="flex flex-wrap justify-center dark:bg-gray-700 bg-gray-200">
-                                                    <div className="py-10 px-10">
-                                                        <MusicNote className="w-20 h-20 text-gray-500"/>
-                                                    </div>
-                                                </div>
-                                                <div className="p-3">
-                                                    <ReactAudioPlayer
-                                                        src={`url('../../../media/01 Save Your Tears - (SongsLover.com).mp3')`}
-                                                        autoPlay={false}
-                                                        controls
-                                                        style={{ width: '100%' }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {!isAudiosLoading ?
+                                            audios.map((item) => (
                                             <div className="lg:w-1/3 sm:w-1/2 p-4">
                                             <div className="border dark:border-gray-700  ">
                                                 <div className="flex flex-wrap justify-center dark:bg-gray-700 bg-gray-200">
@@ -147,7 +183,7 @@ const Media = () => {
                                                 </div>
                                                 <div className="p-3">
                                                     <ReactAudioPlayer
-                                                        src={`url('../../../media/01 Save Your Tears - (SongsLover.com).mp3')`}
+                                                        src={'http://localhost:8000/storage/podcasts/'+item}
                                                         autoPlay={false}
                                                         controls
                                                         style={{ width: '100%' }}
@@ -155,40 +191,12 @@ const Media = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                            <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border dark:border-gray-700  ">
-                                                <div className="flex flex-wrap justify-center bg-gray-200 dark:bg-gray-700">
-                                                    <div className="py-10 px-10">
-                                                        <MusicNote className="w-20 h-20 text-gray-500"/>
-                                                    </div>
-                                                </div>
-                                                <div className="p-3">
-                                                    <ReactAudioPlayer
-                                                        src={`url('../../../media/01 Save Your Tears - (SongsLover.com).mp3')`}
-                                                        autoPlay={false}
-                                                        controls
-                                                        style={{ width: '100%' }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                            <div className="lg:w-1/3 sm:w-1/2 p-4">
-                                            <div className="border dark:border-gray-700  ">
-                                                <div className="flex flex-wrap justify-center bg-gray-200 dark:bg-gray-700">
-                                                    <div className="py-10 px-10">
-                                                        <MusicNote className="w-20 h-20 text-gray-500"/>
-                                                    </div>
-                                                </div>
-                                                <div className="p-3">
-                                                    <ReactAudioPlayer
-                                                        src={`url('../../../media/01 Save Your Tears - (SongsLover.com).mp3')`}
-                                                        autoPlay={false}
-                                                        controls
-                                                        style={{ width: '100%' }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
+                                            )) : (
+                                                Array(9).fill(9).map((index) => (
+                                                    <Skeleton height={250} width={250} className="mr-2"/>
+                                                ))
+                                            )
+                                        }
                                     
                                     </div>
 

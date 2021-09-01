@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, DotsHorizontal, Star } from "heroicons-react"
+import { ArrowDown, ArrowUp, DotsHorizontal, ExclamationCircleOutline, Star } from "heroicons-react"
 
 import React, { useEffect, useState } from "react"
 
@@ -26,9 +26,13 @@ const Overview = () => {
 
     const color: string = 'blue'
 
+    const currentHour = (new Date()).getHours()
+
     const [reviews, setReviews] = useState<any[]>([])
 
     const [reviewsLoading, setReviewsLoading] = useState(false)
+
+    const [isErrorReviews, setIsErrorReviews] = useState(false)
 
     const [popularEpisodes, setPopularEpisodes] = useState<any[]>([])
 
@@ -51,6 +55,7 @@ const Overview = () => {
             setReviews(data.reviews)
         }).catch((err) => {
             setReviewsLoading(false)
+            setIsErrorReviews(true)
             console.log(err)
         })
 
@@ -242,7 +247,8 @@ const Overview = () => {
                                 </div>
                                 <div className="pt-5">
                                     
-                                    {!reviewsLoading ?
+                                    {!isErrorReviews ?
+                                    !reviewsLoading ?
                                         reviews.map((index) => (
                                             <div key={index.id} className="w-full flex justify-between p-3 dark:hover:bg-gray-800 hover:bg-gray-100 transition duration-150 rounded-sm">
                                         <div className="flex">
@@ -285,10 +291,13 @@ const Overview = () => {
                                                 </div>
                                             </div>
                                              ))
-                                        )
+                                        ) : (<div className="flex items-center flex-col pb-10">
+                                            <img src={Error} alt="network-error-illustration" className="w-72 h-72 object-cover" />
+                                            <p className="text-center dark:text-gray-300">An error occurred, check your internet connection or <Link onClick={()=> window.location.reload()} to="#" className="text-blue-400">reload the page</Link></p>
+                                        </div>)
                                     }
                                     
-                                    <Link to="/dashboard/listeners-reviews" className="p-3 text-blue-400 font-semibold">More reviews...</Link>
+                                    {isErrorReviews ? <></> : <Link to="/dashboard/listeners-reviews" className="p-3 text-blue-400 font-semibold">More reviews...</Link>}
                                 </div>
                             </div>
                         </div>
@@ -423,7 +432,12 @@ const Overview = () => {
                                     <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                                     <div className="relative">
                                             
-                                        Number 2
+                                        <div className="sm:px-10 px-5 py-20 flex flex-col items-center">
+                                            <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                                                <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                                                No information available, have a good {currentHour < 17 ? 'day' : 'night'}!
+                                            </p>
+                                        </div>
 
                                         </div>
                                     </div>
@@ -431,7 +445,12 @@ const Overview = () => {
 
                                         <div className="relative">
                                             
-                                            Number 3
+                                            <div className="sm:px-10 px-5 py-20 flex flex-col items-center">
+                                            <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                                                <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                                                No information available, have a good {currentHour < 17 ? 'day' : 'night'}!
+                                            </p>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -439,7 +458,12 @@ const Overview = () => {
 
                                         <div className="relative">
                                             
-                                            Number 4
+                                            <div className="sm:px-10 px-5 py-20 flex flex-col items-center">
+                                            <p className="dark:text-gray-300 text-gray-500 text-sm font-semibold mt-2 flex items-center space-x-2">
+                                                <ExclamationCircleOutline className="w-5 h-5 mr-3"/>
+                                                No information available, have a good {currentHour < 17 ? 'day' : 'night'}!
+                                            </p>
+                                            </div>
 
                                         </div>
                                     </div>
