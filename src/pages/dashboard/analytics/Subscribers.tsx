@@ -1,24 +1,78 @@
-import { DotsHorizontal, ArrowUp } from "heroicons-react"
+import { DotsHorizontal, ArrowUp, Camera } from "heroicons-react"
+import { useState, useEffect, ChangeEvent } from "react"
+import Skeleton from "react-loading-skeleton"
 import { Link } from "react-router-dom"
+import ContactListItem from "../../../components/ContactListItem"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import SubscribersChart from "../../../components/subscribers/SubscribersChart"
-import Alexander from '../../../media/16075282192866.jpg'
-import Gowa from '../../../media/DrBrianMcGowanHeadshot-crop-1024x1024.jpg'
-
-const subscribers = [
-    {
-        name: 'Alexander Macqueen',
-        avatar: Alexander,
-        id: 1
-    },
-    {
-        name: 'Alnord Phiri',
-        avatar: Gowa,
-        id: 2
-    }
-]
 
 const Subscribers = () => {
+
+    const [subscribers, setSubscribers] = useState<any[]>([])
+
+    const [filteredData,setFilteredData] = useState(subscribers);
+
+    const [name, setName] = useState('');
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    const [isTyping, setIsTyping] = useState(false);
+
+    const [femaleListeners, setFemaleListeners] = useState(0)
+
+    const [maleListeners, setMaleListeners] = useState(0)
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/subscription/subscribers',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ channel_id: 7 })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsLoading(false)
+            setSubscribers(data.subscribers)
+            setFilteredData(data.subscribers)
+            console.log(data.subscribers);
+            
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
+        })
+
+        fetch('http://127.0.0.1:8000/api/v1/statistics/listens-by-gender',{
+            method: 'get',
+            headers: {'Content-Type':'application/json'}
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setFemaleListeners(data.female_listeners)
+            setMaleListeners(data.male_listeners)
+            console.log(data);
+            
+        }).catch((err) => {
+            console.log(err)
+        })
+    }, [])
+
+    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+
+        let value = event.target.value.toLowerCase();
+        
+
+        if (value !== '') {
+        const results = subscribers.filter((user) => {
+            return user.first_name.toLowerCase().startsWith(value.toLowerCase());
+        });
+        setFilteredData(results);
+        } else {
+        setFilteredData(subscribers);
+        }
+
+        setName(value);
+    }
     return(
         <div className="dark:bg-gray-800">
             <DashboardMain>
@@ -32,27 +86,58 @@ const Subscribers = () => {
                                 </svg>
                                 <input
                                     id="modal-search" 
-                                    className="w-full dark:bg-transparent dark:text-gray-300 rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
-                                    type="search" 
-                                    placeholder="Search for a subscriber" />
+                                    className="w-full dark:bg-transparent rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                                    type="text"
+                                    value={name}
+                                    onChange={(event) =>handleSearch(event)}
+                                    placeholder="Search contact by first name" />
+                                {name !== '' ? <Link to="#" onClick={() => {
+                                    setName('') 
+                                    setFilteredData(subscribers)}} className="font-semibold text-blue-400">Clear</Link> : ''}
                             </div>
                             <div className="mt-3">
                                 <h3 className="text-md uppercase dark:text-gray-200">{subscribers.length} subscribers</h3>
 
-                                {
-                                    subscribers.map((item) => (
-                                    
-                                    <div>
-                                    <div className="px-10 py-4 flex">
-                                    <img 
-                                    src={item.avatar} 
-                                    alt="contact-user"
-                                    className="rounded-full w-10 h-10 object-cover object-center hover:opacity-75 transition duration-150"
-                                    />
-                                    <Link to="#" className="text-md text-center ml-3 hover:text-gray-700 dark:text-gray-300">{item.name}</Link>
-                                </div>
-                                </div>
-                                ))
+                                {!isLoading ?
+                                    filteredData.map((item) => (
+                                    <ContactListItem 
+                                        key={item.id}
+                                        imageUrl={item.basic_info.clip_art} 
+                                        contactName={item.first_name+' '+item.last_name}>
+                                            <div className="flex-none h-12 pl-8 mb-4">
+                                                <p className="mt-1 mb-1 text-blue-400 font-semibold">Say hello👋 to {item.first_name}</p>
+                                                <div className="flex border dark:border-gray-700 px-3 py-3 mb-5">
+                                                    <div className="bg-gray-100 rounded-full w-8 h-8 mr-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
+                                                        <Camera className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
+                                                    </div>
+                                                    <input
+                                                        className="w-full dark:bg-transparent dark:text-gray-200 rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
+                                                        type="text" 
+                                                        onChange={(e)=>{e.target.value.length !== 0 ? setIsTyping(true) : setIsTyping(false)}}                                                     
+                                                        placeholder="Type your message here" 
+                                                        />
+                                                    {
+                                                    !isTyping ? 
+                                                    '' : <Link to="#" className="font-semibold text-blue-400">Send</Link>
+                                                    }
+                                                </div>
+                                            </div>
+                                    </ContactListItem>
+                                )) : (
+                                    Array(9)
+                                    .fill(9)
+                                    .map((index) => (
+                                        <div key={index} className="flex justify-between">
+                                        <div className="px-10 py-4 flex">
+                                            <Skeleton height={40} width={40}
+                                             style={{ borderRadius: 200 }}
+                                            />
+                                            <Skeleton height={20} width={100} className="ml-3"/>
+                                        </div>
+                                        <Skeleton style={{ borderRadius: 200 }} height={20} width={20} className="ml-3"/>
+                                        </div>
+                                    ))
+                                )
                                 }
                                 
                             </div>
@@ -67,17 +152,21 @@ const Subscribers = () => {
                                 </div>
                                 <div className="mt-2">
                                     <div className="w-full flex">
-                                        <div className="h-6 bg-blue-400 w-1/2"></div>
-                                        <div className="h-6 bg-red-400 w-1/2"></div>
+                                        {
+                                            femaleListeners > 50 ? <div className="h-6 bg-blue-400 w-3/5"></div> : <div className="h-6 bg-blue-400 w-2/5"></div>
+                                        }
+                                        {
+                                            maleListeners > 50 ? <div className="h-6 bg-red-400 w-3/5"></div> : <div className="h-6 bg-red-400 w-2/5"></div>
+                                        }
                                     </div>
                                     <div className="flex justify-between mt-2">
                                         <div className="flex">
                                             <div className="w-2 h-2 bg-blue-400 mr-2 rounded-full mt-1"></div>
-                                            <p className="text-blue-400 text-sm">64 % Females</p>
+                                            <p className="text-blue-400 text-sm">{femaleListeners} % Females</p>
                                         </div>
                                         <div className="flex">
                                             <div className="w-2 h-2 bg-red-400 mr-2 rounded-full mt-1"></div>
-                                            <p className="text-red-400 text-sm">36 % Males</p>
+                                            <p className="text-red-400 text-sm">{maleListeners} % Males</p>
                                         </div>
                                     </div>
                                     <div className="w-full flex mt-2">
