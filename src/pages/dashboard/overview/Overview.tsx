@@ -20,6 +20,8 @@ import OpenPlayer from "../../../components/OpenPlayer"
 
 import Error from "../../../media/503 Error Service Unavailable-rafiki.png"
 
+import { Oval } from "react-loading-icons"
+
 const Overview = () => {
 
     const [openTab, setOpenTab] = React.useState(1);
@@ -41,6 +43,13 @@ const Overview = () => {
     const [isErrorPopularEpisodes, setIsErrorPopularEpisodes] = useState(false)
 
     const [showPlayerBanner, setShowPlayerBanner] = useState(false)
+
+    const [newSubscribers, setNewSubscribers] = useState('')
+
+    const [newSubscribersRate, setNewSubscribersRate] = useState(0)
+
+    const [newSubscribersLoading, setNewSubscribersLoading] = useState(true)
+
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/channels/listener-review-get',{
@@ -75,6 +84,23 @@ const Overview = () => {
             setIsErrorPopularEpisodes(true)
             console.log(err)
         })
+
+        fetch('http://127.0.0.1:8000/api/v1/subscription/new-subscribers',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ channel_id: localStorage.getItem('channel_id')?.toString() })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setNewSubscribers(data.new_subscribers)
+            setNewSubscribersRate(data.rate)
+            setNewSubscribersLoading(false)
+        }).catch((err) => {
+            setNewSubscribersLoading(false)
+            console.log(err)
+        })
+        
     }, [])
 
     return(
@@ -84,16 +110,25 @@ const Overview = () => {
                     <div className="rounded-sm bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-3 w-full">
                         <div className="sm:flex w-full">
                             <div className="sm:w-1/4 dark:border-gray-700 sm:border-r p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150">
-                                <p className="text-gray-500 dark:text-gray-200">New Subscribers</p>
-                                <h3 className="text-2xl font-semibold dark:text-gray-300">12,123</h3>
-                                <div className="flex">
-                                    <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
-                                        <p className="text-center">
-                                            <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
-                                        </p> 
+                                {
+                                    !newSubscribersLoading ? <div>
+                                        <p className="text-gray-500 dark:text-gray-200">New Subscribers</p>
+                                        <h3 className="text-2xl font-semibold dark:text-gray-300">{newSubscribers}</h3>
+                                        <div className="flex">
+                                            <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
+                                                <p className="text-center">
+                                                    <ArrowUp className="text-blue-400 m-1 w-3 h-3 justify-center"/>
+                                                </p> 
+                                            </div>
+                                            {
+                                                newSubscribersRate > 50 ? <p className="text-blue-400 ml-2 text-sm">{newSubscribersRate}%</p> : <p className="text-red-400 ml-2 text-sm">{newSubscribersRate}%</p>
+                                            }
+                                        </div>
+                                    </div> : 
+                                    <div>
+                                        <Skeleton height={100} width={170} className="mb-2"/>
                                     </div>
-                                    <p className="text-blue-400 ml-2 text-sm">+ 33.45%</p>
-                                </div>
+                                }
                             </div>
                             <div className="sm:w-1/4 dark:border-gray-700 sm:border-r p-2 ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150">
                                 <p className="text-gray-500 dark:text-gray-200">Total streams</p>
