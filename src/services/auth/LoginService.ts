@@ -54,7 +54,7 @@ class LoginService{
 
         if(!remember){
 
-            const options = {path: "/dashboard/overview"}
+            const options = {path: "/"}
 
             CookieService.set('access_token', response.access_token, options)
 
@@ -64,7 +64,7 @@ class LoginService{
 
             date.setTime(date.getTime() + (60 * 60 * 1000))
 
-            const options = {path: "/dashboard/overview", expires: date}
+            const options = {path: "/", expires: date}
 
             CookieService.set('access_token', response.access_token, options)
 

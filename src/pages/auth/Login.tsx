@@ -8,7 +8,6 @@ import { Link, useHistory } from 'react-router-dom'
 import PrimaryButton from '../../components/SubmitButton'
 
 import LoginService from '../../services/auth/LoginService'
-import CookieService from '../../services/CookieService'
 
 const Login  = () => {
 
@@ -23,6 +22,8 @@ const Login  = () => {
   const [onLoading, setOnLoading] = useState(false)
 
   const [showError, setShowError] = useState('')
+
+  const history = useHistory()
 
   async function handleLogin (email: string, password: string){
 
@@ -44,11 +45,7 @@ const Login  = () => {
       setLoginState(response.access_token)
       
       LoginService.handleLoginSuccess(response, isChecked)
-      
-
-      console.log('====================================');
-      console.log(CookieService.get('access_token'));
-      console.log('====================================');
+      history.push("/dashboard/overview")
 
     }else{
       if(response === false){
