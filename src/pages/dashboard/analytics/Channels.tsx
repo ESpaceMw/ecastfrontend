@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom"
 
@@ -22,8 +23,14 @@ import {
     useState } from "react"
 
 import Skeleton from "react-loading-skeleton"
+
 import { Oval } from "react-loading-icons"
-import Alert from "../../../components/Alert"
+
+import { toast } from "react-toastify"
+
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const Channels = () => {
 
@@ -35,11 +42,9 @@ const Channels = () => {
 
     const [isLoading, setIsLoading] = useState(true)
 
-    const [showAlert, setShowAlert] = useState(false)
-
     const [onSubscribe, setOnSubscribe] = useState(false)
 
-    const [successMessage, setSuccessMessage] = useState('')
+    toast.clearWaitingQueue()
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/channels/get',{
@@ -56,6 +61,7 @@ const Channels = () => {
             setIsLoading(false)
             console.log(err)
         })
+
     }, [])
 
     const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
@@ -83,18 +89,24 @@ const Channels = () => {
         fetch('http://127.0.0.1:8000/api/v1/subscription/subscribe',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(
-                {user_id: 1, channels_id: 9}
-            )
+            body: JSON.stringify({user_id: 1, channel_id: channelId})
             }
         ).then(async (response) => {
             return response.json()
         }).then((data) => {
             setOnSubscribe(false)
-            setSuccessMessage(data.message)
-            setShowAlert(true)
-            console.log(successMessage);
-            
+            toast.info(data.message, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                    progress: undefined,
+                    toastId: 'channels-toast'
+            })
+                       
         }).catch((err) => {
             setOnSubscribe(false)
             console.log(err)
@@ -195,8 +207,8 @@ const Channels = () => {
                                                 </div>
                                                 </div>
                                                 <div className="flex space-x-1 mt-2">
-                                                <div className="sm:w-1/2">
-                                                    <button onClick={() => {subscribeToChannel(channel.id)}} className="text-xs text-blue-400 hover:bg-opacity-60 font-semibold flex items-center justify-center px-3 py-2 bg-blue-300 dark:bg-gray-900 bg-opacity-50">
+                                                <div className="sm:w-full">
+                                                    <button onClick={() => {subscribeToChannel(channel.id)}} className="w-full text-xs text-blue-400 hover:bg-opacity-60 font-semibold flex items-center justify-center px-3 py-2 bg-blue-300 dark:bg-gray-900 bg-opacity-50">
                                                         {!onSubscribe ? 'Subscribe' : 'Subscribing...'} 
                                                         {!onSubscribe ? <div className="ml-1">
                                                             <ArrowRight className="w-3 h-3"/>
@@ -205,28 +217,7 @@ const Channels = () => {
                                                         </div>}
                                                     </button>
                                                 </div>
-                                                <div className="w-auto">
-                                                    <Link to={"/dashboard/podcasts/"+channel.name} className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
-                                                    <div className="mr-1">
-                                                        <User className="w-4 h-4 dark:text-gray-400 dak"/>
-                                                    </div>
-                                                    </Link>
-                                                </div>
-                                                <div className="w-auto">
-                                                    <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
-                                                    <div className="mr-1">
-                                                        <svg className="w-4 h-4 dark:text-gray-400 dak" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-                                                    </div>
-                                                    </a>
-                                                </div>
                                                 
-                                                <div className="w-auto">
-                                                    <a href="#" className="text-xs text-gray-800 hover:bg-gray-300 font-semibold flex items-center justify-center px-3 py-2 bg-gray-200 dark:bg-gray-900">
-                                                    <div className="mr-1">
-                                                        <svg className="w-4 h-4 dark:text-gray-400 dak" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-                                                    </div>
-                                                    </a>
-                                                </div>
                                                 </div>
                                             </div> 
                                             </Popover.Panel>
@@ -240,11 +231,16 @@ const Channels = () => {
                             <div className="md:flex-grow">
                             <h2 className="text-lg font-semibold title-font mb-2 dark:text-gray-200">{channel.name}</h2>
                             <p className="leading-relaxed dark:text-gray-300">{channel.description}</p>
-                            <Link to="#" className="text-white transition duration-150 hover:bg-blue-500 bg-blue-400 rounded-sm py-2 px-5 inline-flex items-center mt-4">Subscribe
-                                <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5l7 7-7 7"></path>
-                                </svg>
+                            <Link 
+                            onClick={() => {subscribeToChannel(channel.id)}}
+                            to="#" 
+                            className="text-white transition duration-150 hover:bg-blue-500 bg-blue-400 rounded-sm py-2 px-5 inline-flex items-center mt-4">
+                                {!onSubscribe ? 'Subscribe' : 'Subscribing...'} 
+                                {!onSubscribe ? <div className="ml-1">
+                                    <ArrowRight className="w-3 h-3"/>
+                                </div> : <div className="ml-1">
+                                    <Oval className="text-white w-4 h-4"/>
+                                </div>}
                             </Link>
                             </div>
                             </div>
@@ -268,7 +264,18 @@ const Channels = () => {
                 </div>
                 </section>
                 
-                {showAlert ? <Alert icon={"🎉"} message={successMessage} show={true}/> : <></>}
+                 <ToastContainer
+                    limit={1}
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    />
             </DashboardMain>
         </div>
     )
