@@ -118,6 +118,7 @@ const UserInfo = () => {
                                     </div>
                                     <div className="w-full">
                                         <input 
+                                        placeholder={user.title}
                                         className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" 
                                         value={user.title} type="text"/>
                                     </div>
@@ -128,7 +129,7 @@ const UserInfo = () => {
                                     </div>
                                     <div className="w-full">
                                         <input maxLength={20} className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1"
-                                         value={tagline} onChange={(e) => {setTagline(e.target.value)}} type="text"/>
+                                         value={tagline} placeholder={user.tagline} onChange={(e) => {setTagline(e.target.value)}} type="text"/>
                                          {tagline.length > 15 ? 
                                          <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2">
                                             <ExclamationCircleOutline className="w-5 h-5 mr-3"/>Tagline should be not more than 20 words</p> : ''}
