@@ -34,6 +34,7 @@ import Jobs from './pages/landing/Jobs';
 import LandingPage from './pages/LandingPage';
 import OnBoarding from './pages/OnBoarding';
 import PageNotFound from './pages/PageNotFound';
+import CookieService from './services/CookieService';
 
 function App() {
 
@@ -56,7 +57,7 @@ function App() {
   }
 
   function isLoggedIn(){
-    if('access_token' in localStorage){
+    if(CookieService.get('access_token')){
       return true
     }else{
       return false

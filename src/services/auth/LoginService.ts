@@ -1,5 +1,6 @@
 import UrlService from "../UrlService"
 import axios from "axios"
+import CookieService from "../CookieService"
 
 interface Credentials{
 
@@ -9,6 +10,7 @@ interface Credentials{
 
 }
 
+const expiredAt = 60 * 3
 
 class LoginService{
 
@@ -46,6 +48,30 @@ class LoginService{
 
         }
 
+    }
+
+    handleLoginSuccess(response: any, remember: boolean){
+
+        console.log(response, remember);
+
+        if(!remember){
+
+            const options = {path: "/dashboard/overview"}
+
+            CookieService.set('access_token', response.access_token, options)
+
+            return true
+        }
+
+        let date = new Date()
+
+        date.setTime(date.getTime() + (60 * 60 * 1000))
+
+        const options = {path: "/dashboard/overview", expires: date}
+
+        CookieService.set('access_token', response.access_token, options)
+
+        return true
     }
 }
 

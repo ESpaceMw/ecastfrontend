@@ -17,6 +17,8 @@ const Login  = () => {
 
   const [password, setPassword] = useState('')
 
+  const [isChecked, setIsChecked] = useState(false)
+
   const [loginState, setLoginState] = useState('')
 
   const [onLoading, setOnLoading] = useState(false)
@@ -38,10 +40,13 @@ const Login  = () => {
 
 
     if(response.access_token){
+
       setOnLoading(false)
       setLoginState(response.access_token)
+      
+      LoginService.handleLoginSuccess(response, isChecked)
       history.push('/dashboard/overview')
-      console.log(response)
+
     }else{
       if(response === false){
         setOnLoading(false)
@@ -126,9 +131,8 @@ const Login  = () => {
                 <input
                   id="remember-me"
                   name="remember-me"
-                  checked={localStorage.getItem('remember_me') === 'true' ? true : false}
                   type="checkbox"
-                  onChange={() => {localStorage.setItem('remember_me', 'true')}}
+                  onChange={() => isChecked ? setIsChecked(false) : setIsChecked(true)}
                   className="h-4 w-4 dark:bg-transparent bg-white text-blue-400 focus:ring-blue-500 dark:border-gray-900 border-gray-300 rounded-none"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">

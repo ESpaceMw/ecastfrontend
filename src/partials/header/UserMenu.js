@@ -1,6 +1,7 @@
 import{ useState, useRef, useEffect } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
+import CookieService from '../../services/CookieService';
 
 import Transition from '../../utils/Transition';
 
@@ -99,6 +100,7 @@ function UserMenu() {
                 onClick={() => 
                   {
                     setDropdownOpen(!dropdownOpen)
+                    CookieService.remove('access_token')
                     localStorage.clear()
                     history.push('/sign-in')
                   }}
