@@ -20,8 +20,6 @@ class LoginService{
 
             let response = await axios.post(UrlService.loginUrl(), credentials)
 
-            localStorage.setItem('access_token', response.data.access_token)
-
             localStorage.setItem('username', response.data.user.first_name + ' ' + response.data.user.last_name)
 
             localStorage.setItem('user_id', response.data.user.id)
@@ -52,7 +50,7 @@ class LoginService{
 
     handleLoginSuccess(response: any, remember: boolean){
 
-        console.log(response, remember);
+        console.log(response.access_token);
 
         if(!remember){
 
@@ -61,17 +59,17 @@ class LoginService{
             CookieService.set('access_token', response.access_token, options)
 
             return true
+        }else{
+            let date = new Date()
+
+            date.setTime(date.getTime() + (60 * 60 * 1000))
+
+            const options = {path: "/dashboard/overview", expires: date}
+
+            CookieService.set('access_token', response.access_token, options)
+
+            return true
         }
-
-        let date = new Date()
-
-        date.setTime(date.getTime() + (60 * 60 * 1000))
-
-        const options = {path: "/dashboard/overview", expires: date}
-
-        CookieService.set('access_token', response.access_token, options)
-
-        return true
     }
 }
 

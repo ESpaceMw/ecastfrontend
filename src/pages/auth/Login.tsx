@@ -8,10 +8,9 @@ import { Link, useHistory } from 'react-router-dom'
 import PrimaryButton from '../../components/SubmitButton'
 
 import LoginService from '../../services/auth/LoginService'
+import CookieService from '../../services/CookieService'
 
 const Login  = () => {
-
-  const history = useHistory()
 
   const [email, setEmail] = useState('')
 
@@ -45,7 +44,11 @@ const Login  = () => {
       setLoginState(response.access_token)
       
       LoginService.handleLoginSuccess(response, isChecked)
-      history.push('/dashboard/overview')
+      
+
+      console.log('====================================');
+      console.log(CookieService.get('access_token'));
+      console.log('====================================');
 
     }else{
       if(response === false){

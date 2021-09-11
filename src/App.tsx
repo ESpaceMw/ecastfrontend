@@ -38,16 +38,6 @@ import CookieService from './services/CookieService';
 
 function App() {
 
-  // if(localStorage.getItem('remember_me') === 'true'){
-  //   window.onunload = () => {
-
-  //   }
-  // }else{
-  //   window.onunload = () => {
-  //     localStorage.clear()
-  //   }
-  // }
-
   function isFirstTime(){
     if('first_time' in localStorage){
       return true
@@ -57,7 +47,7 @@ function App() {
   }
 
   function isLoggedIn(){
-    if(CookieService.get('access_token')){
+    if(CookieService.get('access_token') !== undefined){
       return true
     }else{
       return false
