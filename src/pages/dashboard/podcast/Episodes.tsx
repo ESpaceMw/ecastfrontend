@@ -30,6 +30,8 @@ const Episodes = () => {
 
     const [serieDropdownOpen, setSerieDropdownOpen] = useState(false);
 
+    const [episodeDropdownOpen, setEpisodeDropdownOpen] = useState(false);
+
     const trigger = useRef(null);
 
     const dropdown = useRef(null);
@@ -66,9 +68,32 @@ const Episodes = () => {
                         <div className="sm:w-3/5 mr-3 dark:bg-gray-900 bg-white shadow-sm rounded-sm hover:shadow-md">
                             <div className="p-3 flex justify-between">
                                 <h3 className="text-md font-medium dark:text-gray-200">All Episodes</h3>
-                                <button className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
-                                    <DotsHorizontal className="h-4 w-4 dark:text-gray-400"/>
-                                </button>
+                                <Link to="#" onClick={() => setEpisodeDropdownOpen(!episodeDropdownOpen)}
+                                        aria-expanded={episodeDropdownOpen} ref={trigger} className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
+                                        <DotsHorizontal className="h-4 w-4 dark:text-gray-200"/>
+                                        <Transition
+                                        className="z-10 mr-20 absolute min-w-44 dark:bg-gray-800 bg-white py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
+                                        show={episodeDropdownOpen}
+                                    >
+                                        <div
+                                        ref={dropdown}
+                                        onFocus={() => setEpisodeDropdownOpen(true)}
+                                        onBlur={() => setEpisodeDropdownOpen(false)}
+                                        >
+                                        <ul>
+                                            <li>
+                                            <Link
+                                                className="font-medium text-sm dark:text-gray-300 dark:hover:bg-gray-700 hover:bg-gray-50 flex items-center py-1 px-3"
+                                                to="/dashboard/new-episode"
+                                                onClick={() => setEpisodeDropdownOpen(!episodeDropdownOpen)}
+                                            >
+                                                <PencilAlt className="text-gray-600 dark:text-gray-300 w-5 h-5"/> Create an episode
+                                            </Link>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </Transition>
+                                    </Link>
                             </div> 
 
                             <div className="p-3">
@@ -199,7 +224,7 @@ const Episodes = () => {
                                         aria-expanded={dropdownOpen} ref={trigger} className="bg-gray-100 dark:bg-gray-800 p-1 rounded-sm">
                                         <DotsHorizontal className="h-4 w-4 dark:text-gray-200"/>
                                         <Transition
-                                        className="z-10 absolute right-14 min-w-44 bg-white py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
+                                        className="z-10 absolute right-14 min-w-44 bg-white dark:bg-gray-800 py-1.5 rounded-sm shadow-lg overflow-hidden mt-1"
                                         show={dropdownOpen}
                                     >
                                         <div
@@ -210,20 +235,20 @@ const Episodes = () => {
                                         <ul>
                                             <li>
                                             <Link
-                                                className="font-medium text-sm hover:bg-gray-50 flex items-center py-1 px-3"
+                                                className="font-medium dark:text-gray-300 text-sm hover:bg-gray-50 flex items-center py-1 px-3"
                                                 to="#"
                                                 onClick={() => setDropdownOpen(!dropdownOpen)}
                                             >
-                                                <PencilAlt className="text-gray-600 w-5 h-5"/> Create event
+                                                <PencilAlt className="dark:text-gray-300 text-gray-600 w-5 h-5"/> Create event
                                             </Link>
                                             </li>
                                             <li>
                                             <Link
-                                                className="font-medium text-sm hover:bg-gray-50 flex items-center py-1 px-3"
+                                                className="font-medium text-sm dark:text-gray-300 hover:bg-gray-50 flex items-center py-1 px-3"
                                                 to="/dashboard/events"
                                                 onClick={() => setDropdownOpen(!dropdownOpen)}
                                             >
-                                                <ViewList className="text-gray-600 w-5 h-5"/> View events
+                                                <ViewList className="dark:text-gray-300 text-gray-600 w-5 h-5"/> View events
                                             </Link>
                                             </li>
                                         </ul>
