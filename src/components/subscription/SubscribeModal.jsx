@@ -50,25 +50,35 @@ const SubscribeModal  = () => {
       }
     }
 
-    const {data: clientSecret} = await axios.post("../../api/PaymentIntent/", {
-      amount: 5000 * 100
-    })
+    const cardElement = elements.getElement("card");
 
-    console.log(clientSecret);
+    try {
+      const { data: clientSecret } = await axios.post("../../api/payment_intents", {
+        amount: 4500 * 100
+      });
 
-    const cardElement = elements.getElement(CardElement)
+      const paymentMethodReq = await stripe.createPaymentMethod({
+        type: "card",
+        card: cardElement,
+        billing_details: billingDetails
+      });
 
-    const createPaymentMethod = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: billingDetails
-    })
+      if (paymentMethodReq.error) {
+        console.log(paymentMethodReq.error.message);
+        return;
+      }
 
-    const confirmPayment = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: createPaymentMethod
-    })
+      const { error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethodReq.paymentMethod.id
+      });
 
-    console.log(confirmPayment);
+      if (error) {
+        console.log(error);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
 
   };
 

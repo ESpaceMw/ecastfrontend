@@ -10,7 +10,8 @@ export default async (req, res) => {
 
             const paymentIntent = await stripe.paymentIntents.create({
                 amount,
-                currency: "usd"
+                currency: "usd",
+                "payment_method_types[]": "card"
             });
 
             res.status(200).send(paymentIntent.client_secret);
