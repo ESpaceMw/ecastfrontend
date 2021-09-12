@@ -26,7 +26,7 @@ const ContactListItem: React.FC<Props> = ({imageUrl, contactName, children}) => 
             alt="contact-user"
             className="rounded-full w-10 h-10 object-cover object-center hover:opacity-75 transition duration-150"
             />
-            <Link to="#" className="text-md text-center ml-3 hover:text-gray-700">{contactName}</Link>
+            <Link to="#" className="text-md text-center ml-3 hover:text-gray-700 dark:text-gray-300">{contactName}</Link>
         </div>
         </div>
         <div className="flex items-center justify-center w-8 h-8 dark:border-gray-700 border rounded-full">

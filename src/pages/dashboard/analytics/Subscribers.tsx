@@ -22,6 +22,8 @@ const Subscribers = () => {
 
     const [maleListeners, setMaleListeners] = useState(0)
 
+    const [annualListens, setAnnualListens] = useState(0)
+
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/subscription/subscribers',{
             method: 'post',
@@ -33,9 +35,7 @@ const Subscribers = () => {
         }).then((data) => {
             setIsLoading(false)
             setSubscribers(data.subscribers)
-            setFilteredData(data.subscribers)
-            console.log(data.subscribers);
-            
+            setFilteredData(data.subscribers)            
         }).catch((err) => {
             setIsLoading(false)
             console.log(err)
@@ -49,9 +49,19 @@ const Subscribers = () => {
             return response.json()
         }).then((data) => {
             setFemaleListeners(data.female_listeners)
-            setMaleListeners(data.male_listeners)
-            console.log(data);
-            
+            setMaleListeners(data.male_listeners)            
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        fetch('http://127.0.0.1:8000/api/v1/statistics/total-annual-listens',{
+            method: 'get',
+            headers: {'Content-Type':'application/json'}
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setAnnualListens(data.total_listens)            
         }).catch((err) => {
             console.log(err)
         })
@@ -199,7 +209,7 @@ const Subscribers = () => {
                                     <div>
                                         <h3 className="text-md text-medium mb-2 mt-2 dark:text-gray-200">Annual listens</h3>
                                         <SubscribersChart/>
-                                        <p className="text-2xl mt-2 dark:text-gray-300">1,050,657 Total Listens</p>
+                                        <p className="text-2xl mt-2 dark:text-gray-300">{annualListens} Total Listens</p>
                                         <div className="flex">
                                             <div className="rounded-full bg-blue-100 animate-pulse w-5 h-5 items-center text-center">
                                                 <p className="text-center">
