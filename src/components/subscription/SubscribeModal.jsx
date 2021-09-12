@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import {
   useStripe,
   useElements,
+  CardElement,
 } from '@stripe/react-stripe-js';
-import { CreditCard } from "heroicons-react";
+import axios from "axios";
 
 const SubscribeModal  = () => {
 
@@ -38,15 +39,50 @@ const SubscribeModal  = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (elements == null) {
-      return;
+    const billingDetails = {
+      name: '',
+      email: '',
+      address: {
+        city: '',
+        line1: '',
+        state: '',
+        postal_code: ''
+      }
     }
 
-    // const {error, paymentMethod} = await stripe.createPaymentMethod({
-    //   type: 'card',
-    //   card: elements.getElement(CardElement),
-    // });
+    const {data: clientSecret} = await axios.post("../../api/PaymentIntent/", {
+      amount: 5000 * 100
+    })
+
+    console.log(clientSecret);
+
+    const cardElement = elements.getElement(CardElement)
+
+    const createPaymentMethod = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+      billing_details: billingDetails
+    })
+
+    const confirmPayment = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: createPaymentMethod
+    })
+
+    console.log(confirmPayment);
+
   };
+
+  const cardElementOptions = {
+    style: {
+      base: {
+        color: "white", "::placeholder" : {color: "white"}
+      },
+      invalid: {
+        color: "red"
+      }
+    }
+    ,hidePostalCode: true
+  }
 
   return (
     <div>
@@ -103,15 +139,8 @@ const SubscribeModal  = () => {
             </div>
             <div className="ml-3 mr-3 mb-3">
                 <label className="block text-gray-700 dark:text-gray-300"> Credit card details</label>
-                <div class="w-full dark:border-gray-700 border hover:border-blue-400">
-                    <div class="flex">
-                        <div className="w-4/6 flex items-center space-x-2 pl-2">
-                            <CreditCard className="text-gray-400"/>
-                            <input type="text" id="payment" class="dark:bg-transparent flex-1 text-sm bg-grey-light text-grey-darkest rounded-l p-3 focus:outline-none" placeholder="Card Number"/>
-                        </div>
-                        <input type="text" id="payment" class="dark:bg-transparent w-1/6 inline-block text-sm bg-grey-light text-grey-darkest p-3 focus:outline-none" placeholder="MM / YY"/>
-                        <input type="text" id="payment" class="dark:bg-transparent w-1/6 inline-block text-sm bg-grey-light text-grey-darkest rounded-r p-3 focus:outline-none" placeholder="CVC"/>
-                    </div>
+                <div className="w-full p-4 dark:border-gray-700 border hover:border-blue-400">
+                    <CardElement options={cardElementOptions}/>
                 </div>
             </div>
 
@@ -130,7 +159,7 @@ const SubscribeModal  = () => {
 
             <div className="w-full p-3">
                 <button className="bg-blue-400 hover:text-gray-100 hover:bg-blue-500 transition duration-150 w-full py-2 justify-center text-white rounded-sm  m-20text-white" type="submit" disabled={!stripe || !elements}>
-                Pay
+                Pay MK5,000.00
             </button>
             </div>
 

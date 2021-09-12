@@ -17,7 +17,7 @@ const UserInfo = () => {
 
     const color = 'blue'
 
-    const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+    const stripePromise = loadStripe("pk_test_51JQrrcEO0pnLs1fBbdVLSIYiVPgjmcK2EBOh0cgncJ3FExrtYNmGjOiemlFnNDX1HPeFbMPnIQnKoG1vzw9Cl9ob00skaWd2Qt");
 
     const basicInfo = JsonParse(localStorage.getItem('basic_info'))
 
