@@ -6,7 +6,6 @@ import Kit from '../../../media/kit.jpg'
 import { Link } from "react-router-dom"
 import { ChangeEvent, useEffect, useState } from "react"
 // import InboxListItem from "../../../components/inbox/InboxListItem"
-import StartChat from '../../../media/start_chat.png'
 
 const messages = [
     {
@@ -64,7 +63,7 @@ const Inbox = () => {
     }
     
     useEffect(() => {
-        setChats(messages)
+        setFilteredChats(messages)
     }, [])
 
     return(
@@ -98,7 +97,11 @@ const Inbox = () => {
 
                         {
                             filteredChats.map((item) => (
-                                <Link to="#" onClick={() => setSelected(item.id)}>
+                                <Link to="#" onClick={() => 
+                                    {setSelected(item.id);
+                                     selected === 1 ? setChats(messages[0].messages) : setChats(messages[1].messages)
+                                    }
+                                }>
                                     <div className={selected === item.id ? "border-blue-400 bg-blue-100 dark:bg-blue-400 dark:border-blue-600 border-l-2 p-3 space-y-4" : "border-gray-100 dark:border-gray-900  dark:bg-gray-800 bg-white border-l-2 p-3 space-y-4"}>
                                         <div className="flex flex-row items-center space-x-2">
                                             <img src={item.avatar} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
@@ -124,7 +127,7 @@ const Inbox = () => {
                         <img src={Rb} alt="user-icon" className="w-12 h-12 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                         <div className="flex flex-col">
                             <strong className="dark:text-gray-200">Nikola Tesla</strong>
-                            <p className="text-green-500 text-sm">Online</p>
+                            <p className="text-green-500 text-sm">The Dee Podcast</p>
                         </div>
                     </div>
                     <div className="flex flex-row items-center">
@@ -141,80 +144,24 @@ const Inbox = () => {
                     className="flex-auto overflow-y-auto p-5 space-y-4"
                     style={{ backgroundImage: 'url(`https://static.intercomassets.com/ember/assets/images/messenger-backgrounds/background-1-99a36524645be823aabcd0e673cb47f8.png)`' }}
                 >
-                    <div className="flex flex-col items-center">
+                    {/* <div className="flex flex-col items-center">
                         <p className="mt-2 text-sm dark:text-gray-200">Start a new conversation</p>
-                    </div>
-                    {/* <div className="flex flex-row space-x-2">
+                    </div> */}
+                    {
+                        chats.map((item) => (
+                            <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                             <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
+                                <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-300 rounded p-5">
+                                    {item.message}
                                 </div>
-                                <div className=" text-gray-600">4hr ago</div>
+                                <div className=" text-gray-600 text-sm dark:text-gray-300">{item.created_at}</div>
                             </div>
                     </div>
+                        ))
+                    }
 
-                    <div className="flex flex-row space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
-                                </div>
-                                <div className=" text-gray-600">4hr ago</div>
-                            </div>
-                    </div>
-
-                    <div className="flex flex-row space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
-                                </div>
-                                <div className=" text-gray-600">4hr ago</div>
-                            </div>
-                    </div>
-
-                    <div className="flex flex-row space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
-                                </div>
-                                <div className=" text-gray-600">4hr ago</div>
-                            </div>
-                    </div>
-
-                    <div className="flex flex-row space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
-                                </div>
-                                <div className=" text-gray-600">4hr ago</div>
-                            </div>
-                    </div>
-
-                    <div className="flex flex-row space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
-                                </div>
-                                <div className=" text-gray-600">4hr ago</div>
-                            </div>
-                    </div>
-
-                    <div className="flex flex-row space-x-2">
-                            <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
-                            <div className="flex flex-col">
-                                <div className="bg-gray-200 dark:bg-gray-700 rounded p-5">
-                                    Some message text
-                                </div>
-                                <div className=" text-gray-600">4hr ago</div>
-                            </div>
-                    </div>
-
-                    <div className="flex flex-row justify-center  text-sm text-gray-600">
+                    <div className="flex flex-row justify-center  text-sm text-gray-600 dark:text-gray-300">
                         13 August 2021
                     </div>
 
@@ -230,7 +177,7 @@ const Inbox = () => {
 
                     
                     
-                    </div> */}
+                    </div>
                 </div>
 
                 <div className="flex-none h-12">
