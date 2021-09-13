@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Bell, Camera, ChatAlt2, Plus, PlusOutline, Trash } from "heroicons-react"
+import { Camera, ChatAlt2, Plus, PlusOutline, Trash } from "heroicons-react"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import Rb from '../../../media/rb.jpg'
 import Kit from '../../../media/kit.jpg'
 import { Link } from "react-router-dom"
-import { useState } from "react"
-import InboxListItem from "../../../components/inbox/InboxListItem"
+import { ChangeEvent, useEffect, useState } from "react"
+// import InboxListItem from "../../../components/inbox/InboxListItem"
 import StartChat from '../../../media/start_chat.png'
 
 const messages = [
@@ -37,17 +37,43 @@ const messages = [
 
 const Inbox = () => {
 
-    
+    const [name, setName] = useState('');
 
     const [isTyping, setIsTyping] = useState(false)
+
+    const [selected, setSelected] = useState(0)
+
+    const [filteredChats, setFilteredChats] = useState<any[]>([])
+
+    const [chats, setChats] = useState<any[]>([])
+
+    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+
+        let value = event.target.value.toLowerCase();
+
+        if (value !== '') {
+        const results = messages.filter((user) => {
+            return user.name.toLowerCase().startsWith(value.toLowerCase());
+        });
+        setFilteredChats(results);
+        } else {
+        setFilteredChats(messages);
+        }
+
+        setName(value);
+    }
     
+    useEffect(() => {
+        setChats(messages)
+    }, [])
+
     return(
         <div className="dark:bg-gray-800">
             <DashboardMain>
             <div className="flex flex-row h-4/5 bg-gray-100 overflow-y-hidden">
                 
             <div className="overflow-y-hidden sm:flex sm:flex-row sm:flex-auto bg-white dark:bg-gray-900 rounded-sm border-l dark:border-gray-700 shadow-sm hover:shadow-md">
-                <div className="flex flex-col sm:w-1/5">
+                <div className="flex flex-col sm:w-2/5">
                     <div className="bg-blue-400 mt-3 ml-3 mr-3 flex p-3">
                         <PlusOutline className="h-6 w-6 mr-1 text-white"></PlusOutline>
                         <p className="text-sm text-white">New conversation</p>
@@ -60,14 +86,32 @@ const Inbox = () => {
                         <input
                             id="modal-search" 
                             className="w-full dark:text-gray-300 dark:bg-transparent rounded-sm focus:border-none outline-none focus:ring-none placeholder-gray-400 appearance-none pr-4" 
-                            type="search" 
+                            type="text"
+                            value={name}
+                            onChange={(event) =>handleSearch(event)}
                             placeholder="Search" />
+                             {name !== '' ? <Link to="#" onClick={() => {
+                                    setName('') 
+                                    setFilteredChats(messages)}} className="font-semibold text-blue-400">Clear</Link> : ''}
                     </div>
                     <div className="flex-auto overflow-y-hidden">
 
                         {
-                            messages.map((item) => (
-                                <InboxListItem avatar={Rb} name={item.name} message={item.messages[0].created_at} time={item.messages[0].message}/>
+                            filteredChats.map((item) => (
+                                <Link to="#" onClick={() => setSelected(item.id)}>
+                                    <div className={selected === item.id ? "border-blue-400 bg-blue-100 dark:bg-blue-400 dark:border-blue-600 border-l-2 p-3 space-y-4" : "border-gray-100 dark:border-gray-900  dark:bg-gray-800 bg-white border-l-2 p-3 space-y-4"}>
+                                        <div className="flex flex-row items-center space-x-2">
+                                            <img src={item.avatar} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
+                                            <strong className="flex-grow dark:text-gray-200">{item.name}</strong>
+                                            <div className="text-sm text-gray-600 dark:text-gray-300">{item.messages[0].created_at}</div>
+                                            </div>
+
+                                            <div className="flex flex-row items-center space-x-1">
+                                                <p className="text-blue-500">✔✔</p>
+                                            <div className="flex-grow truncate dark:text-gray-300">{item.messages[0].message}</div>
+                                        </div>
+                                    </div>
+                                </Link>
                             ))
                         }
 
@@ -98,8 +142,7 @@ const Inbox = () => {
                     style={{ backgroundImage: 'url(`https://static.intercomassets.com/ember/assets/images/messenger-backgrounds/background-1-99a36524645be823aabcd0e673cb47f8.png)`' }}
                 >
                     <div className="flex flex-col items-center">
-                        <img src={StartChat} alt="start-chat" className="w-36 h-36 animate-bounce"/>
-                        <p className="mt-2 text-sm">Start a new conversation</p>
+                        <p className="mt-2 text-sm dark:text-gray-200">Start a new conversation</p>
                     </div>
                     {/* <div className="flex flex-row space-x-2">
                             <img src={Rb} alt="user-icon" className="w-6 h-6 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
@@ -208,12 +251,12 @@ const Inbox = () => {
                 </div>
                 </div>
 
-                <div className="w-2/5 border-l">
+                {/* <div className="w-1/5 border-l">
                     <div className="p-3 flex flex-col items-center">
                         <img src={Rb} alt="contact-avatar" className="mt-5 rounded-full w-36 h-36 object-cover" />
                         <p className="mt-2 text-md font-semibold">Nikola tesla</p>
                     </div>
-                </div>
+                </div> */}
             </div>
             </div>
             </DashboardMain>

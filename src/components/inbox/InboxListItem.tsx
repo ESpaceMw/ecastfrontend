@@ -5,18 +5,22 @@ interface Props {
     avatar: string,
     name: string,
     message: string,
-    time: string
+    time: string,
+    id: number
 }
 
-const InboxListItem: React.FC<Props> = ({avatar, name, message, time}) => {
+const InboxListItem: React.FC<Props> = ({avatar, name, message, time, id}) => {
 
-    const [isSelected, setIsSelected] = useState(false)
+    const [isSelected, setIsSelected] = useState(0)
     
     return(
         <Link onClick={()=> {
-            isSelected ? setIsSelected(false) : setIsSelected(true)
-            }} to="#" className="block border-b dark:border-gray-700">
-            <div className={isSelected ? "border-blue-400 bg-blue-100 border-l-2 dark:border-gray-900  dark:bg-gray-800 p-3 space-y-4" : "border-gray-100 bg-white border-l-2 p-3 space-y-4"}>
+            console.log('====================================');
+            console.log(isSelected);
+            console.log('====================================');
+            setIsSelected(id)}
+            } to="#" className="block border-b dark:border-gray-700">
+            <div className="dark:border-gray-900  dark:bg-gray-800 space-y-4 border-gray-100 bg-white border-l-2 p-3 space-y-4">
                 <div className="flex flex-row items-center space-x-2">
                     <img src={avatar} alt="user-icon" className="w-8 h-8 rounded-full object-cover mr-2 hover:opacity-90 transition duration-150"/>
                     <strong className="flex-grow dark:text-gray-200">{name}</strong>
