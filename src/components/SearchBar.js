@@ -83,7 +83,8 @@ const SearchBar = ({
                 {
                     filtered.length === 0 ? <SearchIcon className="text-gray-500 w-6 h-6"/>
                     : <X className="text-gray-500 w-6 h-6 transition delay-150 duration-300"
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.preventDefault()
                         clearText()
                     }}
                       />

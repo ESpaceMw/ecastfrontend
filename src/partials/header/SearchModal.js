@@ -11,6 +11,10 @@ function SearchModal() {
 
   const searchContent = useRef(null);
 
+  const [recentSearch, setRecentSearch] = useState([])
+
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!searchOpen || searchContent.current.contains(target) || trigger.current.contains(target)) return;
@@ -29,6 +33,23 @@ function SearchModal() {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/v1/search/recent-get',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
+            }
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsLoading(false)
+            setRecentSearch(data.recent_search)
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
+        })
+  })
 
   return (
     <div>
@@ -82,78 +103,26 @@ function SearchModal() {
             <div className="mb-3 last:mb-0">
               <div className="text-xs font-semibold text-gray-400 uppercase px-2 mb-2 dark:text-gray-200">Recent searches</div>
               <ul className="text-sm">
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                    </svg>
-                    <span className="dark:text-gray-200">Form Builder - 23 hours on-demand video</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                    </svg>
-                    <span className="dark:text-gray-200">Access Mosaic on mobile and TV</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                    </svg>
-                    <span className="dark:text-gray-200">Product Update - Q4 2021</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                    </svg>
-                    <span className="dark:text-gray-200">Master Digital Marketing Strategy course</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                    </svg>
-                    <span className="dark:text-gray-200">Dedicated forms for products</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                    </svg>
-                    <span className="dark:text-gray-200">Product Update - Q4 2021</span>
-                  </Link>
-                </li>
+                {
+                  !isLoading ? 
+                  (
+                    recentSearch !== [] ?
+                    recentSearch.fill(6).map((item) => (
+                      <li>
+                        <Link
+                          className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
+                          to="#0"
+                          onClick={() => setSearchOpen(!searchOpen)}
+                        >
+                          <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
+                            <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
+                          </svg>
+                          <span className="dark:text-gray-200">{item.title}</span>
+                        </Link>
+                      </li>
+                    )) : (<p className="m-3">You have no recent search</p>)
+                  ) : (<p className="m-3">Loading recent searches...</p>)
+                }
               </ul>
             </div>
             {/* Recent pages */}
