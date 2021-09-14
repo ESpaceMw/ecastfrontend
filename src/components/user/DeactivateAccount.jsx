@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 import { ExclamationIcon } from "@heroicons/react/outline";
 
+import Oval from "react-loading-icons/dist/components/oval";
+
 const SerieModal  = () => {
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -33,7 +35,30 @@ const SerieModal  = () => {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  const [isLoading, setIsLoading] = useState(false)
  
+  const deactivateAccount = () => {
+
+    setIsLoading(true)
+
+    fetch('http://127.0.0.1:8000/api/v1/auth/account/deactivation',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ user_id: localStorage.getItem('user_id').toString() })
+            }
+        ).then(async (response) => {
+            return response.text()
+        }).then((result) => {
+            setIsLoading(false)
+            if(result === "Account deleted successfully"){
+              localStorage.clear()
+            }
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err.message)
+        })
+  }
 
   return (
     <div>
@@ -93,9 +118,9 @@ const SerieModal  = () => {
                 <button
                   type="button"
                   className="outline-none focus:outline-none focus:ring-none w-full inline-flex justify-center rounded-sm border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700  sm:ml-3 sm:w-auto sm:text-sm"
-                  
+                  onClick={() => deactivateAccount()}
                 >
-                  Deactivate
+                  {!isLoading ? ("Deactivate") : (<Oval className="w-5 h-5"/>)}
                 </button>
                 <button
                   type="button"

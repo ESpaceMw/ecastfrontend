@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { PaperClipIcon } from "@heroicons/react/outline"
 import { Trash } from "heroicons-react"
 import DashboardMain from "../../../components/layouts/DashboardMain"
 import DeactivateAccount from "../../../components/user/DeactivateAccount"
