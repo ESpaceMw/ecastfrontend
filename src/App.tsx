@@ -1,4 +1,5 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { LastLocationProvider } from 'react-router-last-location';
 import './App.css';
 import LandingPageFooter from './components/layouts/LandingPageFooter';
 import LandingPageHeader from './components/layouts/LandingPageHeader';
@@ -56,8 +57,8 @@ function App() {
   return (
     <div>
       <ThemeProvider initialTheme="light">
+        <LastLocationProvider>
       <Switch>
-
           <Route path="/" exact render={() => (
             isFirstTime() ? ( 
             <>
@@ -306,6 +307,7 @@ function App() {
           </Route>
 
         </Switch>
+        </LastLocationProvider>
         </ThemeProvider>
     </div>
   );

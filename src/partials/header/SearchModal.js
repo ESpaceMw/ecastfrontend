@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar.js';
 import Transition from '../../utils/Transition.js';
+import { useLastLocation } from 'react-router-last-location';
+import { loadavg } from 'os';
 
 function SearchModal() {
 
@@ -10,10 +12,6 @@ function SearchModal() {
   const trigger = useRef(null);
 
   const searchContent = useRef(null);
-
-  const [recentSearch, setRecentSearch] = useState([])
-
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -34,22 +32,7 @@ function SearchModal() {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/v1/search/recent-get',{
-            method: 'post',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
-            }
-        ).then(async (response) => {
-            return response.json()
-        }).then((data) => {
-            setIsLoading(false)
-            setRecentSearch(data.recent_search)
-        }).catch((err) => {
-            setIsLoading(false)
-            console.log(err)
-        })
-  })
+  const lastLocation = useLastLocation()
 
   return (
     <div>
@@ -101,56 +84,18 @@ function SearchModal() {
           <div className="py-4 px-2" onFocus={() => setSearchOpen(true)} onBlur={() => setSearchOpen(false)}>
             
             <div className="mb-3 last:mb-0">
-              <div className="text-xs font-semibold text-gray-400 uppercase px-2 mb-2 dark:text-gray-200">Recent searches</div>
-              <ul className="text-sm">
-                {
-                  !isLoading ? 
-                  (
-                    recentSearch !== [] ?
-                    recentSearch.fill(6).map((item) => (
-                      <li>
-                        <Link
-                          className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                          to="#0"
-                          onClick={() => setSearchOpen(!searchOpen)}
-                        >
-                          <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                            <path d="M15.707 14.293v.001a1 1 0 01-1.414 1.414L11.185 12.6A6.935 6.935 0 017 14a7.016 7.016 0 01-5.173-2.308l-1.537 1.3L0 8l4.873 1.12-1.521 1.285a4.971 4.971 0 008.59-2.835l1.979.454a6.971 6.971 0 01-1.321 3.157l3.107 3.112zM14 6L9.127 4.88l1.521-1.28a4.971 4.971 0 00-8.59 2.83L.084 5.976a6.977 6.977 0 0112.089-3.668l1.537-1.3L14 6z" />
-                          </svg>
-                          <span className="dark:text-gray-200">{item.title}</span>
-                        </Link>
-                      </li>
-                    )) : (<p className="m-3">You have no recent search</p>)
-                  ) : (<p className="m-3">Loading recent searches...</p>)
-                }
-              </ul>
-            </div>
-            {/* Recent pages */}
-            <div className="mb-3 last:mb-0">
               <div className="text-xs font-semibold text-gray-400 uppercase px-2 mb-2">Recent places</div>
               <ul className="text-sm">
                 <li>
                   <Link
                     className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
+                    to={lastLocation === null ? '#' : lastLocation["pathname"]}
                     onClick={() => setSearchOpen(!searchOpen)}
                   >
                     <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
                       <path d="M14 0H2c-.6 0-1 .4-1 1v14c0 .6.4 1 1 1h8l5-5V1c0-.6-.4-1-1-1zM3 2h10v8H9v4H3V2z" />
                     </svg>
-                    <span className="dark:text-gray-300"><span className="font-medium text-gray-800 dark:text-gray-300 group-hover:text-white">Messages</span> - Conversation / … / Mike Mills</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-gray-800 hover:text-white hover:bg-blue-400 dark:hover:bg-gray-800 transition duration-150 rounded group"
-                    to="#0"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                  >
-                    <svg className="w-4 h-4 fill-current text-gray-400 group-hover:text-white group-hover:text-opacity-50 flex-shrink-0 mr-3" viewBox="0 0 16 16">
-                      <path d="M14 0H2c-.6 0-1 .4-1 1v14c0 .6.4 1 1 1h8l5-5V1c0-.6-.4-1-1-1zM3 2h10v8H9v4H3V2z" />
-                    </svg>
-                    <span className="dark:text-gray-300"><span className="font-medium text-gray-800 dark:text-gray-300 group-hover:text-white">Messages</span> - Conversation / … / Eva Patrick</span>
+                    <span className="dark:text-gray-300">{lastLocation === null ? '#' : lastLocation["pathname"]}</span>
                   </Link>
                 </li>
               </ul>

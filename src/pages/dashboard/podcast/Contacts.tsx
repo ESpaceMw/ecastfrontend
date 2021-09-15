@@ -88,7 +88,7 @@ const Contacts = () => {
                                         contactName={item.first_name+' '+item.last_name}>
                                             <div className="flex-none h-12 pl-8 mb-4">
                                                 <p className="mt-1 mb-1 text-blue-400 font-semibold">Say hello👋 to {item.first_name}</p>
-                                                <div className="flex border dark:border-gray-700 px-3 py-3 mb-5">
+                                                {/* <div className="flex border dark:border-gray-700 px-3 py-3 mb-5">
                                                     <div className="bg-gray-100 rounded-full w-8 h-8 mr-3 hover:bg-gray-200 dark:bg-gray-700 hover:text-gray-900 transition duration-150">
                                                         <Camera className="w-6 h-6 m-1 text-gray-600 dark:text-gray-400"/>
                                                     </div>
@@ -102,7 +102,7 @@ const Contacts = () => {
                                                     !isTyping ? 
                                                     '' : <Link to="#" className="font-semibold text-blue-400">Send</Link>
                                                     }
-                                                </div>
+                                                </div> */}
                                             </div>
                                     </ContactListItem>
                                 )) : (
