@@ -10,6 +10,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import JsonParse from "../../../utils/JsonParse";
 import EditChannel from "../../../components/user/EditChannel";
+import SubmitButton from "../../../components/SubmitButton";
+
+import { toast } from "react-toastify"
+
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const UserInfo = () => {
 
@@ -23,8 +30,71 @@ const UserInfo = () => {
 
     const [tagline, setTagline] = useState('')
 
+    const [title, setTitle] = useState('')
+
+    const [description, setDescription] = useState('')
+
+    const [category, setCategory] = useState('')
+
+    const [language, setLanguage] = useState('')
+
     const [uploadedImage, setUploadedImage] = useState('')
 
+    const [uploadImage, setUploadImage] = useState('')
+
+    const [isLoading, setIsLoading] = useState(false)
+    const updateProfile = (e) => {
+        e.preventDefault()
+
+        setIsLoading(true)
+
+        const formData = new FormData();
+        formData.append("cover_art", uploadImage);
+        formData.append("tagline", tagline)
+        formData.append("title", title)
+        formData.append('description', description)
+        formData.append('user_id', localStorage.getItem('user_id').toString())
+        formData.append("category", category)
+        formData.append("language", language)
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData,
+            redirect: 'follow'
+        };
+
+        fetch('http://127.0.0.1:8000/api/v1/profile/basic_info/update', requestOptions
+        ).then(async (response) => {
+            return response.json()
+        }).then((data) => {
+            setIsLoading(false)
+            toast.info(data.message, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                    progress: undefined,
+                    toastId: 'channels-toast'
+            })
+        }).catch((err) => {
+            setIsLoading(false)
+            console.log(err)
+            toast.info("A server error occurred", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                    progress: undefined,
+                    toastId: 'channels-toast'
+            })
+            })
+    }
     
     return(
         <div className="dark:bg-gray-800">
@@ -101,8 +171,22 @@ const UserInfo = () => {
                                 <div className="relative">
                                         
                                     <p className="mt-2 dark:text-gray-200">
-                                        Edit your Title, cover art, category and more.
+                                        Edit your tagline, cover art, category and more.
                                     </p>
+
+                                <form onSubmit={(e) => updateProfile(e)}>
+
+                                <div className="flex items-center mt-2">
+                                    <div className="w-1/6">
+                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Title:</p>
+                                    </div>
+                                    <div className="w-full">
+                                        <input 
+                                        value={title}
+                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" 
+                                        onChange={(e) => setTitle(e.target.value)} type="text"/>
+                                    </div>
+                                </div>
 
                                 <div className="flex items-stretch mt-2">
                                     <div className="flex-0">
@@ -110,17 +194,6 @@ const UserInfo = () => {
                                     </div>
                                     <div className="flex-0">
                                         <a href="#" className="text-blue-400 text-md truncate">https://www.ecast.espacemw.com/podcasts/{localStorage.getItem('username')}</a>
-                                    </div>
-                                </div>
-                                <div className="flex items-center mt-2">
-                                    <div className="w-1/6">
-                                        <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Title:</p>
-                                    </div>
-                                    <div className="w-full">
-                                        <input 
-                                        placeholder={user.title}
-                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" 
-                                        value={user.title} type="text"/>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">
@@ -167,7 +240,10 @@ const UserInfo = () => {
                                                 </svg>
                                                 Browse Photo
                                             </label>
-                                            <input type="file" onChange={(e) => setUploadedImage(URL.createObjectURL(e.target.files[0]))} hidden className="sr-only" id="fileInput"/>
+                                            <input type="file" onChange={(e) => 
+                                            {setUploadedImage(URL.createObjectURL(e.target.files[0]))
+                                            setUploadImage(e.target.files[0])}
+                                            } hidden className="sr-only" id="fileInput"/>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +252,10 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Description:</p>
                                     </div>
                                     <div className="w-full">
-                                        <textarea className="dark:text-gray-300 dark:bg-transparent dark:border-gray-700 appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">{user.description}
+                                        <textarea 
+                                        value={description}
+                                        onChange={(e) => setDescription(e.value)}
+                                        className="dark:text-gray-300 dark:bg-transparent dark:border-gray-700 appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         </textarea>
                                     </div>
                                 </div>
@@ -185,7 +264,10 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Category</p>
                                     </div>
                                     <div className="inline-block relative w-full">
-                                        <select className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
+                                        <select 
+                                        value={category}
+                                        onChange={(e) => setCategory(e.target.value)}
+                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         <option>Education: Self Improvement</option>
                                         </select>
                                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -198,16 +280,21 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Language</p>
                                     </div>
                                     <div className="w-full">
-                                        <input className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="English" type="text"/>
+                                        <input 
+                                        value={language}
+                                        onChange={(e) => setLanguage(e.target.value)}
+                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="English" type="text"/>
                                     </div>
                                 </div>
                                 <div className="border-b-1 border w-full dark:border-gray-700 border-gray-200 mt-3 mb-3"></div>
-                                <div className="flex items-center py-2">
-                                    <button className="flex-shrink-0 bg-blue-400 hover:bg-blue-500 text-md border-none text-white py-2 px-8 rounded-sm" type="button">
-                                    Save
-                                    </button>
+                                <div className="flex flex-col items-center py-2">
+                                    
+                                    <SubmitButton text="Save" onLoad={isLoading}/>
+                                    
                                     <EditChannel/>
                                 </div>
+
+                                </form>
 
                                 </div>
                                 ))}
@@ -376,6 +463,19 @@ const UserInfo = () => {
                     </div>
                     
                 </div>
+
+                <ToastContainer
+                    limit={1}
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    />
             </DashboardMain>
         </div>
     )

@@ -10,8 +10,7 @@ import {
  } from "@headlessui/react"
 
 import { 
-    UserGroup, 
-    User, 
+    UserGroup,
     Microphone, 
     ArrowRight
  } from "heroicons-react"
