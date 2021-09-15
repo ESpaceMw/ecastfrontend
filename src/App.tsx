@@ -8,6 +8,7 @@ import Category from './pages/auth/Category';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import ResetPassword from './pages/auth/ResetPassword';
 import Channels from './pages/dashboard/analytics/Channels';
 import Integrations from './pages/dashboard/analytics/Integrations';
 import Statistics from './pages/dashboard/analytics/Statistics';
@@ -125,6 +126,12 @@ function App() {
           <Route path="/forgot-password"> 
             <LandingPageHeader/>
               <ForgotPassword/>
+            <LandingPageFooter/>
+          </Route>
+
+          <Route path="/reset-password"> 
+            <LandingPageHeader/>
+              <ResetPassword/>
             <LandingPageFooter/>
           </Route>
 
