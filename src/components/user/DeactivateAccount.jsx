@@ -2,11 +2,12 @@ import { Transition } from "@headlessui/react";
 
 import { useState, useRef, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { ExclamationIcon } from "@heroicons/react/outline";
 
 import Oval from "react-loading-icons/dist/components/oval";
+import CookieService from "../../services/CookieService";
 
 const SerieModal  = () => {
 
@@ -37,6 +38,8 @@ const SerieModal  = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const history = useHistory()
  
   const deactivateAccount = () => {
 
@@ -51,9 +54,9 @@ const SerieModal  = () => {
             return response.text()
         }).then((result) => {
             setIsLoading(false)
-            if(result === "Account deleted successfully"){
-              localStorage.clear()
-            }
+            localStorage.clear()
+            history.push('/')
+            CookieService.remove('access_token')
         }).catch((err) => {
             setIsLoading(false)
             console.log(err.message)

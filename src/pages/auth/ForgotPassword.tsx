@@ -2,7 +2,7 @@ import SubmitButton from "../../components/SubmitButton"
 
 const ForgotPassword = () => {
     return (
-      <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-black">
+      <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="max-w-md w-full mb-10">
           <div className="items-center">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 dark:text-gray-300">Forgot your password?</h2>
