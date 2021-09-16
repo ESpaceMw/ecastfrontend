@@ -43,57 +43,84 @@ const UserInfo = () => {
     const [uploadImage, setUploadImage] = useState('')
 
     const [isLoading, setIsLoading] = useState(false)
+
     const updateProfile = (e) => {
         e.preventDefault()
 
         setIsLoading(true)
 
-        const formData = new FormData();
-        formData.append("cover_art", uploadImage);
-        formData.append("tagline", tagline)
-        formData.append("title", title)
-        formData.append('description', description)
-        formData.append('user_id', localStorage.getItem('user_id').toString())
-        formData.append("category", category)
-        formData.append("language", language)
+        var formdata = new FormData();
+        formdata.append("cover_art", uploadImage);
+        formdata.append("user_id", localStorage.getItem("user_id").toString())
+        formdata.append("tagline", tagline)
+        formdata.append("title", title)
+        formdata.append("description", description)
+        formdata.append("category", category)
+        formdata.append("language", language)
 
-        const requestOptions = {
-            method: 'POST',
-            body: formData,
-            redirect: 'follow'
+        var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
         };
 
-        fetch('http://127.0.0.1:8000/api/v1/profile/basic_info/update', requestOptions
-        ).then(async (response) => {
-            return response.json()
-        }).then((data) => {
-            setIsLoading(false)
-            toast.info(data.message, {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "dark",
-                    progress: undefined,
-                    toastId: 'channels-toast'
-            })
-        }).catch((err) => {
-            setIsLoading(false)
-            console.log(err)
-            toast.info("A server error occurred", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "dark",
-                    progress: undefined,
-                    toastId: 'channels-toast'
-            })
-            })
+        fetch("http://127.0.0.1:8000/api/v1/profile/basic_info/update", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+        // const formData = new FormData();
+        // formData.append("cover_art", uploadImage);
+        // formData.append("tagline", tagline)
+        // formData.append("title", title)
+        // formData.append('description', description)
+        // formData.append('user_id', localStorage.getItem('user_id').toString())
+        // formData.append("category", category)
+        // formData.append("language", language)
+
+        // const requestOptions = {
+        //     method: 'POST',
+        //     body: formData,
+        //     redirect: 'follow',
+        //     headers: {'Content-Type':'application/json'}
+        // };
+
+        // fetch('http://127.0.0.1:8000/api/v1/profile/basic_info/update', requestOptions
+        // ).then(async (response) => {
+        //     console.log('====================================');
+        //     console.log(response);
+        //     console.log('====================================');
+        //     return response.json()
+        // }).then((data) => {
+        //     setIsLoading(false)
+        //     toast.info(data.message, {
+        //             position: "bottom-right",
+        //             autoClose: 5000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             theme: "dark",
+        //             progress: undefined,
+        //             toastId: 'channels-toast'
+        //     })
+        // }).catch((error) => {
+        //     setIsLoading(false)
+        //     console.log('====================================');
+        //     console.log(error.message);
+        //     console.log('====================================');
+        //     toast.info("A server error occurred", {
+        //             position: "bottom-right",
+        //             autoClose: 5000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: true,
+        //             draggable: true,
+        //             theme: "dark",
+        //             progress: undefined,
+        //             toastId: 'channels-toast'
+        //     })
+        //     })
     }
     
     return(
@@ -224,7 +251,7 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Cover art</p>
                                     </div>
                                     <div className="w-full flex w-ull">
-                                        <img className="rounded-sm hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" 
+                                        <img className="rounded-full hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" 
                                         src={uploadedImage ? uploadedImage : "http://127.0.0.1:8000/storage/profile/"+user.clip_art} 
                                         alt="user-clip-art"/>
                                         <div>
@@ -265,7 +292,7 @@ const UserInfo = () => {
                                     </div>
                                     <div className="inline-block relative w-full">
                                         <select 
-                                        value={category}
+                                        value={category === "" ? user.category : category}
                                         onChange={(e) => setCategory(e.target.value)}
                                         className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         <option>Education: Self Improvement</option>
