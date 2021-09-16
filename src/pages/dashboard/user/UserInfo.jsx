@@ -17,6 +17,7 @@ import { toast } from "react-toastify"
 import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
+import { useHistory } from "react-router";
 
 const UserInfo = () => {
 
@@ -34,9 +35,9 @@ const UserInfo = () => {
 
     const [description, setDescription] = useState('')
 
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('Education: Self-improvement')
 
-    const [language, setLanguage] = useState('')
+    const [language, setLanguage] = useState('English')
 
     const [uploadedImage, setUploadedImage] = useState('')
 
@@ -44,13 +45,15 @@ const UserInfo = () => {
 
     const [isLoading, setIsLoading] = useState(false)
 
+    const history = useHistory()
+
     const updateProfile = (e) => {
         e.preventDefault()
 
         setIsLoading(true)
 
         var formdata = new FormData();
-        formdata.append("cover_art", uploadImage);
+        formdata.append("clip_art", uploadImage);
         formdata.append("user_id", localStorage.getItem("user_id").toString())
         formdata.append("tagline", tagline)
         formdata.append("title", title)
@@ -65,62 +68,30 @@ const UserInfo = () => {
         };
 
         fetch("http://127.0.0.1:8000/api/v1/profile/basic_info/update", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
-        // const formData = new FormData();
-        // formData.append("cover_art", uploadImage);
-        // formData.append("tagline", tagline)
-        // formData.append("title", title)
-        // formData.append('description', description)
-        // formData.append('user_id', localStorage.getItem('user_id').toString())
-        // formData.append("category", category)
-        // formData.append("language", language)
-
-        // const requestOptions = {
-        //     method: 'POST',
-        //     body: formData,
-        //     redirect: 'follow',
-        //     headers: {'Content-Type':'application/json'}
-        // };
-
-        // fetch('http://127.0.0.1:8000/api/v1/profile/basic_info/update', requestOptions
-        // ).then(async (response) => {
-        //     console.log('====================================');
-        //     console.log(response);
-        //     console.log('====================================');
-        //     return response.json()
-        // }).then((data) => {
-        //     setIsLoading(false)
-        //     toast.info(data.message, {
-        //             position: "bottom-right",
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             theme: "dark",
-        //             progress: undefined,
-        //             toastId: 'channels-toast'
-        //     })
-        // }).catch((error) => {
-        //     setIsLoading(false)
-        //     console.log('====================================');
-        //     console.log(error.message);
-        //     console.log('====================================');
-        //     toast.info("A server error occurred", {
-        //             position: "bottom-right",
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             theme: "dark",
-        //             progress: undefined,
-        //             toastId: 'channels-toast'
-        //     })
-        //     })
+        .then(async (response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log(data.basic_info)
+            setIsLoading(false)
+            localStorage.setItem('basic_info', JSON.stringify(data.basic_info))
+            toast.info("Profile information updated🎉", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                    progress: undefined,
+                    toastId: 'channels-toast'
+            })
+            history.push('sign-in')
+        })
+        .catch(error => {
+            setIsLoading(false)
+            console.log('error', error)
+        });
     }
     
     return(
@@ -209,6 +180,7 @@ const UserInfo = () => {
                                     </div>
                                     <div className="w-full">
                                         <input 
+                                        placeholder={user.title}
                                         value={title}
                                         className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" 
                                         onChange={(e) => setTitle(e.target.value)} type="text"/>
@@ -228,8 +200,11 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Tag line:</p>
                                     </div>
                                     <div className="w-full">
-                                        <input maxLength={20} className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1"
-                                         value={tagline} placeholder={user.tagline} onChange={(e) => {setTagline(e.target.value)}} type="text"/>
+                                        <input 
+                                        maxLength={20} 
+                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1"
+                                         value={tagline} 
+                                         placeholder={user.tagline} onChange={(e) => {setTagline(e.target.value)}} type="text"/>
                                          {tagline.length > 15 ? 
                                          <p className="text-red-500 text-sm font-semibold mt-2 flex items-center space-x-2">
                                             <ExclamationCircleOutline className="w-5 h-5 mr-3"/>Tagline should be not more than 20 words</p> : ''}
@@ -280,8 +255,10 @@ const UserInfo = () => {
                                     </div>
                                     <div className="w-full">
                                         <textarea 
+                                        placeholder={user.description}
+                                        required
                                         value={description}
-                                        onChange={(e) => setDescription(e.value)}
+                                        onChange={(e) => setDescription(e.target.value)}
                                         className="dark:text-gray-300 dark:bg-transparent dark:border-gray-700 appearance-none h-20 block w-full text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         </textarea>
                                     </div>
@@ -292,7 +269,8 @@ const UserInfo = () => {
                                     </div>
                                     <div className="inline-block relative w-full">
                                         <select 
-                                        value={category === "" ? user.category : category}
+                                        required
+                                        value={category}
                                         onChange={(e) => setCategory(e.target.value)}
                                         className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1">
                                         <option>Education: Self Improvement</option>
@@ -309,8 +287,9 @@ const UserInfo = () => {
                                     <div className="w-full">
                                         <input 
                                         value={language}
+                                        required
                                         onChange={(e) => setLanguage(e.target.value)}
-                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" value="English" type="text"/>
+                                        className="appearance-none block w-full dark:bg-transparent dark:border-gray-700 dark:text-gray-300 text-gray-700 text-md border border-gray-300 rounded-sm py-2 px-2 leading-tight focus:outline-none focus:ring-1" type="text"/>
                                     </div>
                                 </div>
                                 <div className="border-b-1 border w-full dark:border-gray-700 border-gray-200 mt-3 mb-3"></div>
