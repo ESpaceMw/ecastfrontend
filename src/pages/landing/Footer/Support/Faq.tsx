@@ -50,15 +50,15 @@ const Item: React.FC<Props> = ({ title, children }) => {
 
 const Faq = () => {
   return (
-    <div className="dark:bg-black">
+    <div className="dark:bg-gray-900">
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
         <div className="flex flex-col mb-16 sm:text-center">
           <div className="flex items-center mb-6 mx-auto justify-center w-12 h-12 rounded-full hover:bg-blue-500 dark:hover:bg-blue-700 transition delay-150 duration-300 bg-blue-50 dark:bg-blue-500">
               <QuestionMarkCircle className="dark:text-gray-300 hover:text-white dark:hover:text-gray-300"/>
             </div>
-          <div className="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
-            <h2 className="max-w-lg mb-6 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-gray-300 sm:text-4xl md:mx-auto">
+          <div className="max-w-xl md:mx-auto text-center lg:max-w-2xl items-center">
+            <h2 className="max-w-lg mb-6 items-center align-middle text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-gray-300 sm:text-4xl md:mx-auto">
               Frequently asked questions
             </h2>
             <p className="text-base text-gray-700 dark:text-gray-500 md:text-lg">
@@ -96,7 +96,7 @@ const Faq = () => {
         />
         <button
                 type="submit"
-                className="mt-4 group w-full flex justify-center p-4 border border-transparent text-sm font-medium rounded-none text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="mt-4 group w-full flex justify-center p-4 border border-transparent text-sm font-medium rounded-none text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 Send
               </button>
