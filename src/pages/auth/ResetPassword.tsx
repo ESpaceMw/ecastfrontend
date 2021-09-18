@@ -1,5 +1,6 @@
 import { ExclamationCircleOutline } from "heroicons-react"
 import { useState } from "react"
+import { useHistory } from "react-router-dom"
 import SubmitButton from "../../components/SubmitButton"
 
 const ResetPassword = () => {
@@ -7,6 +8,32 @@ const ResetPassword = () => {
     const [password, setPassword] = useState('')
 
     const [confirmPassword, setConfirmPassword] = useState('')
+
+    const [onLoad, setOnLoad] = useState(false)
+
+    const [successMessage, setSuccessMessage] = useState("")
+
+    const history = useHistory()
+
+    function handleSubmit(email: string, confirmPassword: string){
+
+      setOnLoad(true)
+
+      fetch('http://127.0.0.1:8000/api/v1/auth/password-reset',{
+          method: 'post',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ email: email, confirm_password: confirmPassword })
+          }).then(response => {
+              return response.json()
+          }).then(data => {
+              setSuccessMessage(data.message)
+              setOnLoad(false)
+              history.push('/sign-in')
+      }).catch((error) => {
+          console.log(error)
+          setOnLoad(false)
+      })
+  }
     
     return(
         <div className="min-h-screen px-5 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -17,10 +44,15 @@ const ResetPassword = () => {
               Get a new password for your eCast membership
             </p>
             </div>
-          <form className="mt-2 space-y-6" action="#" method="POST">
+          <form className="mt-2 space-y-6" onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(password, confirmPassword)
+          }}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded shadow-sm -space-y-px">
-              
+              <p className="text-green-500 mt-2 mb-2 font-semibold">
+                {successMessage}
+              </p>
               <div className="py-4">
                 <label className="block text-gray-700 dark:text-gray-300">Password<span className="text-red-500">*</span></label>
                 <input
@@ -57,7 +89,7 @@ const ResetPassword = () => {
               </div>
 
             <div>
-              <SubmitButton text="Reset password" onLoad={false}/>
+              <SubmitButton text="Reset password" onLoad={onLoad}/>
             </div>
 
           </form>
