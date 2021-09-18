@@ -86,7 +86,7 @@ const UserInfo = () => {
                     progress: undefined,
                     toastId: 'channels-toast'
             })
-            history.push('sign-in')
+            history.push('/sign-in')
         })
         .catch(error => {
             setIsLoading(false)

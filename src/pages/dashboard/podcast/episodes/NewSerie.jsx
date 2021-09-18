@@ -52,7 +52,11 @@ const NewSerie = () => {
         formData.append('category', getCategory)
 
         const requestOptions = {
-            method: 'POST',
+            method: 'post',
+            headers: {
+                'Access-Control-Allow-Origin' : 'http://localhost:8000', 
+                'Content-Type':'application/json'
+            },
             body: formData,
             redirect: 'follow'
         };
@@ -64,7 +68,10 @@ const NewSerie = () => {
             if(result.message === "You have successfully created a new series"){
             history.push('/dashboard/episodes')
         }})
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            console.log('error', error)
+            setOnLoad(false)
+        });
     }
 
     return(
