@@ -21,7 +21,7 @@ import {
 
 import { Link } from 'react-router-dom'
 
-import Icon from '../../logo.svg'
+import Icon from '../../icons/icon.png'
 import { ThemeContext } from '../../context/themeContext'
 
 const landingPages = [
@@ -87,6 +87,8 @@ export default function LandingPageHeader() {
               About us
             </Link>
 
+            
+
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             <button
@@ -149,20 +151,27 @@ export default function LandingPageHeader() {
                       <span className="ml-3 text-base font-medium text-gray-900 dark:text-gray-300">{item.name}</span>
                     </a>
                   ))}
+                  <button className="mr-3 dark:text-gray-200"
+                      onClick={() => { isDark() ? setTheme('light') : setTheme('dark')}}
+                  >
+                      { isDark() ?  <Sun className="text-yellow-500 mr-2 dark:bg-gray-900  transition delay-150 duration-300 p-1 h-8 w-8 rounded"/> 
+                      :  <Moon className="text-gray-500 mr-2  transition delay-150 duration-300 p-1 h-8 w-8 rounded"/> }
+ 
+                  </button>
                 </nav>
               </div>
             </div>
             <div className="py-6 px-5 space-y-6">
               <div>
                 <Link 
-                  to="#"
+                  to="/sign-up"
                   className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-sm text-base font-medium text-white bg-blue-400 hover:bg-blue-700"
                 >
                   Sign up
                 </Link>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing a member?{' '}
-                  <Link to="#" href="#" className="text-blue-400 hover:text-blue-500">
+                  <Link to="/sign-in" href="#" className="text-blue-400 hover:text-blue-500">
                     Sign in
                   </Link>
                 </p>

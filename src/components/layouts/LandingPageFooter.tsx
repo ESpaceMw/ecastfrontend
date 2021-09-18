@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import Icon from '../../icons/icon.png'
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const LandingPageFooter = () => {
@@ -6,13 +7,7 @@ const LandingPageFooter = () => {
         <footer className="text-gray-600 dark:text-gray-200 body-font bg-gray-50 dark:bg-gray-800 dark:border-gray-700 border-t">
             <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
                 <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-                <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 dark:text-gray-100">
-                    <div className="text-center text-white text-3xl items-center bg-blue-400 rounded-full w-10 h-10">
-                        e
-                    </div>
-                    <span className="ml-3 text-xl">eCast</span>
-                </a>
-                <p className="mt-2 text-sm text-gray-400">The world is listening,<br />Say something...</p>
+                <img src={Icon} alt="icon"/>
                 </div>
                 <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                 <div className="lg:w-1/4 md:w-1/2 w-full px-4">

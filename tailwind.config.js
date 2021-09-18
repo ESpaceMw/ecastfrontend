@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: 'class', // or 'media' or 'class'
@@ -13,6 +15,20 @@ module.exports = {
         secondary: 'var(--color-text-secondary)',
       },
     },
+    colors: {
+      blue: {
+          400: '#2ab7b1',
+          500: '#21908b'
+      },
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.coolGray,
+      indigo: colors.indigo,
+      red: colors.rose,
+      yellow: colors.amber,
+    }
   },
   variants: {
     extend: {},
