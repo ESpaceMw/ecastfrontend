@@ -1,4 +1,3 @@
-import { Camera } from "heroicons-react"
 import { useState, useEffect, ChangeEvent } from "react"
 import Skeleton from "react-loading-skeleton"
 import { Link } from "react-router-dom"
@@ -14,8 +13,6 @@ const Contacts = () => {
     const [name, setName] = useState('');
 
     const [isLoading, setIsLoading] = useState(true)
-
-    const [isTyping, setIsTyping] = useState(false);
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/v1/subscription/subscribers',{

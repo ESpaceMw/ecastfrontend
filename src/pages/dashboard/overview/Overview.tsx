@@ -20,8 +20,6 @@ import OpenPlayer from "../../../components/OpenPlayer"
 
 import Error from "../../../media/503 Error Service Unavailable-rafiki.png"
 
-import { Oval } from "react-loading-icons"
-
 const Overview = () => {
 
     const [openTab, setOpenTab] = React.useState(1);

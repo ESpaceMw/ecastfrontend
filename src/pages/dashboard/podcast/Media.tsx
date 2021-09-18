@@ -5,7 +5,7 @@ import {
 
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
-import { ExclamationCircleOutline, MusicNote } from "heroicons-react"
+import { MusicNote } from "heroicons-react"
 
 import ReactAudioPlayer from 'react-audio-player'
 

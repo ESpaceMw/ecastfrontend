@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar.js';
 import Transition from '../../utils/Transition.js';
 import { useLastLocation } from 'react-router-last-location';
-import { loadavg } from 'os';
 
 function SearchModal() {
 
