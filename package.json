@@ -1,6 +1,7 @@
 {
   "name": "ecastfrontend",
   "version": "0.1.0",
+  "homepage": "https://ecast.espacemw.com/build",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",

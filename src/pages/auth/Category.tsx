@@ -23,7 +23,7 @@ const Category = () => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/category/categories',{
+        fetch('http://api.ecast.espacemw.com/api/v1/category/categories',{
             method: 'get',
             headers: {'Content-Type':'application/json'}
             }
@@ -42,7 +42,7 @@ const Category = () => {
 
     const createUserCategory = (categoryId: string | number, userId: string | number) => {
         
-        fetch('http://127.0.0.1:8000/api/v1/category/user-create',{
+        fetch('http://api.ecast.espacemw.com/api/v1/category/user-create',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ 

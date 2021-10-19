@@ -11,7 +11,7 @@ const ForgotPassword = () => {
 
   function handleSubmit(email: string){
     setOnLoad(true)
-    fetch('http://127.0.0.1:8000/api/v1/auth/forgot-password',{
+    fetch('http://api.ecast.espacemw.com/api/v1/auth/forgot-password',{
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({ email: email })

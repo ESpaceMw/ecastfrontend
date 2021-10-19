@@ -46,7 +46,7 @@ const Channels = () => {
     toast.clearWaitingQueue()
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/channels/get',{
+        fetch('http://api.ecast.espacemw.com/api/v1/channels/get',{
             method: 'get',
             headers: {'Content-Type':'application/json'}
             }

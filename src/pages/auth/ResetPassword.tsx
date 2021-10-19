@@ -19,7 +19,7 @@ const ResetPassword = () => {
 
       setOnLoad(true)
 
-      fetch('http://127.0.0.1:8000/api/v1/auth/password-reset',{
+      fetch('http://api.ecast.espacemw.com/api/v1/auth/password-reset',{
           method: 'post',
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify({ email: email, confirm_password: confirmPassword })

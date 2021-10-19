@@ -91,7 +91,7 @@ const NewEpisode = () => {
             redirect: 'follow'
         }
 
-        fetch("http://127.0.0.1:8000/api/v1/podcasts/episodes/create", requestOptions)
+        fetch("https://api.ecast.espacemw.com/api/v1/podcasts/episodes/create", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setOnLoad(false)

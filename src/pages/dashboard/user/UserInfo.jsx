@@ -67,7 +67,7 @@ const UserInfo = () => {
         redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:8000/api/v1/profile/basic_info/update", requestOptions)
+        fetch("https://api.ecast.espacemw.com/api/v1/profile/basic_info/update", requestOptions)
         .then(async (response) => {
             return response.json()
         })

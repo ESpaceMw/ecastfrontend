@@ -22,7 +22,7 @@ const Alerts =  () => {
     const [alertMessage, setAlertMessage] = useState('')
     
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/alerts/get-alerts',{
+        fetch('http://api.ecast.espacemw.com/api/v1/alerts/get-alerts',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
@@ -39,7 +39,7 @@ const Alerts =  () => {
     }, [])
 
     function deleteAlert(alertId: string){
-        fetch('http://127.0.0.1:8000/api/v1/alerts/delete',{
+        fetch('http://api.ecast.espacemw.com/api/v1/alerts/delete',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ id: alertId })

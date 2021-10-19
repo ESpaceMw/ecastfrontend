@@ -15,7 +15,7 @@ const Contacts = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/subscription/subscribers',{
+        fetch('https://api.ecast.espacemw.com/api/v1/subscription/subscribers',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channel_id: 7 })

@@ -50,7 +50,7 @@ const Overview = () => {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/channels/listener-review-get',{
+        fetch('http://api.ecast.espacemw.com/api/v1/channels/listener-review-get',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
@@ -66,7 +66,7 @@ const Overview = () => {
             console.log(err)
         })
 
-        fetch('http://127.0.0.1:8000/api/v1/podcasts/episodes/popular-podcasts',{
+        fetch('http://api.ecast.espacemw.com/api/v1/podcasts/episodes/popular-podcasts',{
             method: 'get',
             headers: {'Content-Type':'application/json'}}
         ).then(async (response) => {
@@ -83,7 +83,7 @@ const Overview = () => {
             console.log(err)
         })
 
-        fetch('http://127.0.0.1:8000/api/v1/subscription/new-subscribers',{
+        fetch('http://api.ecast.espacemw.com/api/v1/subscription/new-subscribers',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channel_id: localStorage.getItem('channel_id')?.toString() })

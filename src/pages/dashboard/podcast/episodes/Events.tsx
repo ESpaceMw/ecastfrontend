@@ -19,7 +19,7 @@ const Events = () => {
     const[isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/events/get?channel_id',{
+        fetch('https://api.ecast.espacemw.com/api/v1/events/get?channel_id',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channel_id: 9 })

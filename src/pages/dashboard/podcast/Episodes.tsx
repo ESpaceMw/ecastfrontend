@@ -41,7 +41,7 @@ const Episodes = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/podcasts/series/get',{
+        fetch('https://api.ecast.espacemw.com/api/v1/podcasts/series/get',{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })

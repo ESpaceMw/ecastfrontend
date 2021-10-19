@@ -10,8 +10,6 @@ interface Credentials{
 
 }
 
-// const expiredAt = 60 * 3
-
 class LoginService{
 
     async processLogin(credentials: Credentials){
