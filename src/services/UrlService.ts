@@ -2,7 +2,7 @@ let apiDomain = ''
 
 if(process.env.NODE_ENV === 'production'){
 
-    apiDomain = 'https://api.ecast.espacemw.com'
+    apiDomain = 'https://api.ecast.espacemw.com/'
 
 }else{
 
