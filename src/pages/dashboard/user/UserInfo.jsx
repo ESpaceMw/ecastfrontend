@@ -11,6 +11,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import JsonParse from "../../../utils/JsonParse";
 import EditChannel from "../../../components/user/EditChannel";
 import SubmitButton from "../../../components/SubmitButton";
+import UrlService from "../../../services/UrlService";
 
 import { toast } from "react-toastify"
 
@@ -67,7 +68,7 @@ const UserInfo = () => {
         redirect: 'follow'
         };
 
-        fetch("https://api.ecast.espacemw.com/api/v1/profile/basic_info/update", requestOptions)
+        fetch(UrlService.updateUserInformation(), requestOptions)
         .then(async (response) => {
             return response.json()
         })
@@ -192,7 +193,7 @@ const UserInfo = () => {
                                         <p className="text-gray-700 mr-2 text-md dark:text-gray-200">Podcast url:</p>
                                     </div>
                                     <div className="flex-0">
-                                        <a href="#" className="text-blue-400 text-md truncate">https://www.ecast.espacemw.com/podcasts/{localStorage.getItem('username')}</a>
+                                        <a href="#" className="text-blue-400 text-md sm:truncate">https://www.ecast.espacemw.com/podcasts/{localStorage.getItem('username')}</a>
                                     </div>
                                 </div>
                                 <div className="flex items-center mt-2">

@@ -24,6 +24,8 @@ import EpisodeModal from '.././../../components/episodes/EpisodeModal.jsx'
 
 import Skeleton from "react-loading-skeleton"
 
+import UrlService from "../../../services/UrlService"
+
 const Episodes = () => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -41,10 +43,15 @@ const Episodes = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://api.ecast.espacemw.com/api/v1/podcasts/series/get',{
-            method: 'post',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
+
+        const formData = new FormData();
+
+        formData.append("channels_id", localStorage.getItem('channel_id')!!.toString())
+
+        fetch(UrlService.getSeries(), {
+            method: 'POST',
+            body: formData,
+            redirect: 'follow'
             }
         ).then(async (response) => {
             return response.json()

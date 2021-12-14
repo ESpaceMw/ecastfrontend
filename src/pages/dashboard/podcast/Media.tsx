@@ -13,6 +13,7 @@ import Skeleton from "react-loading-skeleton"
 
 import Error from "../../../media/503 Error Service Unavailable-rafiki.png"
 import { Link } from "react-router-dom"
+import UrlService from "../../../services/UrlService"
 
 const Media = () => {
 
@@ -31,7 +32,7 @@ const Media = () => {
     const [isAudiosLoading, setIsAudiosLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://api.ecast.espacemw.com127.0.0.1:8000/api/v1/podcasts/media/photos',{
+        fetch(UrlService.mediaPhotos(),{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
@@ -47,7 +48,7 @@ const Media = () => {
             console.log(err)
         })
 
-        fetch('http://127.0.0.1:8000/api/v1/podcasts/media/audios',{
+        fetch(UrlService.mediaAudios(),{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })

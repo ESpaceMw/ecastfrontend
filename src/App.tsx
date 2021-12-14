@@ -4,6 +4,7 @@ import './App.css';
 import LandingPageFooter from './components/layouts/LandingPageFooter';
 import LandingPageHeader from './components/layouts/LandingPageHeader';
 import { ThemeProvider } from './context/themeContext';
+import Callback from './pages/auth/Callback';
 import Category from './pages/auth/Category';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
@@ -23,7 +24,7 @@ import Contacts from './pages/dashboard/podcast/Contacts';
 import Episodes from './pages/dashboard/podcast/Episodes';
 import Events from './pages/dashboard/podcast/episodes/Events';
 import NewEpisode from './pages/dashboard/podcast/episodes/NewEpisode.jsx';
-import NewSerie from './pages/dashboard/podcast/episodes/NewSerie.jsx';
+import NewSeries from './pages/dashboard/podcast/episodes/NewSerie.jsx';
 import Media from './pages/dashboard/podcast/Media';
 import Settings from './pages/dashboard/user/Settings';
 import UserInfo from './pages/dashboard/user/UserInfo.jsx';
@@ -114,6 +115,12 @@ function App() {
           <Route path="/sign-up"> 
             <LandingPageHeader/>
               <Register/>
+            <LandingPageFooter/>
+          </Route>
+
+          <Route path="/callback"> 
+            <LandingPageHeader/>
+              <Callback/>
             <LandingPageFooter/>
           </Route>
 
@@ -228,7 +235,7 @@ function App() {
 
           <Route path="/dashboard/new-serie" render={() => (
             isLoggedIn() ? (
-              <NewSerie/>
+              <NewSeries/>
             ) : (
               <Redirect to="/sign-in"/>
             )

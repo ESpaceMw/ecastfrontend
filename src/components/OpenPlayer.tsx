@@ -38,7 +38,9 @@ const OpenPlayer: React.FC<Props> = ({message, link}) => {
                 <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
                     <button
                     type="button"
-                    onClick={() => {setDismiss(false)}}
+                    onClick={() => {
+                        setDismiss(false)
+                    }}
                     className="-mr-1 flex p-2 rounded-md  focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
                     >
                     <span className="sr-only">Dismiss</span>

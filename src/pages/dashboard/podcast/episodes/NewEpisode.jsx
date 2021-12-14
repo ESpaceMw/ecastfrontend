@@ -21,6 +21,8 @@ import { useHistory } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import UrlService from "../../../../services/UrlService";
+
 const NewEpisode = () => {
 
     const [openTab, setOpenTab] = useState(1);
@@ -45,7 +47,7 @@ const NewEpisode = () => {
 
     const [description, setDescription] = useState('')
 
-    const [serie, setSerie] = useState('')
+    const [serie, setSerie] = useState(11)
 
     const [season, setSeason] = useState('01')
 
@@ -54,7 +56,10 @@ const NewEpisode = () => {
     const [onLoad, setOnLoad] = useState(false)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/podcasts/series/get',{
+
+        console.log(localStorage.getItem('channel_id')?.toString());
+
+        fetch(UrlService.getSeries(),{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
@@ -66,6 +71,7 @@ const NewEpisode = () => {
         }).catch((err) => {
             console.log(err)
         })
+
     }, [])
 
     const history = useHistory()
@@ -83,7 +89,7 @@ const NewEpisode = () => {
         formData.append("season", season)
         formData.append("ePNumber", episode)
         formData.append("podcast_serie_id", serie)
-        formData.append("channels_id", localStorage.getItem('channel_id').toString())
+        formData.append("channels_id", localStorage.getItem('channel_id')?.toString())
 
         const requestOptions = {
             method: 'POST',
@@ -91,9 +97,10 @@ const NewEpisode = () => {
             redirect: 'follow'
         }
 
-        fetch("https://api.ecast.espacemw.com/api/v1/podcasts/episodes/create", requestOptions)
+        fetch(UrlService.createEpisode(), requestOptions)
             .then(response => response.text())
             .then(result => {
+                console.log(result)
                 setOnLoad(false)
                 history.push('/dashboard/episodes')
             })

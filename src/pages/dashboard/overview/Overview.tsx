@@ -1,4 +1,10 @@
-import { ArrowDown, ArrowUp, DotsHorizontal, ExclamationCircleOutline, Star } from "heroicons-react"
+import { 
+    ArrowDown, 
+    ArrowUp, 
+    DotsHorizontal, 
+    ExclamationCircleOutline, 
+    Star
+ } from "heroicons-react"
 
 import React, { useEffect, useState } from "react"
 
@@ -19,6 +25,8 @@ import Skeleton from "react-loading-skeleton"
 import OpenPlayer from "../../../components/OpenPlayer"
 
 import Error from "../../../media/503 Error Service Unavailable-rafiki.png"
+
+import UrlService from "../../../services/UrlService"
 
 const Overview = () => {
 
@@ -50,10 +58,16 @@ const Overview = () => {
 
 
     useEffect(() => {
-        fetch('http://api.ecast.espacemw.com/api/v1/channels/listener-review-get',{
+
+        const formData = new FormData();
+
+        formData.append("channels_id", localStorage.getItem('channel_id')!!.toString())
+
+        fetch(UrlService.listenersReviews(),{
             method: 'post',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ channels_id: localStorage.getItem('channel_id')?.toString() })
+            body: formData,
+            redirect: 'follow'
             }
         ).then(async (response) => {
             return response.json()
@@ -66,7 +80,7 @@ const Overview = () => {
             console.log(err)
         })
 
-        fetch('http://api.ecast.espacemw.com/api/v1/podcasts/episodes/popular-podcasts',{
+        fetch(UrlService.popularEpisodes(),{
             method: 'get',
             headers: {'Content-Type':'application/json'}}
         ).then(async (response) => {
@@ -83,10 +97,10 @@ const Overview = () => {
             console.log(err)
         })
 
-        fetch('http://api.ecast.espacemw.com/api/v1/subscription/new-subscribers',{
-            method: 'post',
+        fetch(UrlService.newSubscribers(),{
+            method: 'POST', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ channel_id: localStorage.getItem('channel_id')?.toString() })
+            body: formData
             }
         ).then(async (response) => {
             return response.json()

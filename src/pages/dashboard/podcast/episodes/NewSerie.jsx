@@ -6,7 +6,9 @@ import { useState, useEffect } from "react"
 
 import { useHistory } from "react-router"
 
-const NewSerie = () => {
+import UrlService from "../../../../services/UrlService"
+
+const NewSeries = () => {
 
     const [uploadedImage, setUpLoadedImage] = useState('')
 
@@ -27,7 +29,7 @@ const NewSerie = () => {
     const history = useHistory()
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/category/categories',{
+        fetch(UrlService.seriesCategories(),{
             method: 'get',
             headers: {'Content-Type':'application/json'}
             }
@@ -52,16 +54,12 @@ const NewSerie = () => {
         formData.append('category', getCategory)
 
         const requestOptions = {
-            method: 'post',
-            headers: {
-                'Access-Control-Allow-Origin' : 'http://localhost:8000', 
-                'Content-Type':'application/json'
-            },
+            method: 'POST',
+            
             body: formData,
-            redirect: 'follow'
         };
 
-        fetch("https://api.ecast.espacemw.com/api/v1/podcasts/series/create", requestOptions)
+        fetch(UrlService.createSeries(), requestOptions)
         .then(response => response.json())
         .then(result => {
             setOnLoad(false)
@@ -234,4 +232,4 @@ const NewSerie = () => {
     )
 }
 
-export default NewSerie
+export default NewSeries
