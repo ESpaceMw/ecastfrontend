@@ -7,6 +7,7 @@ import { XIcon } from '@heroicons/react/outline'
 import SubmitButton from '../SubmitButton'
 
 import { useHistory } from 'react-router-dom'
+import UrlService from '../../services/UrlService'
 
 export default function EditChannel() {
 
@@ -32,7 +33,7 @@ export default function EditChannel() {
         formData.append("cover_art", uploadImage);
         formData.append("name", channelName)
         formData.append('description', channelDescription)
-        formData.append('user_id', localStorage.getItem('user_id'))
+        formData.append('user_id', localStorage.getItem('user_id')?.toString())
 
         const requestOptions = {
             method: 'POST',
@@ -40,7 +41,7 @@ export default function EditChannel() {
             redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:8000/api/v1/channels/update-channel", requestOptions)
+        fetch(UrlService.updateChannel(), requestOptions)
         .then(response => response.json())
         .then(result => {
           console.log(result);
@@ -118,7 +119,7 @@ export default function EditChannel() {
                         <div className="flex flex-col p-10">
                             {channelImage ? <div className="h-64 w-64 bg-cover rounded-full hover:opacity-95 transition duration-150" style={{ backgroundImage: `url('${channelImage}')` }}>
                                
-                            </div>: <div className="h-64 w-64 bg-cover rounded-full hover:opacity-95 transition duration-150" style={{ backgroundImage: `url('http://127.0.0.1:8000/storage/profile/${localStorage.getItem('channel_cover_art')}')` }}>
+                            </div>: <div className="h-64 w-64 bg-cover rounded-full hover:opacity-95 transition duration-150" style={{ backgroundImage: `url('http://ecast.espace.mw.com/storage/profile/${localStorage.getItem('channel_cover_art')}')` }}>
                                
                             </div>}
                             {showAlert ? <p className="text-green-500 font-semibold text-center m-2">Channel update success</p> : ''}

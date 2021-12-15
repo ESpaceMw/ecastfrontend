@@ -43,6 +43,12 @@ class UrlService {
         return apiDomain + 'api/v1/profile/basic_info/update'
         
     }
+
+    static updateChannel(){
+
+        return apiDomain + 'api/v1/channels/update-channel'
+        
+    }
     /*Podcast series */
 
     static createSeries(){
@@ -78,7 +84,7 @@ class UrlService {
     static getContacts(){
 
         return apiDomain + 'api/v1/subscription/subscribers'
-        
+
     }
     /* Podcast episodes */
     static createEpisode(){

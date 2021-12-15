@@ -228,7 +228,7 @@ const UserInfo = () => {
                                     </div>
                                     <div className="w-full flex w-ull">
                                         <img className="rounded-full hover:opacity-90 transition duration-150 object-cover md:h-15 md:w-15 h-24 w-24" 
-                                        src={uploadedImage ? uploadedImage : "http://127.0.0.1:8000/storage/profile/"+user.clip_art} 
+                                        src={uploadedImage ? uploadedImage : "http://ecast.espacemw.com/storage/profile/"+user.clip_art} 
                                         alt="user-clip-art"/>
                                         <div>
                                             <p className="ml-3 mb-5 text-gray-700 text-md dark:text-gray-200">Choose your photo from Media Library:</p>
