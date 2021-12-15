@@ -3,6 +3,7 @@ import Skeleton from "react-loading-skeleton"
 import { Link } from "react-router-dom"
 import ContactListItem from "../../../components/ContactListItem"
 import DashboardMain from "../../../components/layouts/DashboardMain"
+import UrlService from "../../../services/UrlService"
 
 const Contacts = () => {
 
@@ -15,7 +16,7 @@ const Contacts = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://api.ecast.espacemw.com/api/v1/subscription/subscribers',{
+        fetch(UrlService.getContacts(),{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ channel_id: 7 })

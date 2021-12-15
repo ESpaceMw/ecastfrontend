@@ -30,6 +30,13 @@ class UrlService {
         return apiDomain + 'api/v1/'
         
     }
+    /*Alerts */
+
+    static getAlerts(){
+
+        return apiDomain + 'api/v1/alerts/get-alerts'
+    }
+
     /* User information */
     static updateUserInformation(){
 
@@ -66,6 +73,12 @@ class UrlService {
 
         return apiDomain + 'api/v1/podcasts/media/audios'
 
+    }
+
+    static getContacts(){
+
+        return apiDomain + 'api/v1/subscription/subscribers'
+        
     }
     /* Podcast episodes */
     static createEpisode(){

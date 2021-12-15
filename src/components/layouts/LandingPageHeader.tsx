@@ -11,8 +11,7 @@ import {
 } from '@heroicons/react/outline'
 
 import { 
-  BriefcaseOutline, 
-  CloudDownloadOutline, 
+  BriefcaseOutline,
   Moon, 
   NewspaperOutline, 
   Sun, 
@@ -30,11 +29,7 @@ const landingPages = [
     href: '/jobs',
     icon: BriefcaseOutline,
   },
-  {
-    name: 'Download',
-    href: '/download',
-    icon: CloudDownloadOutline,
-  },
+  
   { name: 'Blog',
     href: '/blog', 
     icon: NewspaperOutline
@@ -77,9 +72,9 @@ export default function LandingPageHeader() {
             <Link to="/jobs" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               Jobs
             </Link>
-            <Link to="/download" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
+            {/* <Link to="/download" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               Download
-            </Link>
+            </Link> */}
             <Link to="/blog" href="#" className="dark:text-gray-200 dark:hover:text-gray-400 transition duration-150 text-base font-medium text-gray-500 hover:text-gray-900">
               Blog
             </Link>

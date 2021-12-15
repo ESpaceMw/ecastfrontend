@@ -11,6 +11,8 @@ import Alert from "../../../components/Alert"
 
 import DashboardMain from "../../../components/layouts/DashboardMain"
 
+import UrlService from "../../../services/UrlService"
+
 const Alerts =  () => {
 
     const [isLoading, setIsLoading] = useState(true)
@@ -22,7 +24,7 @@ const Alerts =  () => {
     const [alertMessage, setAlertMessage] = useState('')
     
     useEffect(() => {
-        fetch('http://api.ecast.espacemw.com/api/v1/alerts/get-alerts',{
+        fetch(UrlService.getAlerts(),{
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ user_id: localStorage.getItem('user_id') })

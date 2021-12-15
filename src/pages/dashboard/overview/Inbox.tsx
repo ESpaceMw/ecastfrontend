@@ -69,7 +69,7 @@ const Inbox = () => {
     return(
         <div className="dark:bg-gray-800">
             <DashboardMain>
-            <div className="flex flex-row h-4/5 bg-gray-100 overflow-y-hidden">
+            <div className="flex flex-row h-full bg-gray-100">
                 
             <div className="overflow-y-hidden sm:flex sm:flex-row sm:flex-auto bg-white dark:bg-gray-900 rounded-sm border-l dark:border-gray-700 shadow-sm hover:shadow-md">
                 <div className="flex flex-col sm:w-2/5">
