@@ -16,7 +16,9 @@ class LoginService{
 
         try {
 
-            let response = await axios.post(UrlService.loginUrl(), credentials)
+            let response = await (await axios.post(UrlService.loginUrl(), credentials)).headers({
+                "Access-Control-Allow-Origin" : "*"
+            })
 
             localStorage.setItem('username', response.data.user.first_name + ' ' + response.data.user.last_name)
 
